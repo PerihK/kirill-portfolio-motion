@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3f0e9" />
+  <meta name="description" content="Хвост — концепция сайта студии бережного груминга с подбором ухода для собаки." />
+  <title>Хвост — студия бережного груминга</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23263b34'/%3E%3Ccircle cx='20' cy='22' r='5' fill='%23f3f0e9'/%3E%3Ccircle cx='32' cy='16' r='5' fill='%23f3f0e9'/%3E%3Ccircle cx='44' cy='22' r='5' fill='%23f3f0e9'/%3E%3Cpath d='M18 43c0-8 7-14 14-14s14 6 14 14c0 8-6 10-14 7-8 3-14 1-14-7Z' fill='%23f3f0e9'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" defer></script>
+<meta name="robots" content="noindex,follow"></head>
+<body>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top" aria-label="Хвост, на главную">хвост<span aria-hidden="true">.</span></a>
+    <span class="header-descriptor">студия бережного груминга</span>
+    <nav aria-label="Навигация"><a href="#services">Уход</a><a href="#finder">Подбор</a><a href="#visit">Визит</a></nav>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="hero-title">
+      <div class="intro-meta"><span>03 / КОНЦЕПЦИЯ ДЛЯ ПОРТФОЛИО</span><span>ДЛЯ ХОРОШИХ СОБАК И ИХ ЛЮДЕЙ</span></div>
+      <div class="intro-copy"><p class="eyebrow"><span aria-hidden="true">✳</span> УХОД С УВАЖЕНИЕМ К ХАРАКТЕРУ</p><h1 id="hero-title">Чистые лапы.<br />Стрижка с умом.<br /><em>Довольный пёс.</em></h1><p class="intro-description">Мытьё, расчёсывание и стрижка в спокойном ритме. Сначала знакомимся с собакой, а потом подбираем то, что подходит именно ей.</p></div>
+      <div class="intro-bottom"><span>ЛИСТАЙТЕ ВНИЗ</span><span aria-hidden="true">↓</span></div>
+    </section>
+
+    <section class="photo-band" aria-label="Бережный уход за собакой"><img src="./process.png" alt="Грумер аккуратно расчёсывает собаку" width="1536" height="1024" /><div class="photo-note"><span class="photo-note-mark" aria-hidden="true">✳</span><p>У каждого хвоста<br />свой характер.</p></div><span class="photo-caption">ТИШЕ. МЯГЧЕ. С ВНИМАНИЕМ.</span></section>
+
+    <section class="services section-space" id="services" aria-labelledby="services-title"><div class="section-heading"><div><span class="eyebrow">01 / МЕНЮ УХОДА</span><h2 id="services-title">Без лишнего.<br />Всё по делу.</h2></div><p>Здесь не нужен длинный список процедур. Начнём с состояния шерсти и того, что комфортно вашей собаке.</p></div><div class="service-list">
+      <details class="service-item" open><summary><span class="service-index">01</span><span class="service-name">Гигиена и блеск</span><span class="service-kind">КОРОТКАЯ ШЕРСТЬ</span><span class="service-toggle" aria-hidden="true">+</span></summary><div class="service-detail"><p>Мытьё, сушка, мягкое расчёсывание и аккуратный уход за лапами. Хорошая основа для собаки, которой не нужна стрижка формы.</p><a href="#finder" data-coat="short">Посмотреть в подборе <span aria-hidden="true">↗</span></a></div></details>
+      <details class="service-item"><summary><span class="service-index">02</span><span class="service-name">Стрижка и форма</span><span class="service-kind">ДЛИННАЯ ШЕРСТЬ</span><span class="service-toggle" aria-hidden="true">+</span></summary><div class="service-detail"><p>Подготовка шерсти, мытьё и оформление длины. Перед работой мастер обсудит желаемую форму и состояние шерсти.</p><a href="#finder" data-coat="long">Посмотреть в подборе <span aria-hidden="true">↗</span></a></div></details>
+      <details class="service-item"><summary><span class="service-index">03</span><span class="service-name">Кудри под контролем</span><span class="service-kind">КУДРЯВАЯ ШЕРСТЬ</span><span class="service-toggle" aria-hidden="true">+</span></summary><div class="service-detail"><p>Бережное распутывание, мытьё и стрижка формы для шерсти, которой нужен особый порядок ухода.</p><a href="#finder" data-coat="curly">Посмотреть в подборе <span aria-hidden="true">↗</span></a></div></details>
+    </div></section>
+
+    <section class="finder" id="finder" aria-labelledby="finder-title"><div class="finder-heading"><span class="eyebrow">02 / МАРШРУТ УХОДА</span><h2 id="finder-title">Два ответа —<br />и есть ориентир.</h2><p>Выберите размер и тип шерсти. Покажем примерную программу и время; перед настоящим визитом мастер всё уточнит.</p></div><div class="finder-content"><div class="finder-workspace"><div class="finder-question"><div class="question-heading"><span>1 / 2</span><h3>Какой он по размеру?</h3></div><div class="option-grid" id="size-options" role="group" aria-label="Размер собаки"></div></div><div class="finder-question"><div class="question-heading"><span>2 / 2</span><h3>Какая у него шерсть?</h3></div><div class="option-grid" id="coat-options" role="group" aria-label="Тип шерсти"></div></div><div class="finder-result" id="finder-result" aria-live="polite"><span class="result-kicker">ВАШ ОРИЕНТИР</span><h3 id="result-title">Выберите оба пункта</h3><p id="result-description">После выбора здесь появится примерный формат ухода.</p><div class="result-bottom"><span id="result-time"></span><button type="button" id="save-choice" disabled>Сохранить маршрут <span aria-hidden="true">↗</span></button></div><p class="saved-message" id="saved-message" role="status"></p></div></div><div class="finder-dog"><img src="./dog.png" alt="Пушистый рыжий пёс с аккуратной стрижкой" width="900" height="1125" loading="lazy" /><p>«Мне нравится,<br />когда меня понимают»</p></div></div></section>
+
+    <section class="visit section-space" id="visit" aria-labelledby="visit-title"><div class="visit-heading"><span class="eyebrow">03 / СПОКОЙНЫЙ ВИЗИТ</span><h2 id="visit-title">Сначала знакомство.<br />Потом — ножницы.</h2></div><ol class="visit-steps"><li><span>01</span><h3>Поговорим</h3><p>Уточним привычки собаки, состояние шерсти и ожидания от ухода.</p></li><li><span>02</span><h3>Подстроимся</h3><p>Выберем последовательность процедур и комфортный для питомца темп.</p></li><li><span>03</span><h3>Подскажем</h3><p>После визита расскажем, как поддерживать результат дома.</p></li></ol><p class="visit-note">Если собаке некомфортно, реальный мастер должен скорректировать процедуру. Эта страница показывает концепцию сервиса.</p></section>
+
+    <section class="questions section-space" aria-labelledby="questions-title"><div class="questions-heading"><span class="eyebrow">ПЕРЕД ВИЗИТОМ</span><h2 id="questions-title">Пара важных вопросов</h2></div><div class="question-list"><details><summary>Нужна ли стрижка короткой шерсти? <span aria-hidden="true">+</span></summary><p>Обычно хватает гигиенического ухода: мытья, сушки и расчёсывания. Конкретный план зависит от собаки.</p></details><details><summary>Сколько времени займёт уход? <span aria-hidden="true">+</span></summary><p>Подбор выше даёт только ориентир. Точное время зависит от размера, состояния шерсти и того, насколько спокойно чувствует себя питомец.</p></details><details><summary>Можно ли сохранить подбор? <span aria-hidden="true">+</span></summary><p>Да, он сохранится только в текущей вкладке браузера. Это демо: настоящая запись не создаётся, данные никуда не отправляются.</p></details></div></section>
+  </main>
+
+  <footer><div class="footer-top"><a class="wordmark" href="#top">хвост<span aria-hidden="true">.</span></a><a class="footer-up" href="#top">Наверх ↑</a></div><div class="footer-bottom"><p>Учебный проект для портфолио. Вымышленная студия. Реальная запись и оплата не выполняются. Изображения созданы для концепции и не показывают выполненные заказы.</p><span>БЕРЕЖНО К ТЕМ, КТО ВИЛЯЕТ ХВОСТОМ.</span></div></footer>
+<a href="../../?project=hvost" style="position:fixed;bottom:16px;right:16px;z-index:99999;background:#171918;color:#fff;padding:12px 16px;border-radius:2px;font:13px Arial,sans-serif;text-decoration:none;box-shadow:0 2px 12px #0003" aria-label="Вернуться к портфолио Кирилла Перих">Портфолио Кирилла · Закрыть демо</a></body>
+</html>

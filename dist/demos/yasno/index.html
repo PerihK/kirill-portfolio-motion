@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#244de6">
+  <title>Ясно — чистый дом, новый старт</title>
+  <meta name="description" content="Демонстрационный проект клинингового сервиса: адаптивный лендинг, расчёт уборки и интерактивный пример заявки.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23244de6'/%3E%3Cpath d='M20 7v26M7 20h26M11 11l18 18M29 11L11 29' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+<meta name="robots" content="noindex,follow"></head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <div class="project-strip"><div class="container strip-inner"><span>ПОРТФОЛИО / 01</span><span>Демонстрационный проект · услуги для дома</span><a href="#about-project">О проекте <span aria-hidden="true">↗</span></a></div></div>
+  <header class="header container">
+    <a class="logo" href="#" aria-label="Ясно — на главную"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3v34M3 20h34M8 8l24 24M32 8L8 32"/></svg>ясно<span>.</span></a>
+    <nav aria-label="Основная навигация"><a href="#services">Услуги</a><a href="#process">Как это работает</a><a href="#faq">Вопросы</a></nav>
+    <a class="button button-outline header-cta" href="#calculator">Рассчитать уборку <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-copy"><div class="eyebrow"><span class="short-line"></span> КЛИНИНГ ДЛЯ НОВОГО НАЧАЛА</div>
+        <h1 id="hero-title">Чистый дом.<br><span>Новый старт.</span></h1>
+        <p class="hero-description">Ремонт закончился.<br>Пусть останется только удовольствие<br class="desktop-break"> от вашего дома.</p>
+        <a href="#calculator" class="button button-blue">Рассчитать уборку <span aria-hidden="true">↗</span></a>
+        <div class="hero-bottom"><span class="circle-star" aria-hidden="true">✳</span><p>От первого расчёта<br>до последнего чистого уголка.</p></div>
+      </div>
+      <div class="hero-visual" id="hero-visual"><img src="interior.png" alt="Светлая гостиная с дубовым полом и синим креслом — иллюстрация концепции" width="1536" height="1024" fetchpriority="high"><div class="image-note"><span>БОЛЬШЕ СВЕТА.</span><span>МЕНЬШЕ ЛИШНЕГО.</span></div><span class="image-index">01 / Пространство для жизни</span></div>
+    </section>
+    <section class="service-intro container" id="services" aria-labelledby="services-title">
+      <div class="section-heading"><span class="eyebrow">01 / УСЛУГИ</span><h2 id="services-title">У каждой уборки<br>своя задача.</h2><p>Выберите, что нужно вашему дому.<br>Состав работ — без мелкого шрифта.</p></div>
+      <div class="service-grid">
+        <article class="service-card"><div class="card-top"><span>01</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m5 16 11-10 11 10M9 13v14h14V13M13 27v-8h6v8"/></svg></div><h3>Генеральная</h3><p>Когда хочется свежести<br>в каждом уголке.</p><ul><li>Полы, плинтусы и двери</li><li>Кухня и сантехника</li><li>Открытые поверхности</li></ul><button type="button" class="text-action" data-service="deep">От 110 ₽ / м² <span aria-hidden="true">↗</span></button></article>
+        <article class="service-card featured"><div class="card-top"><span>02</span><span class="small-tag">ПОСЛЕ РЕМОНТА</span></div><h3>Первый чистый день</h3><p>Убираем следы ремонта.<br>Возвращаем ощущение дома.</p><ul><li>Строительная пыль</li><li>Следы краски и затирки*</li><li>Полы, двери и поверхности</li></ul><button type="button" class="text-action" data-service="renovation">От 180 ₽ / м² <span aria-hidden="true">↗</span></button></article>
+        <article class="service-card"><div class="card-top"><span>03</span><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3v8M16 21v8M3 16h8M21 16h8M7 7l6 6M19 19l6 6M25 7l-6 6M13 19l-6 6"/></svg></div><h3>Перед переездом</h3><p>Чтобы привезти с собой вещи,<br>а не заботы об уборке.</p><ul><li>Пустые шкафы изнутри</li><li>Кухня и ванная</li><li>Полы и доступные поверхности</li></ul><button type="button" class="text-action" data-service="moving">От 85 ₽ / м² <span aria-hidden="true">↗</span></button></article>
+      </div><p class="section-footnote">* Удаление следов — после проверки материала поверхности. Цены и состав услуг представлены для демонстрации.</p>
+    </section>
+    <section class="calculator-section" id="calculator" aria-labelledby="calculator-title"><div class="container calculator-layout">
+      <div class="calculator-intro"><span class="eyebrow">02 / РАСЧЁТ</span><h2 id="calculator-title">Чистота начинается<br>с ясной цены.</h2><p>Выберите тип уборки, площадь<br>и дополнительные услуги.</p><div class="calculator-note"><span aria-hidden="true">↳</span><p>Это предварительный расчёт.<br>В реальном заказе состав и стоимость<br>согласуют после уточнения деталей.</p></div></div>
+      <div class="calculator-card"><form id="estimate-form">
+        <fieldset><legend>Какая уборка нужна?</legend><div class="segmented"><label><input type="radio" name="service" value="deep"><span>Генеральная</span></label><label><input type="radio" name="service" value="renovation" checked><span>После ремонта</span></label><label><input type="radio" name="service" value="moving"><span>Перед переездом</span></label></div></fieldset>
+        <div class="area-header"><label for="area">Площадь квартиры</label><div class="area-number"><input id="area-number" aria-label="Площадь квартиры в квадратных метрах" type="number" min="20" max="250" step="1" value="60"><span>м²</span></div></div>
+        <input id="area" name="area" type="range" min="20" max="250" step="1" value="60"><div class="range-labels"><span>20 м²</span><span>250 м²</span></div>
+        <fieldset class="extras"><legend>Добавим к уборке</legend><label><span><input type="checkbox" name="extra" value="windows"> Мытьё окон <small>до 3 стандартных окон</small></span><span>+1 200 ₽</span></label><label><span><input type="checkbox" name="extra" value="balcony"> Балкон <small>до 6 м²</small></span><span>+1 500 ₽</span></label><label><span><input type="checkbox" name="extra" value="fridge"> Холодильник внутри</span><span>+600 ₽</span></label></fieldset>
+        <div class="estimate-total"><div><span>Ориентировочная стоимость</span><output id="total" aria-live="polite">10 800 ₽</output></div><span id="estimate-detail">60 м² × 180 ₽</span></div>
+        <button class="button button-blue full-width" type="submit">Посмотреть пример заявки <span aria-hidden="true">↗</span></button><p class="demo-note">Демо-режим: заявку никто не получит, оплата не нужна.</p>
+      </form></div>
+    </div></section>
+    <section class="process container" id="process" aria-labelledby="process-title"><div class="section-heading"><span class="eyebrow">03 / ПРОЦЕСС</span><h2 id="process-title">Всё по порядку.<br>Всё понятно.</h2><p>Три шага от расчёта<br>до готового результата.</p></div><div class="process-grid"><article><span class="step-number">01</span><h3>Расскажите о задаче</h3><p>Выберите уборку и площадь. Отметьте, какие дополнительные работы нужны.</p></article><article><span class="step-number">02</span><h3>Согласуйте детали</h3><p>В рабочем сервисе менеджер уточнит состояние квартиры, время и итоговую стоимость.</p></article><article><span class="step-number">03</span><h3>Принимайте работу</h3><p>Проверяйте результат по согласованному списку — от кухни до дальнего уголка.</p></article></div></section>
+    <section class="faq container" id="faq" aria-labelledby="faq-title"><div><span class="eyebrow">04 / ВОПРОСЫ</span><h2 id="faq-title">Сразу<br>проясним.</h2></div><div class="faq-list"><details><summary>Что входит в уборку после ремонта?<span aria-hidden="true">+</span></summary><p>Удаление строительной пыли с доступных поверхностей, уборка пола, дверей, кухни и санузла. Окна и балкон добавляются в калькуляторе отдельно. Вывоз строительного мусора и высотные работы в этот пример не входят.</p></details><details><summary>Цена в калькуляторе окончательная?<span aria-hidden="true">+</span></summary><p>Нет. Это демонстрационный предварительный расчёт. В реальной услуге итог зависит от загрязнений, материалов и согласованного перечня работ. Минимальная сумма в этом примере — 4 500 ₽.</p></details><details><summary>Нужно ли покупать средства и инвентарь?<span aria-hidden="true">+</span></summary><p>В концепции этого сервиса средства и инвентарь входят в услугу. Для деликатных поверхностей способ очистки согласовывается отдельно.</p></details><details><summary>Можно ли здесь заказать настоящую уборку?<span aria-hidden="true">+</span></summary><p>Это проект для портфолио, а не действующая клининговая компания. Калькулятор работает, а заявка показывает пример взаимодействия. Услуги не оказываются, деньги не списываются, данные никуда не отправляются.</p></details></div></section>
+    <section class="project container" id="about-project"><div><span class="eyebrow">ОБ ЭТОМ ПРОЕКТЕ</span><h2>От идеи —<br>до работающего сценария.</h2></div><div><p>«Ясно» — концепт сервиса уборки для портфолио веб-разработчика. Здесь можно проверить адаптивный сайт, расчёт стоимости и оформление тестовой заявки.</p><div class="project-tags"><span>Адаптивный дизайн</span><span>Калькулятор</span><span>Демо-заявка</span></div><p class="project-limit">Интеграция с Telegram и CRM — следующий этап. В этой версии демонстрация работает в браузере.</p></div></section>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><a class="logo" href="#">ясно<span>.</span></a><span>Чистый дом. Новый старт.</span><span>Учебный проект · 2026</span></div></footer>
+  <dialog id="request-dialog" aria-labelledby="request-title"><button type="button" class="close-dialog" aria-label="Закрыть пример заявки">×</button><div id="request-content"></div></dialog>
+<a href="../../?project=yasno" style="position:fixed;bottom:16px;right:16px;z-index:99999;background:#171918;color:#fff;padding:12px 16px;border-radius:2px;font:13px Arial,sans-serif;text-decoration:none;box-shadow:0 2px 12px #0003" aria-label="Вернуться к портфолио Кирилла Перих">Портфолио Кирилла · Закрыть демо</a></body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1b1b1b" />
+  <meta name="description" content="Линия — демонстрационный сайт салона красоты с выбором услуги и времени визита." />
+  <title>Линия — пространство для ваших волос</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231b1b1b'/%3E%3Cpath d='M19 15v34h26' fill='none' stroke='%23ef6449' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" defer></script>
+<meta name="robots" content="noindex,follow"></head>
+<body>
+  <div class="demo-strip"><span>ПОРТФОЛИО / 02</span><span>Демонстрационный проект · запись не отправляется</span><a href="#project">О проекте ↗</a></div>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#top" aria-label="Линия, главная">линия<span>.</span></a>
+    <nav aria-label="Основная навигация"><a href="#services">Услуги</a><a href="#approach">Подход</a><a href="#booking">Запись</a></nav>
+    <a class="header-link" href="#booking">Выбрать время <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-index"><span class="red-line"></span>ПРОСТРАНСТВО ДЛЯ ВАШИХ ВОЛОС</div>
+        <h1 id="hero-title">Новая форма.<br /><em>Ваш характер.</em></h1>
+        <p>Стрижка, цвет или укладка — найдите то, что подходит вашему ритму. Выберите услугу и удобное время.</p>
+        <a class="primary-button" href="#booking">Записаться <span aria-hidden="true">↗</span></a>
+        <div class="hero-bottom"><span>01 / 03</span><span>Время для себя начинается здесь</span></div>
+      </div>
+      <div class="hero-image" role="img" aria-label="Стилист работает с волосами клиентки в светлой студии"><span class="image-side-label">ЛИНИЯ / BEAUTY STUDIO</span></div>
+    </section>
+
+    <section class="statement" aria-label="О студии"><span>01 / ЗНАКОМСТВО</span><p>Хорошая стрижка живёт вместе с вами — <em>а не только в день визита.</em></p><div class="statement-mark" aria-hidden="true">L<span>/</span></div></section>
+
+    <section class="services section-wrap" id="services" aria-labelledby="services-title">
+      <div class="section-heading"><div><span class="section-index">02 / УСЛУГИ</span><h2 id="services-title">Что сделаем<br /><em>сегодня?</em></h2></div><p>Выберите задачу: освежить форму, изменить цвет или подготовиться к событию.</p></div>
+      <div class="service-list">
+        <article class="service-row"><span class="service-number">01</span><div><h3>Стрижка и форма</h3><p>От идеи до укладки, с учётом привычного ухода.</p></div><span class="service-time">≈ 1,5 часа</span><a href="#booking" data-service="cut" aria-label="Выбрать стрижку и форму">↗</a></article>
+        <article class="service-row"><span class="service-number">02</span><div><h3>Цвет и тон</h3><p>Новый оттенок или мягкое обновление текущего.</p></div><span class="service-time">≈ 3 часа</span><a href="#booking" data-service="color" aria-label="Выбрать цвет и тон">↗</a></article>
+        <article class="service-row"><span class="service-number">03</span><div><h3>Укладка</h3><p>Форма для важного дня или просто для настроения.</p></div><span class="service-time">≈ 45 минут</span><a href="#booking" data-service="style" aria-label="Выбрать укладку">↗</a></article>
+      </div>
+      <p class="services-footnote">Состав услуг и длительность приведены для демонстрации сайта.</p>
+    </section>
+
+    <section class="approach" id="approach" aria-labelledby="approach-title"><div class="approach-heading"><span class="section-index">03 / ПОДХОД</span><h2 id="approach-title">Сначала<br /><em>разговор.</em></h2></div><div class="approach-steps"><div><span>01</span><h3>Услышим запрос</h3><p>Обсудим, как вы носите волосы каждый день и какого результата ждёте.</p></div><div><span>02</span><h3>Подберём решение</h3><p>Сверим идею с текстурой волос, временем на укладку и вашим привычным стилем.</p></div><div><span>03</span><h3>Покажем уход</h3><p>Объясним, как поддерживать форму после визита.</p></div></div></section>
+
+    <section class="booking section-wrap" id="booking" aria-labelledby="booking-title">
+      <div class="section-heading"><div><span class="section-index">04 / ЗАПИСЬ</span><h2 id="booking-title">Выберите<br /><em>своё время.</em></h2></div><p>Это пробный сценарий записи. Выбор сохраняется только в вашей вкладке; место в салоне не бронируется.</p></div>
+      <div class="booking-panel"><div class="booking-step"><div class="step-top"><span>ШАГ 01</span><span>УСЛУГА</span></div><div class="choice-list" id="service-choices" role="group" aria-label="Выбор услуги"></div></div><div class="booking-step booking-step--time"><div class="step-top"><span>ШАГ 02</span><span>ДЕНЬ И ВРЕМЯ</span></div><div id="date-choices" class="date-choices" role="group" aria-label="Выбор дня"></div><div id="time-choices" class="time-choices" role="group" aria-label="Выбор времени"></div><p class="booking-hint">Даты и свободные слоты условные.</p></div></div>
+      <div class="booking-submit"><div><span>ВАШ ВЫБОР</span><p id="booking-summary" aria-live="polite">Выберите услугу и время</p></div><button id="review-booking" class="primary-button" type="button" disabled>Посмотреть запись <span aria-hidden="true">↗</span></button></div>
+    </section>
+
+    <section class="faq section-wrap"><div><span class="section-index">05 / ПЕРЕД ВИЗИТОМ</span><h2>О чём часто<br /><em>спрашивают.</em></h2></div><div class="faq-list"><details><summary>Нужно ли заранее знать, какую стрижку я хочу?</summary><p>Нет. Можно прийти с примером или описать, что нравится и что не устраивает сейчас. В начале визита мастер уточнит пожелания.</p></details><details><summary>Можно ли выбрать день, а решение принять на месте?</summary><p>Для демонстрационной записи выберите наиболее близкую услугу. В реальном салоне объём работы и время согласуются перед подтверждением визита.</p></details><details><summary>Эта запись действительно отправляется в салон?</summary><p>Нет. Это учебный проект. Выбор остаётся только в текущей вкладке браузера и никому не передаётся.</p></details></div></section>
+  </main>
+  <footer><div class="footer-main"><a class="wordmark" href="#top">линия<span>.</span></a><p>Ваш характер.<br />Ваша форма.</p><a href="#top">Наверх ↑</a></div><div class="footer-bottom" id="project"><span>Демонстрационный сайт · 2026</span><span>Вымышленный салон. Изображение создано для этого проекта и не показывает реального клиента.</span></div></footer>
+
+  <dialog id="review-dialog" aria-labelledby="dialog-title"><form method="dialog" class="dialog-inner"><button class="dialog-close" value="cancel" aria-label="Закрыть">×</button><span class="dialog-index">ПРОБНАЯ ЗАПИСЬ / 02</span><h2 id="dialog-title">Ваше время<br /><em>найдено.</em></h2><p id="dialog-selection"></p><div class="dialog-notice">Место не бронируется, личные данные не собираются. Вы можете сохранить выбор в этой вкладке как демонстрацию.</div><div class="dialog-actions"><button class="dialog-back" value="cancel">Изменить выбор</button><button id="save-booking" class="dialog-save" value="save">Сохранить выбор</button></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<a href="../../?project=liniya" style="position:fixed;bottom:16px;right:16px;z-index:99999;background:#171918;color:#fff;padding:12px 16px;border-radius:2px;font:13px Arial,sans-serif;text-decoration:none;box-shadow:0 2px 12px #0003" aria-label="Вернуться к портфолио Кирилла Перих">Портфолио Кирилла · Закрыть демо</a></body>
+</html>
