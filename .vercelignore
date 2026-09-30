@@ -1,6 +1,6 @@
 qa/
-*.tar.gz
+.openai/
 *.zip
+*.tar.gz
 node_modules/
-.vercel
 .env*
