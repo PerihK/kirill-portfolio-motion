@@ -94,7 +94,12 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 .phone-cutout{position:absolute;left:528px;top:105px;width:417px;height:923px}
 .phone-glass{position:absolute;inset:0;background:white;overflow:hidden;clip-path:path('M 1 41 Q 1 30 14 28 L 401 1 Q 415 -1 415 14 L 415 858 C 415 891 400 920 374 919 C 366 921 357 921 344 919 L 54 905 C 24 903 2 879 2 861 Z')}
 .phone-screen{left:1px;top:28px;border-radius:0}
-@supports(-webkit-box-reflect:below){.phone-cutout{-webkit-box-reflect:below 16px linear-gradient(to bottom,transparent 88%,rgb(0 0 0 / .28) 100%)}}
+.phone-reflection-softener{display:none}
+/* Fade within the visible floor; the old 110px fade was cropped after 42px. */
+@supports(-webkit-box-reflect:below){
+ .phone-cutout{-webkit-box-reflect:below 18px linear-gradient(to bottom,transparent calc(100% - 36px),rgb(0 0 0 / .16) 100%)}
+ .phone-reflection-softener{display:block;position:absolute;left:518px;top:1046px;width:439px;height:40px;pointer-events:none;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);mask-image:linear-gradient(to bottom,#000 60%,transparent);-webkit-mask-image:linear-gradient(to bottom,#000 60%,transparent)}
+}
 .project-tab{min-height:69px;padding-top:17px;padding-bottom:17px}
 .project-tab .tab-name{font-size:27px}
 @media(max-width:760px){.project-tab{min-height:0}.project-tab .tab-name{font-size:26px}}
