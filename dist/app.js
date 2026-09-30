@@ -8,28 +8,29 @@ const projects = [
  {id:'mile',name:'MILE',type:'Образование',category:'Лендинг / Школа английского',line:'Английский через ситуации, которые действительно случаются.',task:'Показать программу английского для переезда и помочь посетителю сориентироваться в обучении.',solution:'Программа построена вокруг жизненных ситуаций. Тест и расписание помогают примерить обучение на себя.',features:['Короткий ориентировочный тест','Переключаемое расписание','Демо пробного урока и личного кабинета'],limits:'Вымышленная школа. Тест не заменяет оценку преподавателя; аккаунты, запись и оплата не создаются.'},
  {id:'plan',name:'ПЛАН',type:'Девелопмент',category:'Сайт / Жилые кварталы',line:'От городской среды — к конкретной планировке.',task:'Представить жилые кварталы и показать сценарий выбора будущего дома.',solution:'Крупная архитектурная подача соединена с генпланом, планировками и предварительным калькулятором.',features:['Интерактивный генплан','Просмотр планировок','Демонстрационный ипотечный калькулятор'],limits:'Фронтенд-концепт девелопера. Объекты и условия приведены для демонстрации; финансовые расчёты не являются предложением.'}
 ];
+const featuredProjects = ['tiho','yasno','stebel'].map(id=>projects.find(p=>p.id===id));
 const $ = s => document.querySelector(s);
 const index = $('#project-index');
 const mobile = window.matchMedia('(max-width: 760px)');
 let selected = 0;
-index.innerHTML = projects.map((p,i)=>`<button class="project-tab" id="tab-${p.id}" role="tab" aria-selected="${i===0}" aria-controls="project-panel" tabindex="${i===0?0:-1}" data-index="${i}"><span class="tab-number">${String(i+1).padStart(2,'0')}</span><span class="tab-name">${p.name}</span><span class="tab-type">${p.type}</span><img class="mobile-preview" src="images/${p.id}.webp" alt="Сайт ${p.name}" loading="lazy" width="1250" height="668"></button>`).join('');
+index.innerHTML = featuredProjects.map((p,i)=>`<button class="project-tab" id="tab-${p.id}" role="tab" aria-selected="${i===0}" aria-controls="project-panel" tabindex="${i===0?0:-1}" data-index="${i}"><span class="tab-number">${String(i+1).padStart(2,'0')}</span><span class="tab-name">${p.name}</span><span class="tab-type">${p.type}</span><img class="mobile-preview" src="images/${p.id}.webp" alt="Сайт ${p.name}" loading="lazy" width="1250" height="668"></button>`).join('');
 function setIndexMode(){
  index.setAttribute('role',mobile.matches?'group':'tablist');
  if(mobile.matches)index.removeAttribute('aria-orientation');else index.setAttribute('aria-orientation','vertical');
  index.querySelectorAll('button').forEach((b,i)=>{b.setAttribute('role',mobile.matches?'button':'tab');b.tabIndex=mobile.matches?0:(i===selected?0:-1);if(mobile.matches){b.removeAttribute('aria-selected');b.removeAttribute('aria-controls');b.setAttribute('aria-haspopup','dialog');}else{b.setAttribute('aria-selected',String(i===selected));b.setAttribute('aria-controls','project-panel');b.removeAttribute('aria-haspopup');}});
 }
 function selectProject(i){
- selected=(i+projects.length)%projects.length;const p=projects[selected];
+ selected=(i+featuredProjects.length)%featuredProjects.length;const p=featuredProjects[selected];
  const panel=$('#project-panel');panel.setAttribute('aria-labelledby','tab-'+p.id);
  $('#preview-image').src=`images/${p.id}.webp`;$('#preview-image').alt='Первый экран сайта '+p.name;
- $('#viewer-category').textContent=p.category;$('#viewer-count').textContent=String(selected+1).padStart(2,'0')+' / 08';
+ $('#viewer-category').textContent=p.category;$('#viewer-count').textContent=String(selected+1).padStart(2,'0')+' / 03';
  $('#viewer-description').textContent=p.line;$('#viewer-demo').href=`demos/${p.id}/`;$('#preview-open').setAttribute('aria-label','О проекте '+p.name);
  panel.classList.remove('switching');requestAnimationFrame(()=>panel.classList.add('switching'));setIndexMode();
 }
-index.addEventListener('click',e=>{const b=e.target.closest('[data-index]');if(!b)return;const i=Number(b.dataset.index);selectProject(i);if(mobile.matches)openCase(projects[i].id);});
-index.addEventListener('keydown',e=>{if(mobile.matches)return;let i=selected;if(e.key==='ArrowDown')i++;else if(e.key==='ArrowUp')i--;else if(e.key==='Home')i=0;else if(e.key==='End')i=projects.length-1;else return;e.preventDefault();selectProject(i);$('#tab-'+projects[selected].id).focus();});
+index.addEventListener('click',e=>{const b=e.target.closest('[data-index]');if(!b)return;const i=Number(b.dataset.index);selectProject(i);if(mobile.matches)openCase(featuredProjects[i].id);});
+index.addEventListener('keydown',e=>{if(mobile.matches)return;let i=selected;if(e.key==='ArrowDown')i++;else if(e.key==='ArrowUp')i--;else if(e.key==='Home')i=0;else if(e.key==='End')i=featuredProjects.length-1;else return;e.preventDefault();selectProject(i);$('#tab-'+featuredProjects[selected].id).focus();});
 mobile.addEventListener('change',setIndexMode);setIndexMode();
-$('#preview-open').addEventListener('click',()=>openCase(projects[selected].id));
+$('#preview-open').addEventListener('click',()=>openCase(featuredProjects[selected].id));
 document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>openCase(b.dataset.project)));
 
 const caseDialog=$('#case-dialog');const briefDialog=$('#brief-dialog');let returnFocus=null;
@@ -44,7 +45,7 @@ document.querySelectorAll('dialog').forEach(d=>{d.addEventListener('cancel',e=>{
 function openCase(id,changeUrl=true){const i=projects.findIndex(p=>p.id===id);if(i<0)return;const p=projects[i];
  $('#case-index').textContent=`Проект / ${String(i+1).padStart(2,'0')} · 2026`;
  $('#case-content').innerHTML=`<div class="case-head"><div><p class="eyebrow">${p.category} / Концепт</p><h2 id="case-title">${p.name}<span style="color:var(--accent)">.</span></h2></div><p>${p.line}</p></div><div class="case-shot"><img src="images/${p.id}.webp" width="1250" height="668" alt="Первый экран проекта ${p.name}"></div><div class="case-info"><section><h3>Задача</h3><p>${p.task}</p></section><section><h3>Решение</h3><p>${p.solution}</p></section><section><h3>Что можно попробовать</h3><ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul></section></div><div class="case-info" style="padding-top:0;grid-template-columns:1fr"><section><h3>О проекте</h3><p>${p.limits} Дизайн и реализация подготовлены с использованием ИИ-инструментов.</p></section></div><div class="case-actions"><a href="demos/${p.id}/" target="_blank" rel="noopener" class="solid-button">Открыть демо <span aria-hidden="true">↗</span></a><div><button class="text-button" id="share-case">Скопировать ссылку</button><button class="text-button" id="next-case">Следующий проект <span aria-hidden="true">+</span></button></div></div><p class="case-share-status" id="case-share-status" role="status"></p>`;
- $('#next-case').addEventListener('click',()=>openCase(projects[(i+1)%projects.length].id));
+ $('#next-case').addEventListener('click',()=>openCase(featuredProjects[(featuredProjects.findIndex(p=>p.id===id)+1)%featuredProjects.length].id));
  $('#share-case').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);$('#case-share-status').textContent='Ссылка скопирована — её можно отправить отдельно.';}catch{$('#case-share-status').textContent='Скопируйте ссылку из адресной строки браузера.';}});
  if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);if(u.href!==location.href)history.pushState({portfolioCase:true},'',u);}
  showDialog(caseDialog);caseDialog.scrollTop=0;
