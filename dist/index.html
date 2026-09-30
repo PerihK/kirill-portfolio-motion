@@ -46,10 +46,14 @@
         <div class="detail-caption"><h3>Выбор начинается с вопроса.</h3><span>ТИХО / Подбор системы</span></div>
         <p>Площадь комнаты и солнце за окном превращаются в понятный ориентир по мощности.</p>
       </article>
-      <article class="detail-feature offset">
-        <button class="detail-image portrait-stage" data-project="yasno" aria-label="Подробнее о калькуляторе Ясно"><span class="stage-word" aria-hidden="true">Ясно.</span><img src="images/yasno-mobile.webp" alt="Мобильная версия сайта Ясно" loading="lazy" width="390" height="792"><span class="image-corner" aria-hidden="true">04</span></button>
-        <div class="detail-caption"><h3>Понятно даже на маленьком экране.</h3><span>ЯСНО / Мобильный интерфейс</span></div>
-        <p>Услуги, предварительный расчёт и состав заказа — в последовательном сценарии.</p>
+      <article class="detail-feature mobile-feature" aria-label="ЯСНО — интерактивный мобильный сайт">
+        <div class="mobile-stage" id="mobile-stage">
+          <div class="mobile-artboard" id="mobile-artboard">
+            <img class="phone-poster" src="images/yasno-phone.png" alt="ЯСНО: сайт в макете телефона. Понятно даже на маленьком экране." loading="lazy" width="1448" height="1086">
+            <div class="phone-screen"><img class="phone-fallback" src="images/yasno-mobile.webp" alt="Актуальный первый экран мобильного сайта ЯСНО" loading="lazy" width="414" height="882"><iframe src="demos/yasno/?embedded=1" title="Мобильный сайт ЯСНО — прокрутка и калькулятор уборки" loading="lazy"></iframe></div>
+          </div>
+        </div>
+        <div class="phone-controls"><p>Листайте сайт внутри телефона.</p><button class="text-button" id="expand-phone" aria-haspopup="dialog">Развернуть телефон <span aria-hidden="true">+</span></button><button class="text-button" data-project="yasno">О проекте</button></div>
       </article>
     </div>
     <article class="color-feature">
@@ -79,6 +83,7 @@
 </main>
 
 <dialog id="case-dialog" aria-labelledby="case-title"><div class="dialog-top"><span class="eyebrow" id="case-index">Проект / 01</span><button class="close-button" data-close="case-dialog" aria-label="Закрыть проект">Закрыть <span aria-hidden="true">×</span></button></div><div id="case-content"></div></dialog>
+<dialog id="phone-dialog" class="phone-dialog" aria-labelledby="phone-title"><div class="dialog-top"><h2 class="eyebrow" id="phone-title">ЯСНО / Мобильный сайт</h2><button class="close-button" data-close="phone-dialog" aria-label="Закрыть телефон">Закрыть <span aria-hidden="true">×</span></button></div><div class="expanded-phone"><iframe title="Развёрнутый мобильный сайт ЯСНО" data-src="demos/yasno/?embedded=1"></iframe></div></dialog>
 <dialog id="brief-dialog" aria-labelledby="brief-title">
   <div class="dialog-top"><span class="eyebrow">Начало проекта</span><button class="close-button" data-close="brief-dialog" aria-label="Закрыть бриф">Закрыть <span aria-hidden="true">×</span></button></div>
   <div class="brief-layout"><aside class="brief-sidebar"><h2 id="brief-title">Соберём<br> вашу задачу<span>.</span></h2><p>Несколько ответов, чтобы начать предметный разговор.</p><ol class="brief-progress"><li class="current">Бизнес</li><li>Формат</li><li>Цель</li><li>Детали</li></ol><p class="brief-privacy">Ответы остаются в этой вкладке. Вы сами решаете, когда отправить их в мессенджере.</p></aside>

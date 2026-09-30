@@ -1,3 +1,4 @@
 qa/
 *.tar.gz
+*.zip
 node_modules/

@@ -14,3 +14,29 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 @media(max-width:380px){:root{--gutter:18px}.header nav{gap:15px}.intro-top .eyebrow{font-size:8px}.project-tab .tab-name{font-size:21px}.details-heading h2{font-size:62px}.portrait-stage{height:355px}.brief-button{font-size:21px;gap:10px}.brief-progress{gap:8px}.brief-sidebar h2{font-size:30px}.contact footer{font-size:9px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
+/* The supplied artwork stays at its original resolution; the real mobile page covers its screen. */
+.detail-grid{grid-template-columns:1fr;gap:64px}
+.detail-grid>.detail-feature:first-child{display:grid;grid-template-columns:1.22fr 1fr;column-gap:8%;align-items:center}
+.detail-grid>.detail-feature:first-child>.detail-image{grid-row:1 / 3}
+.detail-grid>.detail-feature:first-child>.detail-caption{display:block;align-self:end;margin:0}
+.detail-grid>.detail-feature:first-child>.detail-caption h3{font-size:clamp(24px,3vw,44px);max-width:400px;line-height:1.16}
+.detail-grid>.detail-feature:first-child>.detail-caption>span{display:block;text-align:left;max-width:none;margin-top:18px;font-size:12px}
+.detail-grid>.detail-feature:first-child>p{align-self:start;font-size:16px;margin-top:20px}
+.mobile-stage{position:relative;width:100%;aspect-ratio:1448 / 1086;overflow:hidden;background:#e4e6df}
+.mobile-artboard{position:absolute;left:0;top:0;width:1448px;height:1086px;transform-origin:0 0}
+.phone-poster{width:1448px;height:1086px;max-width:none}
+.phone-screen{position:absolute;left:529px;top:133px;width:414px;height:882px;overflow:hidden;background:white;border-radius:12px 12px 53px 53px;transform-origin:0 0}
+.phone-screen iframe{border:0;width:414px;height:882px;display:block;background:white}
+.phone-screen:focus-within{outline:3px solid var(--accent);outline-offset:3px}
+.phone-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:24px;padding-top:16px}
+.phone-controls p{margin-right:auto;color:var(--muted);font-size:14px}
+.phone-controls .text-button{font-size:14px}
+.phone-dialog{width:min(510px,100%);height:calc(100dvh - 32px);margin:16px auto;background:#d9dbd2}
+.phone-dialog .dialog-top{padding:12px 20px}
+.phone-dialog .dialog-top h2{font-weight:400}
+.expanded-phone{width:min(390px,calc(100% - 28px));height:calc(100% - 91px);margin:12px auto;border:7px solid #252622;border-radius:28px;overflow:hidden;background:white;box-shadow:0 15px 30px #0002}
+.expanded-phone iframe{display:block;border:0;width:100%;height:100%;background:white}
+@media(max-width:760px){.detail-grid{gap:40px}.detail-grid>.detail-feature:first-child{display:block}.detail-grid>.detail-feature:first-child>.detail-caption{margin-top:22px}.detail-grid>.detail-feature:first-child>.detail-caption h3{font-size:24px}.detail-grid>.detail-feature:first-child>p{font-size:14px;margin-top:12px}.phone-controls{gap:12px 20px;justify-content:flex-start}.phone-controls p{width:100%;font-size:14px}.mobile-stage{margin-left:calc(-1 * var(--gutter));width:calc(100% + 2 * var(--gutter))}.phone-dialog{margin:0 auto;height:100dvh}.expanded-phone{height:calc(100% - 85px)}}
+.phone-screen{transform:matrix3d(0.9604156134422478,-0.06263580087666833,0,-0.00009561446028442585,0.0011365320946780649,0.9933290507486287,0,0.000002745246605502572,0,0,1,0,0,0,0,1)}
+.phone-screen .phone-fallback{position:absolute;inset:0;width:414px;height:882px;max-width:none;object-fit:cover}
+.phone-screen iframe{position:relative}

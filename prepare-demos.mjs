@@ -10,6 +10,7 @@ for(const [slug,source] of Object.entries(projects)) {
  }
  const entry=resolve(dest,'index.html');let html=await readFile(entry,'utf8');
  html=html.replace('</head>','<meta name="robots" content="noindex,follow"></head>');
+ if(slug==='yasno')html=html.replace('</head>','<script>if(new URLSearchParams(location.search).has("embedded"))document.documentElement.classList.add("embedded-preview");</script><style>.embedded-preview body>a[aria-label="Вернуться к портфолио Кирилла Перих"]{display:none}.embedded-preview{scrollbar-width:none}.embedded-preview::-webkit-scrollbar{display:none}</style></head>');
  const badge='<a href="../../?project='+slug+'" style="position:fixed;bottom:16px;right:16px;z-index:99999;background:#171918;color:#fff;padding:12px 16px;border-radius:2px;font:13px Arial,sans-serif;text-decoration:none;box-shadow:0 2px 12px #0003" aria-label="Вернуться к портфолио Кирилла Перих">Портфолио Кирилла · Закрыть демо</a>';
  html=html.replace('</body>',badge+'</body>');await writeFile(entry,html);
  console.log('Prepared '+slug);

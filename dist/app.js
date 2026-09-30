@@ -33,6 +33,10 @@ $('#preview-open').addEventListener('click',()=>openCase(projects[selected].id))
 document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>openCase(b.dataset.project)));
 
 const caseDialog=$('#case-dialog');const briefDialog=$('#brief-dialog');let returnFocus=null;
+const phoneDialog=$('#phone-dialog');
+$('#expand-phone').addEventListener('click',()=>{const frame=phoneDialog.querySelector('iframe');if(!frame.hasAttribute('src'))frame.src=frame.dataset.src;showDialog(phoneDialog);});
+const phoneStage=$('#mobile-stage');const phoneArtboard=$('#mobile-artboard');
+new ResizeObserver(([entry])=>{phoneArtboard.style.transform=`scale(${entry.contentRect.width/1448})`;}).observe(phoneStage);
 function showDialog(dialog){if(dialog.open)return;returnFocus=document.activeElement;dialog.showModal();document.body.classList.add('modal-open');dialog.scrollTop=0;}
 function closeDialog(dialog,changeUrl=true){dialog.close();if(!document.querySelector('dialog[open]'))document.body.classList.remove('modal-open');if(dialog===caseDialog&&changeUrl){const u=new URL(location.href);u.searchParams.delete('project');history.replaceState(null,'',u);}if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});}
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeDialog(document.getElementById(b.dataset.close))));
