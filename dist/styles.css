@@ -145,6 +145,11 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 .project-open{position:absolute;right:16px;bottom:16px;display:flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);font-size:12px;padding:10px 14px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s}
 @media(hover:hover){.project-card:hover .project-window{transform:translateY(-6px)}.project-card:hover .project-open{opacity:1;transform:none}.project-card:hover .project-action-icon{color:var(--paper);background:var(--ink);border-color:var(--ink)}}
 .project-card:focus-visible .project-open{opacity:1;transform:none}
+@media(min-width:1000px){
+ .project-card{display:grid;grid-template-rows:auto 1fr}
+ .project-caption{grid-template-columns:minmax(90px,.85fr) minmax(0,1.35fr) auto;gap:20px;min-height:104px;padding:22px 0}
+ .project-heading{grid-column:1;grid-row:1}.project-summary{grid-column:2;grid-row:1;font-size:15px;line-height:1.5;color:var(--ink);max-width:26ch}.project-action{grid-column:3;grid-row:1}
+}
 .mobile-introduction{display:none}.poster-number-cover{position:absolute;left:46px;top:714px;width:45px;height:33px;background:#f0f0ec;box-shadow:0 0 3px 3px #f0f0ec}
 .services-list summary{grid-template-columns:1fr 33% 20px}.service-body{padding-left:0}
 @media(max-width:760px){.project-grid{gap:32px 18px}.project-caption{gap:10px}.project-name{font-size:23px}.project-niche{font-size:11px}.services-list summary{grid-template-columns:1fr 18px}.service-body{padding-left:0}}

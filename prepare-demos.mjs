@@ -6,7 +6,7 @@ for(const [slug,source] of Object.entries(projects)) {
  const dest=resolve(base,'dist/demos',slug);await mkdir(dest,{recursive:true});await cp(resolve(base,'..',source),dest,{recursive:true});
  // The exported Lesno app uses absolute asset URLs; scope its assets to this demo.
  if(slug==='lesno') {
-  async function scope(dir) {for(const e of await readdir(dir,{withFileTypes:true})) {const p=resolve(dir,e.name);if(e.isDirectory())await scope(p);else if(['.html','.js','.css'].includes(extname(p))){let t=await readFile(p,'utf8');t=t.replaceAll('/assets/','/demos/lesno/assets/').replaceAll('/images/','/demos/lesno/images/').replaceAll('/_next/','/demos/lesno/_next/').replaceAll('https://t.me/laimick','https://t.me/kiriw8');await writeFile(p,t);}}}await scope(dest);
+  async function scope(dir) {for(const e of await readdir(dir,{withFileTypes:true})) {const p=resolve(dir,e.name);if(e.isDirectory())await scope(p);else if(['.html','.js','.css','.rsc'].includes(extname(p))){let t=await readFile(p,'utf8');t=t.replaceAll('/assets/','/demos/lesno/assets/').replaceAll('/images/','/demos/lesno/images/').replaceAll('/_next/','/demos/lesno/_next/').replaceAll('https://t.me/laimick','https://t.me/KiriwPerih').replaceAll('@laimick','@KiriwPerih');await writeFile(p,t);}}}await scope(dest);
  }
  const entry=resolve(dest,'index.html');let html=await readFile(entry,'utf8');
  html=html.replace('</head>','<meta name="robots" content="noindex,follow"></head>');
