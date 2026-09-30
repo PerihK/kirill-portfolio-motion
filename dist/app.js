@@ -10,36 +10,20 @@ const projects = [
 ];
 const featuredProjects=projects.slice(0,6);
 const $=s=>document.querySelector(s);
-const index=$('#project-index');
-const mobile=window.matchMedia('(max-width: 760px)');
-let selected=0;
-index.innerHTML = featuredProjects.map((p,i)=>`<button class="project-tab" id="tab-${p.id}" role="tab" aria-selected="${i===0}" aria-controls="project-panel" tabindex="${i===0?0:-1}" data-index="${i}"><span class="tab-number">${String(i+1).padStart(2,'0')}</span><span class="tab-name">${p.name}</span><span class="tab-type">${p.type}</span><img class="mobile-preview" src="images/${p.id}.webp" alt="Сайт ${p.name}" loading="lazy" width="1250" height="668"></button>`).join('');
-function setIndexMode(){
- index.setAttribute('role',mobile.matches?'group':'tablist');
- if(mobile.matches)index.removeAttribute('aria-orientation');else index.setAttribute('aria-orientation','vertical');
- index.querySelectorAll('button').forEach((b,i)=>{b.setAttribute('role',mobile.matches?'button':'tab');b.tabIndex=mobile.matches?0:(i===selected?0:-1);if(mobile.matches){b.removeAttribute('aria-selected');b.removeAttribute('aria-controls');b.setAttribute('aria-haspopup','dialog');}else{b.setAttribute('aria-selected',String(i===selected));b.setAttribute('aria-controls','project-panel');b.removeAttribute('aria-haspopup');}});
-}
-function selectProject(i){
- selected=(i+featuredProjects.length)%featuredProjects.length;const p=featuredProjects[selected];
- const panel=$('#project-panel');panel.setAttribute('aria-labelledby','tab-'+p.id);
- $('#preview-image').src=`images/${p.id}.webp`;$('#preview-image').alt='Первый экран сайта '+p.name;
- $('#viewer-name').textContent=p.name;$('#viewer-niche').textContent=p.type;
- $('#preview-open').setAttribute('aria-label','Открыть сайт '+p.name);
- panel.classList.remove('switching');requestAnimationFrame(()=>panel.classList.add('switching'));setIndexMode();
-}
-index.addEventListener('click',e=>{const b=e.target.closest('[data-index]');if(!b)return;const i=Number(b.dataset.index);selectProject(i);if(mobile.matches)openSite(featuredProjects[i].id);});
-index.addEventListener('keydown',e=>{if(mobile.matches)return;let i=selected;if(e.key==='ArrowDown')i++;else if(e.key==='ArrowUp')i--;else if(e.key==='Home')i=0;else if(e.key==='End')i=featuredProjects.length-1;else return;e.preventDefault();selectProject(i);$('#tab-'+featuredProjects[selected].id).focus();});
-mobile.addEventListener('change',setIndexMode);setIndexMode();
-$('#preview-open').addEventListener('click',()=>openSite(featuredProjects[selected].id));
+const grid=$('#project-grid');
+grid.innerHTML=featuredProjects.map((p,i)=>`<button class="project-card project-${p.id}" data-project="${p.id}" aria-label="Открыть сайт ${p.name} — ${p.type}" aria-haspopup="dialog"><span class="project-art"><span class="project-window"><span class="project-chrome" aria-hidden="true"><span>● ● ●</span><span>${p.name.toLowerCase()}</span><span>↗</span></span><picture><source media="(max-width: 600px)" srcset="images/${p.id}-mobile.webp"><img src="images/${p.id}.webp" alt="Первый экран сайта ${p.name}" loading="${i===0?'eager':'lazy'}" width="1250" height="668"></picture></span><span class="project-open" aria-hidden="true">Открыть сайт ↗</span></span><span class="project-caption"><span class="project-name">${p.name}</span><span class="project-niche">${p.type}</span><span class="project-arrow" aria-hidden="true">↗</span></span></button>`).join('');
 document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>openSite(b.dataset.project)));
-
-$('#viewer-demo').addEventListener('click',()=>openSite(featuredProjects[selected].id));
 
 const siteDialog=$('#site-dialog'),briefDialog=$('#brief-dialog');
 const siteFrame=$('#site-frame');
 let returnFocus=null;
 const phoneStage=$('#mobile-stage'),phoneArtboard=$('#mobile-artboard');
-new ResizeObserver(([entry])=>{phoneArtboard.style.transform=`scale(${entry.contentRect.width/1448})`;}).observe(phoneStage);
+// The narrow composition crops the same artboard, so the live site keeps its scroll position.
+new ResizeObserver(([entry])=>{
+ const narrow=window.matchMedia('(max-width: 600px)').matches;
+ const scale=entry.contentRect.width/(narrow?550:1448);
+ phoneArtboard.style.transform=narrow?`matrix(${scale},0,0,${scale},${-485*scale},${-5*scale})`:`scale(${scale})`;
+}).observe(phoneStage);
 function showDialog(dialog){if(dialog.open)return;returnFocus=document.activeElement;dialog.showModal();document.body.classList.add('modal-open');dialog.scrollTop=0;}
 function closeDialog(dialog,changeUrl=true){dialog.close();if(dialog===siteDialog){siteFrame.removeAttribute('src');$('#site-loading').hidden=false;if(changeUrl){const u=new URL(location.href);u.searchParams.delete('project');history.replaceState(null,'',u);}}if(!document.querySelector('dialog[open]'))document.body.classList.remove('modal-open');if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});}
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeDialog(document.getElementById(b.dataset.close))));
