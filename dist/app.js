@@ -1,19 +1,18 @@
 const projects = [
- {id:'tiho',name:'ТИХО',type:'Климат',category:'Сервис / Климат',line:'От параметров комнаты — к выбору кондиционера.',task:'Помочь посетителю разобраться в подборе кондиционера и понять, из чего складывается монтаж.',solution:'Архитектурная композиция, предварительный расчёт по параметрам комнаты и сравнение трёх классов оборудования.',features:['Подбор по площади и освещённости','Сравнение классов оборудования','Адаптивная страница и сценарий заявки'],limits:'Фронтенд-концепт вымышленного сервиса. Подбор ориентировочный; форма не отправляет данные.'},
- {id:'stebel',name:'СТЕБЕЛЬ',type:'Цветы',category:'Каталог / Цветочная студия',line:'Характер бренда — от первой иллюстрации до выбора букета.',task:'Представить цветочную студию и помочь выбрать букет под повод и настроение.',solution:'Иллюстрированный визуальный мир, подбор букета и каталог с демонстрационной корзиной.',features:['Подбор букета по случаю','Каталог и демонстрационная корзина','Сценарии доставки и подписки'],limits:'Концепт вымышленной студии. Заказы, оплата и отправка личных данных не выполняются.'},
- {id:'lesno',name:'ЛЕСНО',type:'Ландшафт',category:'Портфолио / Ландшафтное бюро',line:'Пространство, в котором проекты говорят сами за себя.',task:'Показать подход ландшафтного бюро через коллекцию садов и последовательность работы.',solution:'Крупные изображения, спокойная типографика и разбор идеи каждого сада.',features:['Коллекция трёх садов','Раскрывающиеся описания проектов','Мобильная навигация'],limits:'Концептуальное бюро и вымышленные сады. Изображения созданы для демонстрации визуальной подачи.'},
- {id:'yasno',name:'ЯСНО',type:'Клининг',category:'Лендинг / Сервис для дома',line:'Предварительная стоимость — до первого сообщения.',task:'Объяснить услуги клининга и дать посетителю предварительный расчёт с понятным составом заказа.',solution:'Калькулятор связывает тип уборки, площадь и дополнительные услуги. Итог можно просмотреть и скачать.',features:['Расчёт стоимости и дополнительных услуг','Демонстрационный путь заявки','Скачивание расчёта'],limits:'Вымышленный сервис, примерные цены. Заявка хранится только в текущей вкладке; CRM и уведомления не подключены.'},
- {id:'liniya',name:'ЛИНИЯ',type:'Красота',category:'Лендинг / Салон красоты',line:'От знакомства с услугой — к выбору времени.',task:'Представить услуги салона и показать удобный сценарий записи.',solution:'Редакционная подача, меню услуг и последовательный выбор услуги, дня и времени.',features:['Выбор услуги','Выбор дня и времени','Просмотр пробной записи'],limits:'Учебный проект вымышленного салона. Свободное время условное; настоящая бронь и уведомления не создаются.'},
- {id:'hvost',name:'ХВОСТ',type:'Груминг',category:'Лендинг / Груминг-студия',line:'Подходящий уход — с учётом размера и типа шерсти.',task:'Познакомить со студией и сделать выбор ухода понятным владельцу собаки.',solution:'Спокойный визуальный язык, раскрывающееся меню услуг и интерактивный подбор программы.',features:['Подбор по двум параметрам','Рекомендация программы и времени','Описание визита и ответы на вопросы'],limits:'Концепт вымышленной студии. Запись, оплата и передача данных не выполняются.'},
- {id:'mile',name:'MILE',type:'Образование',category:'Лендинг / Школа английского',line:'Английский через ситуации, которые действительно случаются.',task:'Показать программу английского для переезда и помочь посетителю сориентироваться в обучении.',solution:'Программа построена вокруг жизненных ситуаций. Тест и расписание помогают примерить обучение на себя.',features:['Короткий ориентировочный тест','Переключаемое расписание','Демо пробного урока и личного кабинета'],limits:'Вымышленная школа. Тест не заменяет оценку преподавателя; аккаунты, запись и оплата не создаются.'},
- {id:'plan',name:'ПЛАН',type:'Девелопмент',category:'Сайт / Жилые кварталы',line:'От городской среды — к конкретной планировке.',task:'Представить жилые кварталы и показать сценарий выбора будущего дома.',solution:'Крупная архитектурная подача соединена с генпланом, планировками и предварительным калькулятором.',features:['Интерактивный генплан','Просмотр планировок','Демонстрационный ипотечный калькулятор'],limits:'Фронтенд-концепт девелопера. Объекты и условия приведены для демонстрации; финансовые расчёты не являются предложением.'}
+ {id:'lesno',name:'ЛЕСНО',type:'Ландшафт'},
+ {id:'plan',name:'ПЛАН',type:'Девелопмент'},
+ {id:'mile',name:'MILE',type:'Образование'},
+ {id:'tiho',name:'ТИХО',type:'Климат'},
+ {id:'liniya',name:'ЛИНИЯ',type:'Красота'},
+ {id:'hvost',name:'ХВОСТ',type:'Груминг'},
+ {id:'yasno',name:'ЯСНО',type:'Клининг'},
+ {id:'stebel',name:'СТЕБЕЛЬ',type:'Цветочная студия'}
 ];
-const featuredProjects = ['lesno','plan','mile','tiho','liniya','hvost'].map(id=>projects.find(p=>p.id===id));
-const showcaseProjects = [...featuredProjects, ...['yasno','stebel'].map(id=>projects.find(p=>p.id===id))];
-const $ = s => document.querySelector(s);
-const index = $('#project-index');
-const mobile = window.matchMedia('(max-width: 760px)');
-let selected = 0;
+const featuredProjects=projects.slice(0,6);
+const $=s=>document.querySelector(s);
+const index=$('#project-index');
+const mobile=window.matchMedia('(max-width: 760px)');
+let selected=0;
 index.innerHTML = featuredProjects.map((p,i)=>`<button class="project-tab" id="tab-${p.id}" role="tab" aria-selected="${i===0}" aria-controls="project-panel" tabindex="${i===0?0:-1}" data-index="${i}"><span class="tab-number">${String(i+1).padStart(2,'0')}</span><span class="tab-name">${p.name}</span><span class="tab-type">${p.type}</span><img class="mobile-preview" src="images/${p.id}.webp" alt="Сайт ${p.name}" loading="lazy" width="1250" height="668"></button>`).join('');
 function setIndexMode(){
  index.setAttribute('role',mobile.matches?'group':'tablist');
@@ -24,35 +23,31 @@ function selectProject(i){
  selected=(i+featuredProjects.length)%featuredProjects.length;const p=featuredProjects[selected];
  const panel=$('#project-panel');panel.setAttribute('aria-labelledby','tab-'+p.id);
  $('#preview-image').src=`images/${p.id}.webp`;$('#preview-image').alt='Первый экран сайта '+p.name;
- $('#viewer-category').textContent=p.category;$('#viewer-count').textContent=String(selected+1).padStart(2,'0')+' / '+String(featuredProjects.length).padStart(2,'0');
- $('#viewer-description').textContent=p.line;$('#viewer-demo').href=`demos/${p.id}/`;$('#preview-open').setAttribute('aria-label','О проекте '+p.name);
+ $('#viewer-name').textContent=p.name;$('#viewer-niche').textContent=p.type;
+ $('#preview-open').setAttribute('aria-label','Открыть сайт '+p.name);
  panel.classList.remove('switching');requestAnimationFrame(()=>panel.classList.add('switching'));setIndexMode();
 }
-index.addEventListener('click',e=>{const b=e.target.closest('[data-index]');if(!b)return;const i=Number(b.dataset.index);selectProject(i);if(mobile.matches)openCase(featuredProjects[i].id);});
+index.addEventListener('click',e=>{const b=e.target.closest('[data-index]');if(!b)return;const i=Number(b.dataset.index);selectProject(i);if(mobile.matches)openSite(featuredProjects[i].id);});
 index.addEventListener('keydown',e=>{if(mobile.matches)return;let i=selected;if(e.key==='ArrowDown')i++;else if(e.key==='ArrowUp')i--;else if(e.key==='Home')i=0;else if(e.key==='End')i=featuredProjects.length-1;else return;e.preventDefault();selectProject(i);$('#tab-'+featuredProjects[selected].id).focus();});
 mobile.addEventListener('change',setIndexMode);setIndexMode();
-$('#preview-open').addEventListener('click',()=>openCase(featuredProjects[selected].id));
-document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>openCase(b.dataset.project)));
+$('#preview-open').addEventListener('click',()=>openSite(featuredProjects[selected].id));
+document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>openSite(b.dataset.project)));
 
-const caseDialog=$('#case-dialog');const briefDialog=$('#brief-dialog');let returnFocus=null;
-const phoneDialog=$('#phone-dialog');
-$('#expand-phone').addEventListener('click',()=>{const frame=phoneDialog.querySelector('iframe');if(!frame.hasAttribute('src'))frame.src=frame.dataset.src;showDialog(phoneDialog);});
-const phoneStage=$('#mobile-stage');const phoneArtboard=$('#mobile-artboard');
+$('#viewer-demo').addEventListener('click',()=>openSite(featuredProjects[selected].id));
+
+const siteDialog=$('#site-dialog'),briefDialog=$('#brief-dialog');
+const siteFrame=$('#site-frame');
+let returnFocus=null;
+const phoneStage=$('#mobile-stage'),phoneArtboard=$('#mobile-artboard');
 new ResizeObserver(([entry])=>{phoneArtboard.style.transform=`scale(${entry.contentRect.width/1448})`;}).observe(phoneStage);
 function showDialog(dialog){if(dialog.open)return;returnFocus=document.activeElement;dialog.showModal();document.body.classList.add('modal-open');dialog.scrollTop=0;}
-function closeDialog(dialog,changeUrl=true){dialog.close();if(!document.querySelector('dialog[open]'))document.body.classList.remove('modal-open');if(dialog===caseDialog&&changeUrl){const u=new URL(location.href);u.searchParams.delete('project');history.replaceState(null,'',u);}if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});}
+function closeDialog(dialog,changeUrl=true){dialog.close();if(dialog===siteDialog){siteFrame.removeAttribute('src');$('#site-loading').hidden=false;if(changeUrl){const u=new URL(location.href);u.searchParams.delete('project');history.replaceState(null,'',u);}}if(!document.querySelector('dialog[open]'))document.body.classList.remove('modal-open');if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});}
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeDialog(document.getElementById(b.dataset.close))));
-document.querySelectorAll('dialog').forEach(d=>{d.addEventListener('cancel',e=>{e.preventDefault();closeDialog(d);});d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog(d);}});});
-function openCase(id,changeUrl=true){const i=projects.findIndex(p=>p.id===id);if(i<0)return;const p=projects[i];
- $('#case-index').textContent=`Проект / ${String(showcaseProjects.findIndex(p=>p.id===id)+1).padStart(2,'0')} · 2026`;
- $('#case-content').innerHTML=`<div class="case-head"><div><p class="eyebrow">${p.category} / Концепт</p><h2 id="case-title">${p.name}<span style="color:var(--accent)">.</span></h2></div><p>${p.line}</p></div><div class="case-shot"><img src="images/${p.id}.webp" width="1250" height="668" alt="Первый экран проекта ${p.name}"></div><div class="case-info"><section><h3>Задача</h3><p>${p.task}</p></section><section><h3>Решение</h3><p>${p.solution}</p></section><section><h3>Что можно попробовать</h3><ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul></section></div><div class="case-info" style="padding-top:0;grid-template-columns:1fr"><section><h3>О проекте</h3><p>${p.limits} Дизайн и реализация подготовлены с использованием ИИ-инструментов.</p></section></div><div class="case-actions"><a href="demos/${p.id}/" target="_blank" rel="noopener" class="solid-button">Открыть демо <span aria-hidden="true">↗</span></a><div><button class="text-button" id="share-case">Скопировать ссылку</button><button class="text-button" id="next-case">Следующий проект <span aria-hidden="true">+</span></button></div></div><p class="case-share-status" id="case-share-status" role="status"></p>`;
- $('#next-case').addEventListener('click',()=>openCase(showcaseProjects[(showcaseProjects.findIndex(p=>p.id===id)+1)%showcaseProjects.length].id));
- $('#share-case').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);$('#case-share-status').textContent='Ссылка скопирована — её можно отправить отдельно.';}catch{$('#case-share-status').textContent='Скопируйте ссылку из адресной строки браузера.';}});
- if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);if(u.href!==location.href)history.pushState({portfolioCase:true},'',u);}
- showDialog(caseDialog);caseDialog.scrollTop=0;
-}
-window.addEventListener('popstate',()=>{const id=new URL(location.href).searchParams.get('project');if(id)openCase(id,false);else if(caseDialog.open)closeDialog(caseDialog,false);});
-const initialProject=new URL(location.href).searchParams.get('project');if(initialProject)openCase(initialProject,false);
+document.querySelectorAll('dialog').forEach(d=>d.addEventListener('cancel',e=>{e.preventDefault();closeDialog(d);}));
+siteFrame.addEventListener('load',()=>{if(!siteFrame.hasAttribute('src'))return;$('#site-loading').hidden=true;try{const doc=siteFrame.contentDocument;doc.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e.defaultPrevented&&!doc.querySelector('dialog[open]')){e.preventDefault();closeDialog(siteDialog);}});}catch{}});
+function openSite(id,changeUrl=true){const p=projects.find(p=>p.id===id);if(!p)return;$('#site-title').textContent=p.name;$('#site-niche').textContent=p.type;$('#site-external').href=`demos/${id}/`;siteFrame.title='Сайт '+p.name;$('#site-loading').hidden=false;showDialog(siteDialog);siteFrame.src=`demos/${id}/?embedded=1`;if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);if(u.href!==location.href)history.pushState({portfolioSite:true},'',u);}}
+window.addEventListener('popstate',()=>{const id=new URL(location.href).searchParams.get('project');if(id)openSite(id,false);else if(siteDialog.open)closeDialog(siteDialog,false);});
+const initialProject=new URL(location.href).searchParams.get('project');if(initialProject)openSite(initialProject,false);
 
 const form=$('#brief-form');form.noValidate=true;let step=0;
 function renderStep(){form.querySelectorAll('.brief-step').forEach((s,i)=>s.hidden=i!==step);document.querySelectorAll('.brief-progress li').forEach((li,i)=>{li.classList.toggle('current',i===step);li.classList.toggle('complete',i<step);});$('#brief-back').hidden=step===0;$('#brief-back').textContent=step===4?'Изменить ответы':'Назад';$('#brief-next').hidden=step===4;$('#brief-next').textContent=step===3?'Собрать описание':'Дальше +';$('#form-error').textContent='';}

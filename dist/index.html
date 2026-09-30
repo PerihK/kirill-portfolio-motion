@@ -28,12 +28,10 @@
     <div class="collection-grid">
       <div class="project-index" role="tablist" aria-label="Выбрать проект" aria-orientation="vertical" id="project-index"></div>
       <div class="project-viewer" id="project-panel" role="tabpanel" aria-labelledby="tab-lesno" tabindex="0">
-        <div class="viewer-bar"><span id="viewer-category">Портфолио / Ландшафтное бюро</span><span id="viewer-count">01 / 06</span></div>
-        <button class="preview-open" id="preview-open" aria-label="О проекте ЛЕСНО"><img id="preview-image" src="images/lesno.webp" alt="Первый экран сайта ЛЕСНО" width="1250" height="668" fetchpriority="high"><span class="preview-label">Открыть проект <span aria-hidden="true">+</span></span></button>
-        <div class="viewer-footer"><p id="viewer-description">Пространство, в котором проекты говорят сами за себя.</p><a id="viewer-demo" href="demos/lesno/" target="_blank" rel="noopener">Открыть сайт <span aria-hidden="true">↗</span></a></div>
+        <button class="preview-open" id="preview-open" aria-label="Открыть сайт ЛЕСНО" aria-haspopup="dialog"><img id="preview-image" src="images/lesno.webp" alt="Первый экран сайта ЛЕСНО" width="1250" height="668" fetchpriority="high"><span class="preview-label">Открыть сайт <span aria-hidden="true">+</span></span></button>
+        <div class="viewer-footer"><p><span id="viewer-name">ЛЕСНО</span><span id="viewer-niche">Ландшафт</span></p><button id="viewer-demo" class="text-button" aria-haspopup="dialog">Открыть сайт <span aria-hidden="true">+</span></button></div>
       </div>
     </div>
-    <p class="collection-note">Шесть проектов в галерее. ЯСНО и СТЕБЕЛЬ — в отдельных блоках ниже.</p>
   </section>
 
   <section class="details-section" aria-labelledby="details-title">
@@ -46,12 +44,12 @@
             <div class="phone-cutout"><div class="phone-screen"><img class="phone-fallback" src="images/yasno-mobile.webp" alt="Актуальный первый экран мобильного сайта ЯСНО" loading="lazy" width="414" height="882"><iframe src="demos/yasno/?embedded=1" title="Мобильный сайт ЯСНО — прокрутка и калькулятор уборки" loading="lazy"></iframe></div></div>
           </div>
         </div>
-        <div class="phone-controls"><p>Листайте сайт внутри телефона.</p><button class="text-button" id="expand-phone" aria-haspopup="dialog">Развернуть телефон <span aria-hidden="true">+</span></button><button class="text-button" data-project="yasno">О проекте</button></div>
+        <div class="phone-controls"><p>Листайте сайт внутри телефона.</p><button class="text-button" data-project="yasno" aria-haspopup="dialog">Открыть сайт <span aria-hidden="true">+</span></button></div>
       </article>
     </div>
     <article class="flower-feature" id="stebel-feature" aria-labelledby="flower-title">
-      <div class="flower-stage"><div class="flower-stage-top"><span>СТЕБЕЛЬ / ЦВЕТОЧНАЯ СТУДИЯ</span><span>ИЛЛЮСТРАЦИИ · КАТАЛОГ · ПОДБОР</span></div><button class="flower-browser" data-project="stebel" aria-label="Открыть проект СТЕБЕЛЬ"><span class="browser-chrome" aria-hidden="true"><span>● ● ●</span><span>stebel / цветы к вашему моменту</span><span>+</span></span><img src="images/stebel.webp" alt="Актуальный первый экран сайта цветочной студии СТЕБЕЛЬ" loading="lazy" width="1250" height="668"></button><button class="flower-card" data-project="stebel" aria-label="Подробнее о каталоге букетов СТЕБЕЛЬ"><img src="demos/stebel/images/bouquet-coral.png" alt="Иллюстрация букета Тёплый привет из проекта СТЕБЕЛЬ" loading="lazy" width="1024" height="1536"><span>01 / Тёплый привет</span></button></div>
-      <div class="flower-caption"><div><span class="eyebrow">СТЕБЕЛЬ / Каталог</span><h3 id="flower-title">Цветочная студия<br>с собственным характером.</h3></div><div><p>Иллюстрации, подбор букета по поводу и каталог. От первого знакомства до выбора цветов.</p><button class="text-button" data-project="stebel">Посмотреть проект <span aria-hidden="true">+</span></button></div></div>
+      <div class="flower-stage"><div class="flower-stage-top"><span>СТЕБЕЛЬ / ЦВЕТОЧНАЯ СТУДИЯ</span><span>ИЛЛЮСТРАЦИИ · КАТАЛОГ · ПОДБОР</span></div><button class="flower-browser" data-project="stebel" aria-label="Открыть сайт СТЕБЕЛЬ" aria-haspopup="dialog"><span class="browser-chrome" aria-hidden="true"><span>● ● ●</span><span>stebel / цветы к вашему моменту</span><span>+</span></span><img src="images/stebel.webp" alt="Актуальный первый экран сайта цветочной студии СТЕБЕЛЬ" loading="lazy" width="1250" height="668"></button><button class="flower-card" data-project="stebel" aria-label="Открыть сайт цветочной студии СТЕБЕЛЬ" aria-haspopup="dialog"><img src="demos/stebel/images/bouquet-coral.png" alt="Иллюстрация букета Тёплый привет из проекта СТЕБЕЛЬ" loading="lazy" width="1024" height="1536"><span>01 / Тёплый привет</span></button></div>
+      <div class="flower-caption"><div><h3 id="flower-title">СТЕБЕЛЬ</h3><span class="flower-niche">Цветочная студия</span></div><button class="text-button" data-project="stebel" aria-haspopup="dialog">Открыть сайт <span aria-hidden="true">+</span></button></div>
     </article>
   </section>
 
@@ -74,8 +72,7 @@
   </section>
 </main>
 
-<dialog id="case-dialog" aria-labelledby="case-title"><div class="dialog-top"><span class="eyebrow" id="case-index">Проект / 01</span><button class="close-button" data-close="case-dialog" aria-label="Закрыть проект">Закрыть <span aria-hidden="true">×</span></button></div><div id="case-content"></div></dialog>
-<dialog id="phone-dialog" class="phone-dialog" aria-labelledby="phone-title"><div class="dialog-top"><h2 class="eyebrow" id="phone-title">ЯСНО / Мобильный сайт</h2><button class="close-button" data-close="phone-dialog" aria-label="Закрыть телефон">Закрыть <span aria-hidden="true">×</span></button></div><div class="expanded-phone"><iframe title="Развёрнутый мобильный сайт ЯСНО" data-src="demos/yasno/?embedded=1"></iframe></div></dialog>
+<dialog id="site-dialog" class="site-dialog" aria-labelledby="site-title"><div class="site-toolbar"><div class="site-identity"><h2 id="site-title">ЛЕСНО</h2><span id="site-niche">Ландшафт</span><span class="site-concept">Концепт</span></div><div class="site-toolbar-actions"><a id="site-external" href="demos/lesno/" target="_blank" rel="noopener">Открыть отдельно</a><button class="close-button" data-close="site-dialog" aria-label="Закрыть сайт">Закрыть <span aria-hidden="true">×</span></button></div></div><div class="site-surface"><p id="site-loading" class="site-loading" role="status">Открываем сайт…</p><iframe id="site-frame" title="Сайт ЛЕСНО" allow="clipboard-write"></iframe></div></dialog>
 <dialog id="brief-dialog" aria-labelledby="brief-title">
   <div class="dialog-top"><span class="eyebrow">Начало проекта</span><button class="close-button" data-close="brief-dialog" aria-label="Закрыть бриф">Закрыть <span aria-hidden="true">×</span></button></div>
   <div class="brief-layout"><aside class="brief-sidebar"><h2 id="brief-title">Соберём<br> вашу задачу<span>.</span></h2><p>Несколько ответов, чтобы начать предметный разговор.</p><ol class="brief-progress"><li class="current">Бизнес</li><li>Формат</li><li>Цель</li><li>Детали</li></ol><p class="brief-privacy">Ответы остаются в этой вкладке. Вы сами решаете, когда отправить их в мессенджере.</p></aside>
