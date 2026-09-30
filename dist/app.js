@@ -8,7 +8,8 @@ const projects = [
  {id:'mile',name:'MILE',type:'Образование',category:'Лендинг / Школа английского',line:'Английский через ситуации, которые действительно случаются.',task:'Показать программу английского для переезда и помочь посетителю сориентироваться в обучении.',solution:'Программа построена вокруг жизненных ситуаций. Тест и расписание помогают примерить обучение на себя.',features:['Короткий ориентировочный тест','Переключаемое расписание','Демо пробного урока и личного кабинета'],limits:'Вымышленная школа. Тест не заменяет оценку преподавателя; аккаунты, запись и оплата не создаются.'},
  {id:'plan',name:'ПЛАН',type:'Девелопмент',category:'Сайт / Жилые кварталы',line:'От городской среды — к конкретной планировке.',task:'Представить жилые кварталы и показать сценарий выбора будущего дома.',solution:'Крупная архитектурная подача соединена с генпланом, планировками и предварительным калькулятором.',features:['Интерактивный генплан','Просмотр планировок','Демонстрационный ипотечный калькулятор'],limits:'Фронтенд-концепт девелопера. Объекты и условия приведены для демонстрации; финансовые расчёты не являются предложением.'}
 ];
-const featuredProjects = ['tiho','yasno','stebel'].map(id=>projects.find(p=>p.id===id));
+const featuredProjects = ['lesno','plan','mile','tiho','liniya','hvost'].map(id=>projects.find(p=>p.id===id));
+const showcaseProjects = [...featuredProjects, ...['yasno','stebel'].map(id=>projects.find(p=>p.id===id))];
 const $ = s => document.querySelector(s);
 const index = $('#project-index');
 const mobile = window.matchMedia('(max-width: 760px)');
@@ -23,7 +24,7 @@ function selectProject(i){
  selected=(i+featuredProjects.length)%featuredProjects.length;const p=featuredProjects[selected];
  const panel=$('#project-panel');panel.setAttribute('aria-labelledby','tab-'+p.id);
  $('#preview-image').src=`images/${p.id}.webp`;$('#preview-image').alt='Первый экран сайта '+p.name;
- $('#viewer-category').textContent=p.category;$('#viewer-count').textContent=String(selected+1).padStart(2,'0')+' / 03';
+ $('#viewer-category').textContent=p.category;$('#viewer-count').textContent=String(selected+1).padStart(2,'0')+' / '+String(featuredProjects.length).padStart(2,'0');
  $('#viewer-description').textContent=p.line;$('#viewer-demo').href=`demos/${p.id}/`;$('#preview-open').setAttribute('aria-label','О проекте '+p.name);
  panel.classList.remove('switching');requestAnimationFrame(()=>panel.classList.add('switching'));setIndexMode();
 }
@@ -43,9 +44,9 @@ function closeDialog(dialog,changeUrl=true){dialog.close();if(!document.querySel
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeDialog(document.getElementById(b.dataset.close))));
 document.querySelectorAll('dialog').forEach(d=>{d.addEventListener('cancel',e=>{e.preventDefault();closeDialog(d);});d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog(d);}});});
 function openCase(id,changeUrl=true){const i=projects.findIndex(p=>p.id===id);if(i<0)return;const p=projects[i];
- $('#case-index').textContent=`Проект / ${String(i+1).padStart(2,'0')} · 2026`;
+ $('#case-index').textContent=`Проект / ${String(showcaseProjects.findIndex(p=>p.id===id)+1).padStart(2,'0')} · 2026`;
  $('#case-content').innerHTML=`<div class="case-head"><div><p class="eyebrow">${p.category} / Концепт</p><h2 id="case-title">${p.name}<span style="color:var(--accent)">.</span></h2></div><p>${p.line}</p></div><div class="case-shot"><img src="images/${p.id}.webp" width="1250" height="668" alt="Первый экран проекта ${p.name}"></div><div class="case-info"><section><h3>Задача</h3><p>${p.task}</p></section><section><h3>Решение</h3><p>${p.solution}</p></section><section><h3>Что можно попробовать</h3><ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul></section></div><div class="case-info" style="padding-top:0;grid-template-columns:1fr"><section><h3>О проекте</h3><p>${p.limits} Дизайн и реализация подготовлены с использованием ИИ-инструментов.</p></section></div><div class="case-actions"><a href="demos/${p.id}/" target="_blank" rel="noopener" class="solid-button">Открыть демо <span aria-hidden="true">↗</span></a><div><button class="text-button" id="share-case">Скопировать ссылку</button><button class="text-button" id="next-case">Следующий проект <span aria-hidden="true">+</span></button></div></div><p class="case-share-status" id="case-share-status" role="status"></p>`;
- $('#next-case').addEventListener('click',()=>openCase(featuredProjects[(featuredProjects.findIndex(p=>p.id===id)+1)%featuredProjects.length].id));
+ $('#next-case').addEventListener('click',()=>openCase(showcaseProjects[(showcaseProjects.findIndex(p=>p.id===id)+1)%showcaseProjects.length].id));
  $('#share-case').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);$('#case-share-status').textContent='Ссылка скопирована — её можно отправить отдельно.';}catch{$('#case-share-status').textContent='Скопируйте ссылку из адресной строки браузера.';}});
  if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);if(u.href!==location.href)history.pushState({portfolioCase:true},'',u);}
  showDialog(caseDialog);caseDialog.scrollTop=0;
