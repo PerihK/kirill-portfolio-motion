@@ -1,0 +1,97 @@
+/* Cyrillic display typography and larger gallery proportions. */
+:root{--font-text:Roboto,Arial,sans-serif;--font-display:Oswald,'Arial Narrow',sans-serif;font-family:var(--font-text)}
+.identity strong{font-size:18px;font-weight:500;letter-spacing:-.025em;line-height:1.2}
+.identity>span{font-size:11px;letter-spacing:.01em;line-height:1.45}
+.masthead nav{font-size:13px;font-weight:400}
+.contact-link{padding:11px 18px}
+.work-stage{--display-size:clamp(100px,min(10.7vw,17svh),180px);--heading-row:calc(148px + var(--display-size));padding-inline:8%;grid-template-rows:var(--heading-row) 1fr 8%}
+.work-heading{padding-top:91px}
+#project-titles{height:190px;margin-top:0}
+.project-title-block h2{font-family:var(--font-display);font-size:var(--display-size);font-weight:400;letter-spacing:-.025em;line-height:1.03}
+.project-title-block p{font-size:12px;font-weight:400;letter-spacing:.015em;line-height:1.5;margin-top:16px;gap:7px 14px}
+.project-title-block p>span+span::before{margin-right:14px}
+.work-cards{height:min(61svh,calc(92svh - var(--heading-row) - 10px));max-width:1400px;width:100%;justify-self:center}
+.showcase-card{max-width:1400px;max-height:calc(61svh - 48px)}
+.project-caption{max-width:1400px;padding-top:16px}
+.project-caption>p,.project-open{font-size:13px;letter-spacing:.005em}
+.work-count{font-size:12px;font-variant-numeric:tabular-nums}
+.work-count>span:first-child{font-weight:500}
+.stage-foot{max-width:1400px;justify-self:center;padding-bottom:8px}
+.closing-layout h2,.catalog-top h2,.preview-copy h2,.brief-sidebar h2,.brief-step h3,.site-identity h2,.case-head h2{font-family:var(--font-display);font-weight:400;letter-spacing:-.025em}
+.closing-layout h2{font-size:clamp(58px,6.2vw,104px);line-height:1.08}
+.closing-layout em{font-family:inherit;font-style:normal;font-weight:inherit}
+.closing-copy>p{font-size:16px;line-height:1.65}
+.closing-kicker,.about-contact footer{font-size:12px;letter-spacing:.01em}
+.brief-link{font-size:14px}
+.catalog-top h2{font-size:64px;line-height:1.05}
+.catalog-card strong{font-family:var(--font-display);font-size:30px;font-weight:400;letter-spacing:0}
+.preview-copy h2{font-size:clamp(85px,10vw,170px);line-height:1.04}
+.preview-eyebrow,.preview-role,.preview-features,.preview-top,.intro-top,.eyebrow,.brief-step>label,.case-info h3,.brief-progress li:before{font-family:var(--font-text);letter-spacing:.01em}
+.preview-description{font-size:17px;line-height:1.65}
+.preview-eyebrow,.preview-role,.preview-features{font-size:12px}
+.brief-step h3{font-size:clamp(32px,3.4vw,48px);line-height:1.2}
+.brief-sidebar h2{font-size:clamp(46px,4.5vw,72px);line-height:1.12}
+@media(min-width:1600px){.work-stage{padding-inline:max(8%,calc((100% - 1400px)/2))}}
+@media(max-width:1050px){
+ .work-stage{--display-size:clamp(94px,min(13.6vw,17svh),142px);--heading-row:calc(153px + var(--display-size));padding-inline:6%;grid-template-rows:var(--heading-row) 1fr 8%}
+ .work-heading{padding-top:96px}
+ .preview-description{font-size:16px}
+}
+@media(min-width:601px) and (max-width:1050px) and (min-height:800px){
+ .work-stage{--display-size:clamp(110px,18.5vw,142px)}
+ .showcase-card{aspect-ratio:6 / 5}
+}
+@media(max-width:600px){
+ .masthead{padding:19px 5%;gap:12px}
+ .identity strong{font-size:15px}
+ .identity>span{font-size:9px;letter-spacing:0}
+ .masthead nav{font-size:11px;gap:13px}
+ .contact-link{padding:9px 11px;gap:11px}
+ .work-stage{padding-inline:5%;grid-template-rows:28% 1fr 8%}
+ .work-heading{padding-top:91px}
+ #project-titles{height:145px}
+ .project-title-block h2{font-size:clamp(68px,21vw,116px);line-height:1.05;letter-spacing:-.025em}
+ .project-title-block p{font-size:11px;gap:4px 11px;margin-top:12px;letter-spacing:0}
+ .project-title-block p>span+span::before{margin-right:11px}
+ .project-title-block p>.project-role{font-size:10px}
+ .work-cards{height:60svh;max-width:none}
+ .showcase-card{max-height:calc(60svh - 48px)}
+ .project-caption{padding-top:13px;gap:12px}
+ .project-caption>p,.project-open{font-size:11px}
+ .stage-foot{padding-bottom:10px}
+ .work-count{font-size:10px}
+ .closing-layout h2{font-size:clamp(48px,13.5vw,78px)}
+ .closing-copy>p{font-size:15px}
+ .closing-kicker,.about-contact footer{font-size:11px}
+ .brief-link{font-size:13px}
+ .catalog-top h2{font-size:48px}
+ .preview-copy h2{font-size:clamp(70px,23vw,110px)}
+ .preview-description{font-size:15px}
+ .preview-eyebrow,.preview-role,.preview-features{font-size:11px}
+ .preview-dialog.show-mobile .preview-copy h2{font-size:48px}
+ .brief-step h3{font-size:36px}
+}
+@media(max-height:740px) and (min-width:601px){
+ .work-stage{--display-size:clamp(88px,15svh,112px);--heading-row:calc(131px + var(--display-size));grid-template-rows:var(--heading-row) 1fr 7%}
+ .work-heading{padding-top:81px}
+ #project-titles{height:145px}
+ .project-title-block h2{font-size:var(--display-size)}
+ .project-title-block p{margin-top:10px;font-size:11px}
+ .work-cards{height:min(58svh,calc(93svh - var(--heading-row) - 8px));max-width:1400px}
+ .showcase-card{max-height:calc(58svh - 44px)}
+ .stage-foot{max-width:1400px}
+}
+@media(max-width:600px) and (max-height:700px){
+ .work-stage{grid-template-rows:29% 1fr 8%}
+ .work-heading{padding-top:78px}
+ .project-title-block h2{font-size:clamp(62px,10.6svh,74px)}
+ .project-title-block p{margin-top:9px}
+ .work-cards{height:58svh}
+ .showcase-card{max-height:calc(58svh - 46px)}
+}
+@media(max-width:360px){
+ .identity strong{font-size:14px}
+ .identity>span{font-size:8px}
+ .masthead nav{gap:9px;font-size:10px}
+ .contact-link{padding:8px;gap:8px}
+}
