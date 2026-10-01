@@ -95,3 +95,49 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 body:has(#preview-dialog[open]) .masthead{opacity:0;pointer-events:none}
 .preview-top{animation:preview-copy-in .8s var(--ease) .35s both}
 .is-closing .preview-copy,.is-closing .preview-mobile,.is-closing .preview-top{animation:none}
+
+/* Symbols use vectors so iOS never substitutes emoji glyphs. */
+.brand-spark{width:1em;height:1em;stroke-width:1.5;stroke-linecap:butt}
+.identity-spark{display:inline-flex;vertical-align:super;font-size:8px}
+.contact-link>.ui-arrow{width:18px;height:18px;flex-shrink:0}
+.brief-link>.ui-arrow{width:14px;height:14px;flex-shrink:0}
+.scroll-cue{display:flex;align-items:center;gap:10px}
+.scroll-cue>.ui-arrow{width:12px;height:12px;flex-shrink:0}
+.about-contact footer>a:last-child{display:inline-flex;align-items:center;gap:6px}
+.about-contact footer .ui-arrow{width:12px;height:12px}
+
+/* The fixed header masks the departing gallery heading, including Safari toolbar resizing. */
+body{background:var(--gallery-color,#e5e7dc)}
+.masthead{background:var(--gallery-color,#e5e7dc);transition:opacity .6s var(--ease),transform .9s var(--ease)}
+.in-contact .masthead{background:var(--paper)}
+.work-heading{opacity:var(--heading-opacity,1);transition:transform .9s var(--ease)}
+.identity>span,.contact-link{white-space:nowrap}
+
+/* YASNO is an interior-led cover with a restrained blue identity. */
+.cover-yasno{background:#eeece4;color:#153144}
+.cover-yasno .cover-image{inset:0;width:100%;height:100%;object-position:57% center}
+.cover-yasno::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#faf9f480,transparent 65%),linear-gradient(0deg,#f8f6f344,transparent 40%)}
+.cover-yasno .cover-mark{top:12%;left:7%;font-size:11cqw;color:#102034}
+.cover-yasno .cover-label{top:5%;left:7%;color:#153144}
+.cover-yasno .cover-line{top:auto;bottom:9%;left:7%;font-size:3.1cqw;line-height:1.3;color:#153144}
+.cover-yasno .cover-detail{top:10%;right:7%;font-size:4.5cqw;color:#164dff}
+.preview-backdrop .cover-yasno::after{display:none}
+.intro-deck{perspective:52.08vw;transform-style:preserve-3d}
+.intro-card{backface-visibility:hidden;transform-origin:center center}
+.intro-card::after{content:'';position:absolute;inset:0;background:#0009;pointer-events:none}
+@media(max-width:600px){
+ .cover-yasno .cover-image{inset:0;width:100%;height:100%;object-position:52% center}
+ .cover-yasno .cover-mark{top:12%;font-size:18cqw}
+ .cover-yasno .cover-label{display:none}
+ .cover-yasno .cover-line{top:auto;bottom:10%;font-size:5cqw;max-width:77%}
+ .cover-yasno .cover-detail{top:12%;right:7%;font-size:8cqw}
+ .cover-stebel .cover-detail{top:6%;font-size:7cqw}
+ .about-contact footer>a:last-child{justify-content:flex-end}
+ .project-nav .cover-yasno .cover-mark{font-size:6px}
+}
+@media(max-width:360px){
+ .masthead,.masthead nav{gap:10px}
+ .identity{flex-shrink:0}
+ .contact-link{padding:8px;gap:8px;font-size:9px}
+ .contact-link>.ui-arrow{width:14px;height:14px}
+}
