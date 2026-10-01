@@ -58,19 +58,14 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 .collection-note{font-size:14px}
 .details-section{margin-top:76px}
 .detail-grid>.mobile-feature:first-child{display:block}
-.flower-feature{margin-top:76px}
-.flower-stage{position:relative;aspect-ratio:1.95;background:#274b99;overflow:hidden;color:#fff4d7;padding:28px 36px}
-.flower-stage-top{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;font-family:monospace;font-size:12px;letter-spacing:.035em}
-.flower-browser{position:absolute;left:7%;top:16%;width:72%;padding:0;transform:rotate(-3deg);background:#fff4d7;box-shadow:0 20px 65px #08224c66;text-align:left;transition:transform .5s}
-.flower-browser:hover{transform:rotate(-1deg) translateY(-5px)}
-.browser-chrome{display:flex;justify-content:space-between;align-items:center;gap:15px;background:#fff4d7;color:#254b8e;padding:12px 16px;font-size:12px;font-family:monospace;border-bottom:1px solid #c3baa3}
-.browser-chrome>span:first-child{font-size:9px;letter-spacing:3px;color:#ab7358}
+.flower-feature{max-width:1040px;margin:64px auto 0}
+.flower-stage{position:relative;padding:0 28% 20px 0}
+.flower-browser{display:block;width:100%;padding:0;border:1px solid var(--line);background:var(--paper);text-align:left;transition:transform .35s ease}
 .flower-browser img{width:100%;height:auto}
-.flower-card{position:absolute;right:6%;top:29%;width:24%;padding:18px 18px 16px;background:#ffeab4;transform:rotate(8deg);box-shadow:0 18px 35px #0c214660;transition:transform .5s}
-.flower-card:hover{transform:rotate(4deg) translateY(-5px)}
+.flower-card{position:absolute;right:6%;top:18%;width:24%;padding:14px;background:#fffaf1;border:1px solid #d8ccb7;transform:rotate(5deg);box-shadow:0 8px 20px #2526220c;transition:transform .35s ease}
 .flower-card img{width:100%;height:auto;aspect-ratio:.91;object-fit:contain}
-.flower-card>span{display:block;color:#254b8e;font-size:12px;font-family:monospace;text-align:left;margin-top:10px}
-.flower-stage-bottom{position:absolute;bottom:23px;left:36px;font-size:18px;letter-spacing:-.035em}
+.flower-card>span{display:block;color:var(--ink);font-size:12px;font-family:monospace;text-align:left;margin-top:10px}
+@media(hover:hover){.flower-browser:hover{transform:translateY(-6px)}.flower-card:hover{transform:rotate(3deg) translateY(-6px)}}
 .flower-caption{display:grid;grid-template-columns:1.22fr 1fr;gap:8%;padding-top:28px}
 .flower-caption .eyebrow{color:var(--muted)}
 .flower-caption h3{font-size:clamp(24px,3vw,42px);font-weight:500;letter-spacing:-.045em;line-height:1.18;margin-top:12px}
@@ -88,7 +83,7 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 .contact-brief-note{font-size:14px;color:#bfc3b9;line-height:1.5;margin-top:16px;max-width:350px}
 .contact .direct-links{justify-content:flex-start;gap:28px;font-size:14px}
 .contact footer{font-size:12px}
-@media(max-width:760px){.intro{padding-top:25px}.intro-layout{grid-template-columns:1fr;gap:26px;margin:29px 0 27px}.intro h1{font-size:clamp(62px,17vw,88px);line-height:.96;letter-spacing:-.065em}.intro-note{font-size:17px;margin:0}.intro-note .text-button{margin-top:12px}.intro-index{align-items:center;margin:0;padding:15px 0}.intro-index>.eyebrow{font-size:10px}.intro-index .text-link{font-size:12px}.collection{margin-top:5px}.project-index{grid-template-columns:1fr;gap:25px}.project-tab{display:grid;grid-template-columns:32px 1fr auto;gap:12px;padding-bottom:15px!important;transform:none!important}.project-tab .mobile-preview{grid-column:1 / -1;aspect-ratio:1.875;object-fit:cover;margin-bottom:3px}.project-tab .tab-type{flex-basis:auto;font-size:12px;margin:0}.project-tab .tab-name{font-size:26px}.project-tab .tab-number{font-size:11px}.collection-note{font-size:13px;margin-top:20px;max-width:none}.details-section{margin-top:50px}.flower-feature{margin-top:50px}.flower-stage{aspect-ratio:1.18;padding:18px}.flower-stage-top{font-size:10px;line-height:1.4;gap:14px}.flower-stage-top>span:last-child{max-width:110px;text-align:right}.flower-browser{left:7%;top:23%;width:83%;transform:rotate(-5deg)}.browser-chrome{padding:8px 9px;font-size:9px;gap:8px}.browser-chrome>span:first-child{font-size:7px;letter-spacing:1px}.flower-card{width:32%;right:5%;top:44%;padding:10px}.flower-card>span{font-size:9px;margin-top:7px}.flower-stage-bottom{bottom:17px;left:18px;font-size:15px}.flower-caption{grid-template-columns:1fr;gap:18px;padding-top:24px}.flower-caption h3{font-size:28px}.flower-caption p{font-size:14px}.contact-bottom{grid-template-columns:1fr;padding:32px 0 38px;gap:35px}.contact h2{font-size:34px;line-height:1.14;margin:0 0 17px}.contact-copy p{font-size:14px}.contact-telegram{font-size:23px}.brief-button{font-size:18px;gap:12px}.contact .direct-links{font-size:13px;gap:20px;flex-wrap:wrap}.contact footer{font-size:11px}}
+@media(max-width:760px){.intro{padding-top:25px}.intro-layout{grid-template-columns:1fr;gap:26px;margin:29px 0 27px}.intro h1{font-size:clamp(62px,17vw,88px);line-height:.96;letter-spacing:-.065em}.intro-note{font-size:17px;margin:0}.intro-note .text-button{margin-top:12px}.intro-index{align-items:center;margin:0;padding:15px 0}.intro-index>.eyebrow{font-size:10px}.intro-index .text-link{font-size:12px}.collection{margin-top:5px}.project-index{grid-template-columns:1fr;gap:25px}.project-tab{display:grid;grid-template-columns:32px 1fr auto;gap:12px;padding-bottom:15px!important;transform:none!important}.project-tab .mobile-preview{grid-column:1 / -1;aspect-ratio:1.875;object-fit:cover;margin-bottom:3px}.project-tab .tab-type{flex-basis:auto;font-size:12px;margin:0}.project-tab .tab-name{font-size:26px}.project-tab .tab-number{font-size:11px}.collection-note{font-size:13px;margin-top:20px;max-width:none}.details-section{margin-top:50px}.flower-feature{margin-top:50px}.flower-stage{padding:0 0 68px}.flower-card{width:31%;right:5%;top:auto;bottom:0;padding:10px}.flower-card>span{font-size:9px;margin-top:7px}.flower-caption{grid-template-columns:1fr;gap:18px;padding-top:24px}.flower-caption h3{font-size:28px}.flower-caption p{font-size:14px}.contact-bottom{grid-template-columns:1fr;padding:32px 0 38px;gap:35px}.contact h2{font-size:34px;line-height:1.14;margin:0 0 17px}.contact-copy p{font-size:14px}.contact-telegram{font-size:23px}.brief-button{font-size:18px;gap:12px}.contact .direct-links{font-size:13px;gap:20px;flex-wrap:wrap}.contact footer{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.flower-browser,.flower-card{transition:none}}
 /* The cutout follows the physical screen, including its asymmetric lower corners. */
 .phone-cutout{position:absolute;left:528px;top:105px;width:417px;height:923px}
@@ -116,7 +111,7 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 .viewer-footer p{display:flex;gap:18px;align-items:baseline;max-width:none;font-size:16px;color:var(--ink)}
 #viewer-niche{font-size:13px;color:var(--muted)}
 .viewer-footer .text-button{font-size:14px;white-space:nowrap}
-.flower-caption{grid-template-columns:1fr auto;align-items:center;gap:24px;padding-top:24px}
+.flower-caption{grid-template-columns:1fr auto;align-items:center;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
 .flower-caption h3{font-size:24px;letter-spacing:-.035em;margin:0 0 6px}
 .flower-niche{font-size:14px;color:var(--muted)}
 .flower-caption .text-button{margin:0;font-size:14px}
