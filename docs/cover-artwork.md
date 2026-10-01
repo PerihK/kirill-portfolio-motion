@@ -1,4 +1,10 @@
-# LINIYA editorial cover
+# Current gallery covers
+
+MILE, LINIYA and HVOST now use screenshots of their actual demo interfaces: the English quick check, service booking and care finder. Each has a separate mobile crop under `dist/images/covers/*-interface-mobile.webp`. These are static covers; clicking still opens the project preview. Demo functionality is unchanged.
+
+TIHO uses `tiho-interior-hq.webp`, encoded from the original 1536 x 1024 PNG at WebP quality 94. LESNO, PLAN, YASNO and STEBEL keep their existing image sources. Project titles and metadata are rendered above the covers.
+
+# Earlier LINIYA editorial cover (unused)
 
 Asset: `dist/images/covers/liniya-editorial.webp` (1536 x 1024, 61 KB).
 Generated with the built-in imagegen tool. The photo is a concept cover, not a photograph of an actual salon or client. Typography stays in CSS. Existing demo imagery is unchanged.

@@ -1,26 +1,31 @@
 const projects = [
- {id:'lesno',name:'ЛЕСНО',type:'Ландшафтное бюро',summary:'Природа. Архитектура. Вы.',color:'#e5e7dc',mark:'лесно',line:'Сады, в которых хочется остаться.',description:'Концепт ландшафтного бюро: крупная фотография, спокойная типографика и истории садов. Сайт ведёт от знакомства с подходом бюро к просмотру проектов и обсуждению своего участка.',features:['Проекты садов','Подход бюро','Адаптивная вёрстка']},
- {id:'plan',name:'ПЛАН',type:'Девелопмент',summary:'Город начинается у вашего дома.',color:'#e6e6de',mark:'план.',line:'Место для<br>настоящей жизни.',description:'Концепт девелоперского сайта о доме и среде вокруг него. Архитектура задаёт визуальный ритм, а карточки проектов и подбор квартиры помогают перейти от впечатления к выбору.',features:['Жилые проекты','Подбор квартиры','Адаптивная вёрстка']},
- {id:'mile',name:'MILE',type:'Образование',summary:'Новый город. Ваш язык.',color:'#f0e5db',mark:'MILE.',line:'Make<br>your place.',description:'Концепт школы английского для жизни в новой стране. Тёплая редакционная подача соединяет программы, уровень языка и понятный маршрут к первому уроку.',features:['Программы','Выбор уровня','Первый урок']},
- {id:'tiho',name:'ТИХО',type:'Климат',summary:'Комфорт, который продуман.',color:'#e8e5db',mark:'ТИХО',line:'Тишина —<br>часть интерьера.',description:'Концепт сервиса подбора и установки кондиционеров. Вместо витрины оборудования — вопросы о комнате, ориентир по мощности и объяснение того, как проходит монтаж.',features:['Расчёт мощности','Модели систем','Монтаж по шагам']},
- {id:'liniya',name:'ЛИНИЯ',type:'Красота',summary:'Новая форма. Ваш характер.',color:'#e7e4dc',mark:'ЛИНИЯ',line:'Форма.<br>Характер.',description:'Концепт салона с акцентом на характер, услуги и работу мастеров. Фотография и крупная типографика создают настроение, а подбор услуги помогает найти следующий шаг.',features:['Услуги','Подбор образа','Мастера']},
- {id:'hvost',name:'ХВОСТ',type:'Груминг',summary:'Чистые лапы. Довольный пёс.',color:'#e9e6da',mark:'ХВОСТ.',line:'У каждого хвоста<br>свой характер.',description:'Концепт груминг-студии с дружелюбной подачей и вниманием к питомцу. Размер собаки и тип шерсти превращаются в понятный ориентир по программе ухода.',features:['Маршрут ухода','Программы','Демо-запись']},
- {id:'yasno',name:'ЯСНО',type:'Клининг',summary:'Чистый дом. Новый старт.',color:'#e5e7e0',mark:'ЯСНО.',line:'Клининг<br>после ремонта.',description:'Концепт клининга с понятным составом услуг и расчётом до первого сообщения. В мобильной демонстрации можно прокрутить настоящий сайт, изменить площадь и попробовать калькулятор.',features:['Калькулятор','Состав услуг','Демо-заявка']},
- {id:'stebel',name:'СТЕБЕЛЬ',type:'Цветочная студия',summary:'Цветы к вашему моменту.',color:'#f3e7d1',mark:'СТЕБЕЛЬ',line:'Маленький повод.<br>Большое чувство.',description:'Иллюстрированный концепт цветочной студии. Подбор по поводу и бюджету, букеты и демо-корзина собраны в лёгкий сценарий выбора подарка.',features:['Подбор букета','Демо-корзина','Подписка']}
+ {id:'lesno',name:'ЛЕСНО',type:'Ландшафтное бюро',summary:'Природа. Архитектура. Вы.',color:'#d5e1ce',mark:'лесно',line:'Сады, в которых хочется остаться.',description:'Концепт ландшафтного бюро: крупная фотография, спокойная типографика и истории садов. Сайт ведёт от знакомства с подходом бюро к просмотру проектов и обсуждению своего участка.',features:['Проекты садов','Подход бюро','Адаптивная вёрстка']},
+ {id:'plan',name:'ПЛАН',type:'Девелопмент',summary:'Город начинается у вашего дома.',color:'#dce3e4',mark:'план.',line:'Место для<br>настоящей жизни.',description:'Концепт девелоперского сайта о доме и среде вокруг него. Архитектура задаёт визуальный ритм, а карточки проектов и подбор квартиры помогают перейти от впечатления к выбору.',features:['Жилые проекты','Подбор квартиры','Адаптивная вёрстка']},
+ {id:'mile',name:'MILE',type:'Английский язык',summary:'Новый город. Ваш язык.',color:'#d9e3e7',mark:'MILE.',line:'Make<br>your place.',description:'Концепт школы английского для жизни в новой стране. Тёплая редакционная подача соединяет программы, уровень языка и понятный маршрут к первому уроку.',features:['Программы','Выбор уровня','Первый урок']},
+ {id:'tiho',name:'ТИХО',type:'Климат',summary:'Комфорт, который продуман.',color:'#e5dfd0',mark:'ТИХО',line:'Тишина —<br>часть интерьера.',description:'Концепт сервиса подбора и установки кондиционеров. Вместо витрины оборудования — вопросы о комнате, ориентир по мощности и объяснение того, как проходит монтаж.',features:['Расчёт мощности','Модели систем','Монтаж по шагам']},
+ {id:'liniya',name:'ЛИНИЯ',type:'Красота',summary:'Новая форма. Ваш характер.',color:'#e9dcd5',mark:'ЛИНИЯ',line:'Форма.<br>Характер.',description:'Концепт салона с акцентом на характер, услуги и работу мастеров. Фотография и крупная типографика создают настроение, а подбор услуги помогает найти следующий шаг.',features:['Услуги','Подбор образа','Мастера']},
+ {id:'hvost',name:'ХВОСТ',type:'Груминг',summary:'Чистые лапы. Довольный пёс.',color:'#d7e4d3',mark:'ХВОСТ.',line:'У каждого хвоста<br>свой характер.',description:'Концепт груминг-студии с дружелюбной подачей и вниманием к питомцу. Размер собаки и тип шерсти превращаются в понятный ориентир по программе ухода.',features:['Маршрут ухода','Программы','Демо-запись']},
+ {id:'yasno',name:'ЯСНО',type:'Клининг',summary:'Чистый дом. Новый старт.',color:'#dee8ec',mark:'ЯСНО.',line:'Клининг<br>после ремонта.',description:'Концепт клининга с понятным составом услуг и расчётом до первого сообщения. В мобильной демонстрации можно прокрутить настоящий сайт, изменить площадь и попробовать калькулятор.',features:['Калькулятор','Состав услуг','Демо-заявка']},
+ {id:'stebel',name:'СТЕБЕЛЬ',type:'Цветочная студия',summary:'Цветы к вашему моменту.',color:'#f0e1c6',mark:'СТЕБЕЛЬ',line:'Маленький повод.<br>Большое чувство.',description:'Иллюстрированный концепт цветочной студии. Подбор по поводу и бюджету, букеты и демо-корзина собраны в лёгкий сценарий выбора подарка.',features:['Подбор букета','Демо-корзина','Подписка']}
 ];
 const $=s=>document.querySelector(s);
 const arrow='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
 const coverArt={
  plan:{src:'demos/plan/assets/project-sad.webp',width:1600,height:2000},
- tiho:{src:'demos/tiho/assets/hero-apartment.webp',width:1536,height:1024},
- liniya:{src:'images/covers/liniya-editorial.webp',width:1536,height:1024}
+ tiho:{src:'images/covers/tiho-interior-hq.webp',width:1536,height:1024},
+ mile:{src:'images/covers/mile-interface.webp',mobile:'images/covers/mile-interface-mobile.webp',width:991,height:510},
+ liniya:{src:'images/covers/liniya-interface.webp',mobile:'images/covers/liniya-interface-mobile.webp',width:997,height:465},
+ hvost:{src:'images/covers/hvost-interface.webp',mobile:'images/covers/hvost-interface-mobile.webp',width:1400,height:714}
 };
-function cover(p,eager=false){const artwork=coverArt[p.id]||{src:`images/covers/${p.id}.webp`,width:1400,height:933};return `<div class="project-cover image-cover cover-${p.id}" aria-hidden="true"><img class="cover-image" ${eager?'src':'data-src'}="${artwork.src}" alt="" width="${artwork.width}" height="${artwork.height}" ${eager?'fetchpriority="high"':''}></div>`;}
-function loadImages(root){root.querySelectorAll('[data-src]').forEach(el=>{el.src=el.dataset.src;el.removeAttribute('data-src');});}
+function cover(p,eager=false){
+ const artwork=coverArt[p.id]||{src:`images/covers/${p.id}.webp`,width:1400,height:933};
+ const image=`<img class="cover-image" ${eager?'src':'data-src'}="${artwork.src}" alt="" width="${artwork.width}" height="${artwork.height}" ${eager?'fetchpriority="high"':''}>`;
+ return `<div class="project-cover image-cover ${artwork.mobile?'interface-cover ':''}cover-${p.id}" aria-hidden="true">${artwork.mobile?`<picture><source media="(max-width:600px)" ${eager?'srcset':'data-src'}="${artwork.mobile}">${image}</picture>`:image}</div>`;
+}
+function loadImages(root){root.querySelectorAll('[data-src]').forEach(el=>{if(el.tagName==='SOURCE')el.srcset=el.dataset.src;else el.src=el.dataset.src;el.removeAttribute('data-src');});}
 $('#project-titles').innerHTML=projects.map((p,i)=>`<div class="project-title-block" ${i?'aria-hidden="true"':''}><h2>${p.name}</h2><p><span>${p.type}</span><span>Концепт / 2026</span><span class="project-role">Дизайн / Разработка</span></p></div>`).join('');
 $('#project-cards').innerHTML=projects.map((p,i)=>`<article class="work-slide" data-index="${i}" ${i?'aria-hidden="true" inert':''}><div class="card-motion"><button class="showcase-card" data-project="${p.id}" aria-label="Посмотреть проект ${p.name} — ${p.type}" aria-haspopup="dialog">${cover(p,i===0)}<span class="cover-cursor" aria-hidden="true">Подробнее ${arrow}</span></button><div class="project-caption"><p>${p.summary}</p><button class="project-open" data-project="${p.id}" aria-haspopup="dialog">О проекте ${arrow}</button></div></div></article>`).join('');
-$('#project-nav').innerHTML=projects.map((p,i)=>`<button data-jump="${i}" aria-label="Перейти к проекту ${p.name}" ${i===0?'aria-current="true"':''}>${cover(p)}<span>${p.name}</span></button>`).join('');
 $('#project-grid').innerHTML=projects.map(p=>`<button class="catalog-card" data-project="${p.id}" aria-label="Посмотреть проект ${p.name} — ${p.type}" aria-haspopup="dialog">${cover(p)}<span><strong>${p.name}</strong><small>${p.type}</small>${arrow}</span></button>`).join('');
 const previewDialog=$('#preview-dialog'),briefDialog=$('#brief-dialog'),catalogDialog=$('#catalog-dialog');
 const focusOrigins=new WeakMap(),closeTickets=new WeakMap();
@@ -29,7 +34,7 @@ document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click
 $('#catalog-toggle').setAttribute('aria-label','Все работы');
 $('#catalog-toggle').addEventListener('click',()=>{loadImages($('#project-grid'));showDialog(catalogDialog);});
 
-const track=$('#work'),slides=[...document.querySelectorAll('.work-slide')],titles=[...document.querySelectorAll('.project-title-block')],jumps=[...document.querySelectorAll('[data-jump]')];
+const track=$('#work'),slides=[...document.querySelectorAll('.work-slide')],titles=[...document.querySelectorAll('.project-title-block')];
 let unit=innerHeight*.92,position=0,target=0,raf=0,lastTime=0,current=-1;
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
 const rgb=hex=>[1,3,5].map(n=>parseInt(hex.slice(n,n+2),16));
@@ -40,8 +45,9 @@ function draw(time){const dt=lastTime?Math.min(64,time-lastTime):16;lastTime=tim
  const first=Math.floor(position),fraction=position-first,a=colors[first],b=colors[Math.min(7,first+1)];document.body.style.backgroundColor=`rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*fraction)).join(',')})`;
  document.body.style.setProperty('--gallery-color',document.body.style.backgroundColor);
  $('.work-stage').style.setProperty('--heading-opacity',String(clamp(1-Math.max(0,scrollY-track.offsetTop-7*unit)/40,0,1)));
- const active=Math.round(position);if(current!==active){current=active;$('#work-count').textContent=String(active+1).padStart(2,'0');jumps.forEach((b,i)=>i===active?b.setAttribute('aria-current','true'):b.removeAttribute('aria-current'));}
- slides.forEach((slide,i)=>{const delta=i-position,visible=Math.abs(delta)<1.25;slide.style.visibility=visible?'visible':'hidden';slide.inert=i!==active;slide.setAttribute('aria-hidden',String(i!==active));titles[i].setAttribute('aria-hidden',String(i!==active));
+ const active=Math.round(position);if(current!==active){current=active;$('#work-count').textContent=String(active+1).padStart(2,'0');}
+ slides.forEach((slide,i)=>{const rawDelta=i-position,delta=Math.abs(rawDelta)<.002?0:rawDelta,visible=Math.abs(delta)<1.25;slide.style.visibility=visible?'visible':'hidden';slide.inert=i!==active;slide.setAttribute('aria-hidden',String(i!==active));titles[i].setAttribute('aria-hidden',String(i!==active));
+  slide.style.willChange=position===target?'auto':'transform, opacity';
   if(visible){loadImages(slide);const height=$('#project-cards').clientHeight;const y=delta>0?delta*(height+90):delta*height*.16;const scale=delta>0?1-.08*delta:1+.07*delta;slide.style.transform=reduced.matches?'none':`translate3d(0,${y}px,0) scale(${scale})`;slide.style.opacity=reduced.matches?String(i===active?1:0):String(delta<0?clamp(1+delta*1.55,0,1):1);}
   titles[i].style.opacity=String(i===active?(reduced.matches?1:Math.max(.5,1-Math.abs(delta))):0);titles[i].style.transform=reduced.matches?'none':`translateY(${delta*35}px)`;
  });
@@ -49,9 +55,7 @@ function draw(time){const dt=lastTime?Math.min(64,time-lastTime):16;lastTime=tim
  if(position!==target)raf=requestAnimationFrame(draw);else{raf=0;lastTime=0;}
 }
 function jumpToProject(i){scrollTo({top:track.offsetTop+i*unit,behavior:reduced.matches?'instant':'smooth'});}
-jumps.forEach((button,i)=>button.addEventListener('click',()=>jumpToProject(i)));
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',measure);reduced.addEventListener('change',schedule);measure();
-loadImages($('#project-nav'));
 
 // A vertical phone gesture advances exactly one work; taps and pinch zoom remain native.
 const stage=$('.work-stage'),mobileGallery=matchMedia('(max-width:600px)');
