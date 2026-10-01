@@ -118,7 +118,7 @@ body{background:var(--gallery-color,#e5e7dc)}
 .cover-yasno .cover-line{top:auto;bottom:9%;left:7%;font-size:3.1cqw;line-height:1.3;color:#153144}
 .cover-yasno .cover-detail{top:10%;right:7%;font-size:4.5cqw;color:#164dff}
 .preview-backdrop .cover-yasno::after{display:none}
-.intro-deck{perspective:52.08vw;transform-style:preserve-3d}
+.intro-deck{perspective:none;transform-style:flat}
 .intro-card{backface-visibility:hidden;transform-origin:center center}
 .intro-card::after{content:'';position:absolute;inset:0;background:rgb(0 0 0 / .35);pointer-events:none}
 @media(max-width:600px){

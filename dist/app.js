@@ -11,6 +11,22 @@ const projects = [
 const $=s=>document.querySelector(s);
 const arrow='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
+// Two clipped rows per letter keep the identity readable while it rolls on hover.
+const identity=$('.identity');
+identity.setAttribute('aria-label','Кирилл Перих — Дизайн и разработка сайтов');
+function identityLine(text){
+ const line=document.createElement('span');line.className='identity-line';line.setAttribute('aria-hidden','true');
+ [...text].forEach((letter,i)=>{
+  const slot=document.createElement('span');slot.className='identity-letter';slot.style.setProperty('--letter-delay',`${i*12}ms`);
+  const roll=document.createElement('span');roll.className='identity-roll';roll.textContent=letter;
+  const echo=document.createElement('span');echo.className='identity-echo';echo.textContent=letter;
+  roll.append(echo);slot.append(roll);line.append(slot);
+ });return line;
+}
+const identityName=identity.querySelector('strong').firstChild;
+identityName.replaceWith(identityLine(identityName.textContent));
+const identityDescription=identity.querySelector(':scope > span');
+identityDescription.replaceChildren(identityLine(identityDescription.textContent));
 const coverArt={
  plan:{src:'demos/plan/assets/project-sad.webp',width:1600,height:2000},
  tiho:{src:'images/covers/tiho-interior-hq.webp',width:1536,height:1024},
@@ -134,16 +150,23 @@ async function intro(){
  events.forEach(e=>addEventListener(e,finish,{passive:true,once:true}));addEventListener('resize',resized);reduced.addEventListener('change',finish);$('#intro-skip').addEventListener('click',finish);
  await Promise.race([Promise.all([...deck.querySelectorAll('img')].map(im=>im.decode().catch(()=>{}))),new Promise(resolve=>setTimeout(resolve,500))]);if(finished)return;
  const cards=[...deck.children],ease='cubic-bezier(.785,.135,.15,.86)';
- const front='translate3d(0,41.7vh,2.6vw) rotateX(-10deg)',level='translate3d(0,-13.89vh,0) rotateX(0deg)',rest='translate3d(0,0,0) rotateX(0deg)';
+ // Use the actual card as the scene ruler. The gallery caps its width on large
+ // monitors; viewport-based depth used to keep growing past that cap and reverse
+ // the first leg of the flight. All depths now move consistently towards camera.
+ const sceneWidth=frame.width/.83125,sceneHeight=Math.min(innerHeight,frame.height/.50705);
+ const perspective=sceneWidth*.5208;
+ const pose=(y,z,angle)=>`perspective(${perspective}px) translate3d(0,${y}px,${z}px) rotateX(${angle}deg)`;
+ const front=pose(sceneHeight*.417,sceneWidth*.026,-10),level=pose(-sceneHeight*.1389,0,0),rest=pose(0,0,0);
  const passes=cards.map((card,i)=>{
   // Cards are opaque throughout the pass; only depth and position reveal the stack.
-  const depth=(cards.length-1-i)*3;
-  const pose=(y,z,angle)=>`translate3d(0,${y},calc(${z} - ${depth}px)) rotateX(${angle}deg)`;
+  // Project each card independently. A shared preserve-3d scene lets tilted
+  // planes intersect and exposes slices of another image on large cards.
+  card.style.zIndex=String(i+1);
   return card.animate([
-   {offset:0,transform:pose('-400px','-800px',30),visibility:'visible'},
-   {offset:.3,transform:pose('-4.6vh','-36.5vw',10),visibility:'visible'},
-   {offset:.6,transform:pose('5.6vh','-26vw',0),visibility:'visible'},
-   {offset:1,transform:pose('41.7vh','2.6vw',-10),visibility:'visible'}
+   {offset:0,transform:pose(-sceneHeight*4/9,-sceneWidth*5/9,30),visibility:'visible'},
+   {offset:.3,transform:pose(-sceneHeight*.046,-sceneWidth*.365,10),visibility:'visible'},
+   {offset:.6,transform:pose(sceneHeight*.056,-sceneWidth*.26,0),visibility:'visible'},
+   {offset:1,transform:front,visibility:'visible'}
   ],{duration:2000,delay:(cards.length-1-i)*1000/(cards.length-1),easing:ease,fill:'forwards'});
  });
  animations.push(...passes);await Promise.all(passes.map(a=>a.finished.catch(()=>{})));if(finished)return;

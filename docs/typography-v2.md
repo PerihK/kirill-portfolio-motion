@@ -10,4 +10,8 @@ The subsequent balance pass uses Oswald for both identity lines in the masthead,
 
 Entrance cards remain opaque through the entire depth animation. Each stays hidden until its own pass begins, and the card has a solid background while artwork loads. Only the final single-card overlay fades into the resting gallery.
 
+The full-screen entrance uses card-relative scene dimensions, including perspective and all depth keyframes. Width no longer grows independently of the 1400px gallery cap. Each card projects its own perspective into a flat, explicitly ordered stack; tilted planes cannot cut through another project's image. The final landing uses the same projection and cancels cleanly on resize or input.
+
+Both masthead identity lines roll vertically, letter by letter, on pointer hover or keyboard focus. The SVG spark turns a quarter rotation. Echo letters are hidden from assistive technology, the link retains one descriptive accessible name, touch layouts remain still, and reduced-motion preferences disable the effect.
+
 Sources: https://fonts.google.com/specimen/Oswald, https://fonts.google.com/specimen/Roboto, https://github.com/google/fonts/tree/main/ofl/oswald, https://github.com/google/fonts/tree/main/ofl/roboto.
