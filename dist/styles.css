@@ -65,7 +65,7 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 .cover-lesno::after,.cover-liniya::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,#1027129c,transparent 75%)}
 .cover-lesno .cover-mark{top:auto;bottom:20%;font-family:Georgia,serif;font-size:17cqw;font-weight:400;letter-spacing:-.045em}
 .cover-lesno .cover-label{top:7%;color:#ffffffe0}.cover-lesno .cover-line{font-size:2.4cqw}.cover-lesno .cover-image{object-position:center 60%}
-.cover-plan{background:#d2dfeb;color:#17374b}.cover-plan .cover-image{left:32%;width:68%;object-position:50% 60%}.cover-plan .cover-mark{font-size:18cqw;top:10%;color:#102f43}.cover-plan .cover-label{top:auto;bottom:9%;width:19%;font-size:1.1cqw;line-height:1.7}.cover-plan .cover-line{bottom:28%;font-size:3.2cqw;width:24%}.cover-plan .cover-detail{right:5%;top:8%;bottom:auto;color:#fff}.cover-plan .cover-orbit{position:absolute;left:6%;bottom:20%;width:15%;height:1px;background:#17374b50}
+.cover-plan{background:#254957;color:#f8f5e9}.cover-plan .cover-image{inset:0;width:100%;height:100%;object-position:50% 20%}.cover-plan::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,#102e39e6,transparent 65%),linear-gradient(180deg,#18394226,transparent 35%)}.cover-plan .cover-mark{left:7%;top:auto;bottom:9%;font-size:18cqw;color:#f8f5e9;font-weight:600;letter-spacing:-.075em}.cover-plan .cover-label{top:6%;bottom:auto;left:7%;width:auto;font-size:1cqw}.cover-plan .cover-line{left:7%;top:13%;bottom:auto;font-size:3.2cqw;line-height:1.18;width:auto}.cover-plan .cover-detail{right:7%;top:6%;bottom:auto;color:#f8f5e9;font-size:1cqw}.cover-plan .cover-orbit{display:none}
 .cover-mile{background:#f4e8d8;color:#18323c}.cover-mile .cover-image{left:56%;width:44%;object-position:62% center}.cover-mile .cover-mark{font-size:16cqw;top:10%;left:6%}.cover-mile .cover-line{font-family:Georgia,serif;font-style:italic;color:#b45e43;font-size:7.5cqw;line-height:1;left:6%;bottom:10%}.cover-mile .cover-label{top:7%;left:57%;color:#fff;font-size:.9cqw}.cover-mile .cover-detail{left:6%;top:42%;bottom:auto;font-size:.8cqw}
 .cover-tiho{background:#153b42;color:#e5ebe2}.cover-tiho .cover-image{width:75%;left:24%;object-fit:contain;filter:drop-shadow(0 35px 25px #001e2577);z-index:1}.cover-tiho .cover-mark{font-size:13cqw;top:11%;left:6%}.cover-tiho .cover-line{font-family:Georgia,serif;font-size:4cqw;left:6%;bottom:12%}.cover-tiho .cover-label{left:6%;top:6%}.cover-tiho .cover-detail{right:6%;bottom:9%}.cover-tiho .cover-orbit{position:absolute;width:65%;aspect-ratio:1;left:38%;top:0;border:1px solid #bcd4d333;border-radius:50%;box-shadow:0 0 0 50px #bcd4d309,0 0 0 100px #bcd4d305}
 .cover-liniya{background:#ad9a88}.cover-liniya .cover-mark{top:auto;bottom:14%;font-size:17cqw;font-weight:400;letter-spacing:.025em}.cover-liniya .cover-line{bottom:auto;top:14%;font-family:Georgia,serif;font-style:italic;font-size:4cqw;width:25%}.cover-liniya .cover-image{object-position:65% 50%}.cover-liniya .cover-label{top:7%}.cover-liniya::after{background:linear-gradient(0deg,#251b2177,transparent 55%),linear-gradient(90deg,#53403144,transparent 50%)}
@@ -159,3 +159,21 @@ body{background:var(--gallery-color,#e5e7dc)}
 }
 @media(max-height:740px) and (min-width:601px){.work-heading{padding-top:85px}.work-cards{height:61svh}}
 @media(max-width:600px) and (max-height:700px){.work-heading{padding-top:80px}}
+
+/* PLAN uses one architectural image across every format, without a separate color panel. */
+@media(max-width:600px){
+ .cover-plan .cover-image{inset:0;width:100%;height:100%;object-position:50% center}
+ .cover-plan .cover-mark{top:auto;bottom:9%;left:7%;font-size:27cqw}
+ .cover-plan .cover-label{top:6%;bottom:auto;left:7%;font-size:2.1cqw;width:auto}
+ .cover-plan .cover-line{display:block;left:7%;top:12%;bottom:auto;width:auto;font-size:5.5cqw;max-width:85%}
+ .cover-plan .cover-detail{top:6%;bottom:auto;right:7%;font-size:1.8cqw;max-width:40%}
+}
+.project-nav .cover-plan .cover-image{object-position:50% 20%}
+.project-nav .cover-plan .cover-mark{top:auto;bottom:9%;font-size:10px}
+.preview-backdrop .cover-plan .cover-image{object-position:50% center}
+.catalog-card .cover-plan .cover-image{object-position:50% 20%}
+@media(max-width:600px){
+ .project-nav .cover-plan .cover-mark{font-size:6px}
+ .catalog-card .cover-plan .cover-line{display:none}
+ .catalog-card .cover-plan .cover-mark{font-size:22cqw}
+}
