@@ -14,7 +14,7 @@ const spark='<svg class="brand-spark" viewBox="0 0 32 32" aria-hidden="true"><pa
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
 function cover(p,eager=false){return `<div class="project-cover cover-${p.id}" aria-hidden="true"><img class="cover-image" ${eager?'src':'data-src'}="images/covers/${p.id}.webp" alt="" width="1400" height="933" ${eager?'fetchpriority="high"':''}><span class="cover-orbit"></span><span class="cover-mark">${p.mark}</span><span class="cover-line">${p.line}</span><span class="cover-label">${p.type} / 2026</span><span class="cover-detail">${p.id==='mile'?'ENGLISH FOR THE MOVE':p.id==='plan'?'ЖИЛЬЁ · СРЕДА · ЖИЗНЬ':p.id==='yasno'?spark:p.id==='stebel'?spark:'ДИЗАЙН / РАЗРАБОТКА'}</span></div>`;}
 function loadImages(root){root.querySelectorAll('[data-src]').forEach(el=>{el.src=el.dataset.src;el.removeAttribute('data-src');});}
-$('#project-titles').innerHTML=projects.map((p,i)=>`<div class="project-title-block" ${i?'aria-hidden="true"':''}><h2>${p.name}</h2><p>${p.type}<span>·</span>Концепт / 2026</p></div>`).join('');
+$('#project-titles').innerHTML=projects.map((p,i)=>`<div class="project-title-block" ${i?'aria-hidden="true"':''}><p>${p.type}<span>·</span>Концепт / 2026</p></div>`).join('');
 $('#project-cards').innerHTML=projects.map((p,i)=>`<article class="work-slide" data-index="${i}" ${i?'aria-hidden="true" inert':''}><div class="card-motion"><button class="showcase-card" data-project="${p.id}" aria-label="Посмотреть проект ${p.name} — ${p.type}" aria-haspopup="dialog">${cover(p,i===0)}<span class="cover-cursor" aria-hidden="true">Подробнее ${arrow}</span></button><div class="project-caption"><p>${p.summary}</p><button class="project-open" data-project="${p.id}" aria-haspopup="dialog">О проекте ${arrow}</button></div></div></article>`).join('');
 $('#project-nav').innerHTML=projects.map((p,i)=>`<button data-jump="${i}" aria-label="Перейти к проекту ${p.name}" ${i===0?'aria-current="true"':''}>${cover(p)}<span>${p.name}</span></button>`).join('');
 $('#project-grid').innerHTML=projects.map(p=>`<button class="catalog-card" data-project="${p.id}" aria-label="Посмотреть проект ${p.name} — ${p.type}" aria-haspopup="dialog">${cover(p)}<span><strong>${p.name}</strong><small>${p.type}</small>${arrow}</span></button>`).join('');
@@ -44,9 +44,33 @@ function draw(time){const dt=lastTime?Math.min(64,time-lastTime):16;lastTime=tim
  document.body.classList.toggle('in-contact',scrollY>track.offsetHeight-innerHeight*.7);
  if(position!==target)raf=requestAnimationFrame(draw);else{raf=0;lastTime=0;}
 }
-jumps.forEach((button,i)=>button.addEventListener('click',()=>scrollTo({top:track.offsetTop+i*unit,behavior:reduced.matches?'instant':'smooth'})));
+function jumpToProject(i){scrollTo({top:track.offsetTop+i*unit,behavior:reduced.matches?'instant':'smooth'});}
+jumps.forEach((button,i)=>button.addEventListener('click',()=>jumpToProject(i)));
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',measure);reduced.addEventListener('change',schedule);measure();
 loadImages($('#project-nav'));
+
+// A vertical phone gesture advances exactly one work; taps and pinch zoom remain native.
+const stage=$('.work-stage'),mobileGallery=matchMedia('(max-width:600px)');
+let gesture=null,suppressClickUntil=0;
+stage.addEventListener('touchstart',e=>{
+ if(!mobileGallery.matches||e.touches.length!==1||document.body.classList.contains('modal-open')||scrollY<track.offsetTop-2||scrollY>track.offsetTop+7*unit+2){gesture=null;return;}
+ const t=e.touches[0];gesture={x:t.clientX,y:t.clientY,axis:null,index:Math.round(target)};
+},{passive:true});
+stage.addEventListener('touchmove',e=>{
+ if(!gesture)return;if(e.touches.length!==1){gesture=null;return;}
+ const t=e.touches[0],dx=t.clientX-gesture.x,dy=t.clientY-gesture.y;
+ if(!gesture.axis&&Math.max(Math.abs(dx),Math.abs(dy))>=8)gesture.axis=Math.abs(dy)>Math.abs(dx)?'vertical':'horizontal';
+ if(gesture.axis==='vertical'){e.preventDefault();suppressClickUntil=performance.now()+500;}
+},{passive:false});
+stage.addEventListener('touchend',e=>{
+ const g=gesture;gesture=null;if(!g||g.axis!=='vertical'||e.touches.length)return;
+ const dy=e.changedTouches[0].clientY-g.y;
+ if(Math.abs(dy)<32){jumpToProject(g.index);return;}
+ if(dy<0&&g.index===7){scrollTo({top:$('#contact').offsetTop-$('.masthead').offsetHeight-20,behavior:reduced.matches?'instant':'smooth'});return;}
+ jumpToProject(clamp(g.index+(dy<0?1:-1),0,7));
+},{passive:true});
+stage.addEventListener('touchcancel',()=>{gesture=null;},{passive:true});
+stage.addEventListener('click',e=>{if(performance.now()<suppressClickUntil){e.preventDefault();e.stopPropagation();}},{capture:true});
 document.querySelectorAll('.showcase-card[data-project]').forEach(card=>{card.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=card.getBoundingClientRect();card.style.setProperty('--cursor-x',`${clamp(e.clientX-r.left,64,r.width-64)}px`);card.style.setProperty('--cursor-y',`${clamp(e.clientY-r.top,52,r.height-52)}px`);});});
 
 function showDialog(dialog){if(dialog.open)return;focusOrigins.set(dialog,document.activeElement);dialog.showModal();document.body.classList.add('modal-open');dialog.scrollTop=0;}
@@ -78,17 +102,24 @@ async function intro(){
  await Promise.race([Promise.all([...deck.querySelectorAll('img')].map(im=>im.decode().catch(()=>{}))),new Promise(resolve=>setTimeout(resolve,500))]);if(finished)return;
  const cards=[...deck.children],ease='cubic-bezier(.785,.135,.15,.86)';
  const front='translate3d(0,41.7vh,2.6vw) rotateX(-10deg)',level='translate3d(0,-13.89vh,0) rotateX(0deg)',rest='translate3d(0,0,0) rotateX(0deg)';
- const passes=cards.map((card,i)=>card.animate([
-  {offset:0,transform:'translate3d(0,-400px,-800px) rotateX(30deg)',opacity:0},
-  {offset:.3,transform:'translate3d(0,-4.6vh,-36.5vw) rotateX(10deg)',opacity:1},
-  {offset:.6,transform:'translate3d(0,5.6vh,-26vw) rotateX(0deg)',opacity:1},
-  {offset:1,transform:front,opacity:1}
- ],{duration:2000,delay:(cards.length-1-i)*1000/(cards.length-1),easing:ease,fill:'both'}));
+ const passes=cards.map((card,i)=>{
+  // Distinct planes prevent coplanar cards from showing fragments of each other on Safari.
+  const depth=(cards.length-1-i)*3;
+  const pose=(y,z,angle)=>`translate3d(0,${y},calc(${z} - ${depth}px)) rotateX(${angle}deg)`;
+  return card.animate([
+   {offset:0,transform:pose('-400px','-800px',30),opacity:0},
+   {offset:.3,transform:pose('-4.6vh','-36.5vw',10),opacity:1},
+   {offset:.6,transform:pose('5.6vh','-26vw',0),opacity:1},
+   {offset:1,transform:pose('41.7vh','2.6vw',-10),opacity:1}
+  ],{duration:2000,delay:(cards.length-1-i)*1000/(cards.length-1),easing:ease,fill:'both'});
+ });
  animations.push(...passes);await Promise.all(passes.map(a=>a.finished.catch(()=>{})));if(finished)return;
- const settle=cards.map(card=>card.animate([{transform:front},{transform:level}],{duration:1000,easing:ease,fill:'forwards'}));
+ // Only the chosen work lands: the completed stack cannot leak through the front card.
+ cards.slice(0,-1).forEach(card=>card.remove());const landingCard=cards.at(-1);
+ const settle=[landingCard.animate([{transform:front},{transform:level}],{duration:1000,easing:ease,fill:'forwards'})];
  animations.push(...settle);await Promise.all(settle.map(a=>a.finished.catch(()=>{})));if(finished)return;
  await new Promise(resolve=>setTimeout(resolve,500));if(finished)return;
- const land=cards.map(card=>card.animate([{transform:level},{transform:rest}],{duration:1000,easing:ease,fill:'forwards'}));
+ const land=[landingCard.animate([{transform:level},{transform:rest}],{duration:1000,easing:ease,fill:'forwards'})];
  animations.push(...land);await Promise.all(land.map(a=>a.finished.catch(()=>{})));if(finished)return;
  document.body.classList.remove('intro-playing');const fade=overlay.animate([{opacity:1},{opacity:0}],{duration:1000,fill:'forwards'});animations.push(fade);await fade.finished.catch(()=>{});finish();
 }
