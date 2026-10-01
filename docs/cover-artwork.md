@@ -1,6 +1,6 @@
-# Current gallery covers
+# Gallery cover history
 
-MILE, LINIYA and HVOST now use screenshots of their actual demo interfaces: the English quick check, service booking and care finder. Each has a separate mobile crop under `dist/images/covers/*-interface-mobile.webp`. These are static covers; clicking still opens the project preview. Demo functionality is unchanged.
+Current MILE, LINIYA and HVOST covers use standalone generated imagery documented in [cover-art-v2.md](cover-art-v2.md). Earlier interface screenshots (the English quick check, service booking and care finder) and their mobile crops remain as unused historical assets. Clicking still opens the project preview. Demo functionality is unchanged.
 
 TIHO uses `tiho-interior-hq.webp`, encoded from the original 1536 x 1024 PNG at WebP quality 94. LESNO, PLAN, YASNO and STEBEL keep their existing image sources. Project titles and metadata are rendered above the covers.
 

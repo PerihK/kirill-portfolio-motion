@@ -14,16 +14,12 @@ const reduced=matchMedia('(prefers-reduced-motion:reduce)');
 const coverArt={
  plan:{src:'demos/plan/assets/project-sad.webp',width:1600,height:2000},
  tiho:{src:'images/covers/tiho-interior-hq.webp',width:1536,height:1024},
- mile:{src:'images/covers/mile-interface.webp',mobile:'images/covers/mile-interface-mobile.webp',width:991,height:510},
- liniya:{src:'images/covers/liniya-interface.webp',mobile:'images/covers/liniya-interface-mobile.webp',width:997,height:465},
- hvost:{src:'images/covers/hvost-interface.webp',mobile:'images/covers/hvost-interface-mobile.webp',width:1400,height:714}
+ mile:{src:'images/covers/mile-art-v2.webp',width:1536,height:1024},
+ liniya:{src:'images/covers/liniya-art-v2.webp',width:1536,height:1024},
+ hvost:{src:'images/covers/hvost-art-v2.webp',width:1536,height:1024}
 };
-function cover(p,eager=false){
- const artwork=coverArt[p.id]||{src:`images/covers/${p.id}.webp`,width:1400,height:933};
- const image=`<img class="cover-image" ${eager?'src':'data-src'}="${artwork.src}" alt="" width="${artwork.width}" height="${artwork.height}" ${eager?'fetchpriority="high"':''}>`;
- return `<div class="project-cover image-cover ${artwork.mobile?'interface-cover ':''}cover-${p.id}" aria-hidden="true">${artwork.mobile?`<picture><source media="(max-width:600px)" ${eager?'srcset':'data-src'}="${artwork.mobile}">${image}</picture>`:image}</div>`;
-}
-function loadImages(root){root.querySelectorAll('[data-src]').forEach(el=>{if(el.tagName==='SOURCE')el.srcset=el.dataset.src;else el.src=el.dataset.src;el.removeAttribute('data-src');});}
+function cover(p,eager=false){const artwork=coverArt[p.id]||{src:`images/covers/${p.id}.webp`,width:1400,height:933};return `<div class="project-cover image-cover cover-${p.id}" aria-hidden="true"><img class="cover-image" ${eager?'src':'data-src'}="${artwork.src}" alt="" width="${artwork.width}" height="${artwork.height}" ${eager?'fetchpriority="high"':''}></div>`;}
+function loadImages(root){root.querySelectorAll('[data-src]').forEach(el=>{el.src=el.dataset.src;el.removeAttribute('data-src');});}
 $('#project-titles').innerHTML=projects.map((p,i)=>`<div class="project-title-block" ${i?'aria-hidden="true"':''}><h2>${p.name}</h2><p><span>${p.type}</span><span>Концепт / 2026</span><span class="project-role">Дизайн / Разработка</span></p></div>`).join('');
 $('#project-cards').innerHTML=projects.map((p,i)=>`<article class="work-slide" data-index="${i}" ${i?'aria-hidden="true" inert':''}><div class="card-motion"><button class="showcase-card" data-project="${p.id}" aria-label="Посмотреть проект ${p.name} — ${p.type}" aria-haspopup="dialog">${cover(p,i===0)}<span class="cover-cursor" aria-hidden="true">Подробнее ${arrow}</span></button><div class="project-caption"><p>${p.summary}</p><button class="project-open" data-project="${p.id}" aria-haspopup="dialog">О проекте ${arrow}</button></div></div></article>`).join('');
 $('#project-grid').innerHTML=projects.map(p=>`<button class="catalog-card" data-project="${p.id}" aria-label="Посмотреть проект ${p.name} — ${p.type}" aria-haspopup="dialog">${cover(p)}<span><strong>${p.name}</strong><small>${p.type}</small>${arrow}</span></button>`).join('');
@@ -57,11 +53,39 @@ function draw(time){const dt=lastTime?Math.min(64,time-lastTime):16;lastTime=tim
 function jumpToProject(i){scrollTo({top:track.offsetTop+i*unit,behavior:reduced.matches?'instant':'smooth'});}
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',measure);reduced.addEventListener('change',schedule);measure();
 
-// A vertical phone gesture advances exactly one work; taps and pinch zoom remain native.
-const stage=$('.work-stage'),mobileGallery=matchMedia('(max-width:600px)');
+// One wheel / trackpad gesture moves one work. Momentum belongs to the same gesture.
+let wheelLast=0,wheelDelta=0,wheelConsumed=false,wheelAnimatingUntil=0;
+function galleryContact(){scrollTo({top:$('#contact').offsetTop-$('.masthead').offsetHeight-20,behavior:reduced.matches?'instant':'smooth'});}
+function advanceWork(direction){const index=Math.round(target);if(direction>0&&index===7)galleryContact();else jumpToProject(clamp(index+direction,0,7));}
+addEventListener('wheel',e=>{
+ if(e.ctrlKey||e.defaultPrevented||document.body.classList.contains('modal-open')||Math.abs(e.deltaX)>Math.abs(e.deltaY)||!e.deltaY)return;
+ const now=performance.now(),lastTop=track.offsetTop+7*unit;
+ const inGallery=scrollY>=track.offsetTop-2&&scrollY<=lastTop+2;
+ const returning=e.deltaY<0&&scrollY>lastTop&&scrollY<=$('#contact').offsetTop+innerHeight*.2;
+ if(!inGallery&&!returning&&now>=wheelAnimatingUntil)return;
+ e.preventDefault();
+ if(now-wheelLast>180){wheelConsumed=false;wheelDelta=0;}
+ wheelLast=now;
+ if(wheelConsumed||now<wheelAnimatingUntil)return;
+ const pixels=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?innerHeight:1);
+ if(Math.sign(pixels)!==Math.sign(wheelDelta))wheelDelta=0;
+ wheelDelta+=pixels;if(Math.abs(wheelDelta)<20)return;
+ wheelConsumed=true;wheelAnimatingUntil=now+(reduced.matches?0:750);
+ if(returning)jumpToProject(7);else advanceWork(Math.sign(wheelDelta));
+},{passive:false});
+addEventListener('keydown',e=>{
+ if(e.defaultPrevented||e.ctrlKey||e.metaKey||e.altKey||document.body.classList.contains('modal-open')||e.target.closest('input,textarea,select,[contenteditable]'))return;
+ if(scrollY<track.offsetTop-2||scrollY>track.offsetTop+7*unit+2)return;
+ const direction=['ArrowDown','PageDown'].includes(e.key)?1:['ArrowUp','PageUp'].includes(e.key)?-1:0;
+ if(!direction)return;e.preventDefault();if(e.repeat||performance.now()<wheelAnimatingUntil)return;
+ wheelAnimatingUntil=performance.now()+(reduced.matches?0:750);advanceWork(direction);
+});
+
+// A vertical touch gesture advances exactly one work; taps and pinch zoom remain native.
+const stage=$('.work-stage');
 let gesture=null,suppressClickUntil=0;
 stage.addEventListener('touchstart',e=>{
- if(!mobileGallery.matches||e.touches.length!==1||document.body.classList.contains('modal-open')||scrollY<track.offsetTop-2||scrollY>track.offsetTop+7*unit+2){gesture=null;return;}
+ if(e.touches.length!==1||document.body.classList.contains('modal-open')||scrollY<track.offsetTop-2||scrollY>track.offsetTop+7*unit+2){gesture=null;return;}
  const t=e.touches[0];gesture={x:t.clientX,y:t.clientY,axis:null,index:Math.round(target)};
 },{passive:true});
 stage.addEventListener('touchmove',e=>{
@@ -74,7 +98,7 @@ stage.addEventListener('touchend',e=>{
  const g=gesture;gesture=null;if(!g||g.axis!=='vertical'||e.touches.length)return;
  const dy=e.changedTouches[0].clientY-g.y;
  if(Math.abs(dy)<32){jumpToProject(g.index);return;}
- if(dy<0&&g.index===7){scrollTo({top:$('#contact').offsetTop-$('.masthead').offsetHeight-20,behavior:reduced.matches?'instant':'smooth'});return;}
+ if(dy<0&&g.index===7){galleryContact();return;}
  jumpToProject(clamp(g.index+(dy<0?1:-1),0,7));
 },{passive:true});
 stage.addEventListener('touchcancel',()=>{gesture=null;},{passive:true});
