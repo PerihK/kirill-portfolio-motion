@@ -1,73 +1,10 @@
 <!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Кирилл Перих — сайты и интерфейсы</title>
-  <meta name="description" content="Кирилл Перих — веб-разработчик. Восемь сайтов и интерфейсов для разных задач бизнеса. Дизайн, адаптивная разработка и интерактивные сценарии.">
-  <meta name="theme-color" content="#eeede8">
-  <meta property="og:title" content="Кирилл Перих — сайты и интерфейсы"><meta property="og:description" content="Избранные сайты и интерфейсы. Дизайн, код и взаимодействие."><meta property="og:type" content="website">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="styles.css">
-  <link rel="preload" href="images/lesno.webp" as="image"><script src="app.js" defer></script>
-</head>
-<body>
-<a class="skip-link" href="#work">К работам</a>
-<header class="header" id="top">
-  <a href="#top" class="monogram" aria-label="Кирилл Перих, в начало">кп<span class="mark" aria-hidden="true">*</span></a>
-  <nav aria-label="Основная навигация"><a href="#work">Работы</a><a href="#approach">Подход</a><a href="#contact">Контакт</a></nav>
-  <button class="header-brief text-button" data-brief>Обсудить проект <span aria-hidden="true">+</span></button>
-</header>
-<main>
-  <section class="intro" aria-labelledby="intro-title">
-    <div class="intro-top"><span class="eyebrow">Веб-разработчик</span><span class="eyebrow">Портфолио / 2026</span></div>
-    <div class="intro-layout"><h1 id="intro-title">Кирилл<br>Перих<span class="name-period">.</span></h1><div class="intro-note"><p>Разрабатываю сайты.<br>Продумываю, как они выглядят.<br>И как ими пользуются.</p><a href="https://t.me/KiriwPerih" target="_blank" rel="noopener" class="text-button">Написать в Telegram</a></div></div>
-    <div class="intro-index"><span class="eyebrow">Дизайн / Код / Взаимодействие</span><a href="#work" class="text-link">Избранные работы</a></div>
-  </section>
-
-  <section class="collection" id="work" aria-labelledby="work-title">
-    <div class="section-label"><h2 id="work-title">Избранные работы</h2><span>Концепты · 2026</span></div>
-    <div class="project-grid" id="project-grid"></div>
-  </section>
-
-  <section class="details-section" aria-labelledby="details-title">
-    <div class="section-label"><h2 id="details-title">Внутри проектов</h2><span>ЯСНО / Мобильная версия</span></div>
-    <div class="detail-grid">
-      <article class="detail-feature mobile-feature" aria-label="ЯСНО — интерактивный мобильный сайт">
-        <div class="mobile-introduction"><h3>Понятно даже<br>на маленьком экране.</h3><p>ЯСНО — мобильный сайт с расчётом уборки.<br>Листайте и попробуйте сами.</p></div>
-        <div class="mobile-stage" id="mobile-stage">
-          <div class="mobile-artboard" id="mobile-artboard">
-            <img class="phone-poster" src="images/yasno-phone.png" alt="ЯСНО: сайт в макете телефона. Понятно даже на маленьком экране." loading="lazy" width="1448" height="1086">
-            <span class="poster-number-cover" aria-hidden="true"></span>
-            <div class="phone-cutout"><div class="phone-glass"><div class="phone-screen"><img class="phone-fallback" src="images/yasno-mobile.webp" alt="Актуальный первый экран мобильного сайта ЯСНО" loading="lazy" width="414" height="882"><iframe src="demos/yasno/?embedded=1" title="Мобильный сайт ЯСНО — прокрутка и калькулятор уборки" loading="lazy"></iframe></div></div></div>
-          </div>
-        </div>
-        <div class="phone-controls"><p>Листайте сайт внутри телефона.</p><button class="text-button" data-project="yasno" aria-haspopup="dialog">Открыть сайт <span aria-hidden="true">+</span></button></div>
-      </article>
-    </div>
-    <article class="flower-feature" id="stebel-feature" aria-labelledby="flower-title">
-      <div class="flower-stage"><button class="flower-browser" data-project="stebel" aria-label="Открыть сайт СТЕБЕЛЬ" aria-haspopup="dialog"><img src="images/stebel.webp" alt="Актуальный первый экран сайта цветочной студии СТЕБЕЛЬ" loading="lazy" width="1250" height="668"></button><button class="flower-card" data-project="stebel" aria-label="Открыть сайт цветочной студии СТЕБЕЛЬ" aria-haspopup="dialog"><img src="demos/stebel/images/bouquet-coral.png" alt="Иллюстрация букета Тёплый привет из проекта СТЕБЕЛЬ" loading="lazy" width="1024" height="1536"><span>Тёплый привет</span></button></div>
-      <div class="flower-caption"><div><h3 id="flower-title">СТЕБЕЛЬ</h3><span class="flower-niche">Цветочная студия</span></div><button class="text-button" data-project="stebel" aria-haspopup="dialog">Открыть сайт <span aria-hidden="true">+</span></button></div>
-    </article>
-  </section>
-
-  <section class="approach" id="approach" aria-labelledby="approach-title">
-    <div class="section-label"><span>Подход</span><span>От задачи до работающего сайта</span></div>
-    <div class="approach-intro"><h2 id="approach-title">Хороший сайт<br> собран <span>со смыслом.</span></h2><div><p>Я Кирилл. Делаю сайты, в которых внешний вид и логика работают вместе. Сначала разбираюсь в задаче бизнеса, затем собираю структуру, дизайн и интерфейс.</p><p class="muted">В работе использую код и ИИ-инструменты. Решения проверяю в браузере — на большом экране и на телефоне.</p></div></div>
-    <div class="services-list">
-      <details open><summary><h3>Лендинги</h3><span class="service-hint">Одна задача. Ясный маршрут.</span><span class="toggle" aria-hidden="true">+</span></summary><div class="service-body"><p>Для запуска услуги, продукта или отдельного предложения. Структура, визуальная концепция, адаптивная разработка и понятный путь к обращению.</p></div></details>
-      <details><summary><h3>Сайты и каталоги</h3><span class="service-hint">Больше содержания. Та же ясность.</span><span class="toggle" aria-hidden="true">+</span></summary><div class="service-body"><p>Для бизнеса, которому нужно представить несколько услуг, показать работы или помочь выбрать из каталога. Продумываю навигацию, страницы и сценарии выбора.</p></div></details>
-      <details><summary><h3>Интерфейсы</h3><span class="service-hint">От идеи до взаимодействия.</span><span class="toggle" aria-hidden="true">+</span></summary><div class="service-body"><p>Калькуляторы, подборщики, формы и концепции цифровых продуктов. Можно начать с отдельного сценария и проверить, насколько он удобен.</p></div></details>
-      <details><summary><h3>Интеграции</h3><span class="service-hint">Обсудим под вашу задачу.</span><span class="toggle" aria-hidden="true">+</span></summary><div class="service-body"><p>Связь сайта с мессенджерами и сервисами, автоматизация обработки заявок, боты. Это развивающееся направление: состав и возможность реализации обсуждаем отдельно.</p></div></details>
-    </div>
-    <div class="process-line"><p><span>Разобраться</span>Обсуждаем бизнес, аудиторию и задачу.</p><p><span>Спроектировать</span>Согласуем структуру и визуальное направление.</p><p><span>Собрать</span>Разрабатываем, проверяем, готовим к запуску.</p></div>
-  </section>
-
-  <section class="contact" id="contact" aria-labelledby="contact-title">
-    <div class="section-label"><span>Контакт</span><span>Кирилл Перих</span></div>
-    <div class="contact-bottom"><div class="contact-copy"><h2 id="contact-title">Обсудим ваш сайт.</h2><p>Напишите о бизнесе и о том, что хотите сделать.<br>Можно начать с пары предложений.</p><a class="contact-telegram" href="https://t.me/KiriwPerih" target="_blank" rel="noopener">Telegram <span>@KiriwPerih</span></a></div><div class="contact-actions"><button class="brief-button" data-brief>Заполнить короткий бриф <span>~1 мин</span><span aria-hidden="true">+</span></button><p class="contact-brief-note">Если удобнее сначала собрать мысли — четыре вопроса о будущем сайте.</p><div class="direct-links"><a href="https://wa.me/79623143515" target="_blank" rel="noopener">WhatsApp</a><a href="tel:+79623143515">+7 962 314-35-15</a></div></div></div>
-    <footer><span>© 2026 Кирилл Перих</span><a href="https://github.com/PerihK" target="_blank" rel="noopener">GitHub</a><a href="#top">В начало ↑</a></footer>
-  </section>
-</main>
-
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Кирилл Перих — сайты в движении</title><meta name="description" content="Дизайн и разработка сайтов. Восемь интерактивных концептов Кирилла Периха."><meta name="theme-color" content="#e5e7dc"><meta property="og:title" content="Кирилл Перих — сайты в движении"><meta property="og:description" content="Дизайн, разработка и внимание к деталям."><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="styles.css"><link rel="preload" href="images/lesno.webp" as="image"><script src="app.js" defer></script></head>
+<body><a class="skip-link" href="#contact">К контактам</a>
+<header class="masthead" id="top"><a class="identity" href="#work"><strong>Кирилл Перих<span>*</span></strong><span>Дизайн и разработка сайтов</span></a><nav aria-label="Основная навигация"><button id="catalog-toggle" aria-haspopup="dialog"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 2h6v6H2zM12 2h6v6h-6zM2 12h6v6H2zM12 12h6v6h-6z"/></svg><span>Все работы</span></button><a class="contact-link" href="https://t.me/KiriwPerih" target="_blank" rel="noopener">Обсудить проект <span aria-hidden="true">↗</span></a></nav></header>
+<main><h1 class="sr-only">Кирилл Перих — дизайн и разработка сайтов</h1><section class="work-track" id="work" aria-label="Восемь избранных работ"><div class="work-stage"><div class="work-heading"><p class="kicker">Независимый веб-разработчик / Портфолио 2026</p><div id="project-titles"></div></div><div class="work-cards" id="project-cards"></div><div class="stage-foot"><p class="work-count"><span id="work-count">01</span><span class="count-line"></span>08</p><nav class="project-nav" id="project-nav" aria-label="Переключение проектов"></nav><p class="scroll-cue">Листайте работы <span aria-hidden="true">↓</span></p></div></div></section>
+<section class="about-contact" id="contact"><div class="closing-kicker"><span>От идеи до работающего сайта</span><span>Дизайн / Разработка</span></div><div class="closing-layout"><h2>Сайт, который<br>хочется <em>открыть.</em></h2><div class="closing-copy"><p>Я Кирилл. Продумываю внешний вид, структуру и то, как человек будет пользоваться вашим сайтом.</p><p>Лендинги, сайты услуг, каталоги и интерактивные сценарии. От первого обсуждения — до запуска.</p><a class="telegram-cta" href="https://t.me/KiriwPerih" target="_blank" rel="noopener">Обсудим ваш проект <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><button class="brief-link" data-brief>Или начните с короткого брифа <span aria-hidden="true">↗</span></button></div></div><footer><span>© 2026 Кирилл Перих</span><a href="https://t.me/KiriwPerih" target="_blank" rel="noopener">@KiriwPerih</a><a href="https://github.com/PerihK" target="_blank" rel="noopener">GitHub</a><a href="#work">В начало ↑</a></footer></section></main>
+<dialog id="catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-top"><div><p class="kicker">Коллекция / 2026</p><h2 id="catalog-title">Все работы<span>08</span></h2></div><button class="close-button" data-close="catalog-dialog" aria-label="Закрыть все работы">Закрыть <span aria-hidden="true">×</span></button></div><div class="catalog-grid" id="project-grid"></div><p class="catalog-note">Самостоятельные концепты. Каждый сайт можно открыть и попробовать.</p></dialog>
 <dialog id="site-dialog" class="site-dialog" aria-labelledby="site-title"><div class="site-toolbar"><div class="site-identity"><h2 id="site-title">ЛЕСНО</h2><span id="site-niche">Ландшафт</span><span class="site-concept">Концепт</span></div><div class="site-toolbar-actions"><a id="site-external" href="demos/lesno/" target="_blank" rel="noopener">Открыть отдельно</a><button class="close-button" data-close="site-dialog" aria-label="Закрыть сайт">Закрыть <span aria-hidden="true">×</span></button></div></div><div class="site-surface"><p id="site-loading" class="site-loading" role="status">Открываем сайт…</p><iframe id="site-frame" title="Сайт ЛЕСНО" allow="clipboard-write"></iframe></div></dialog>
 <dialog id="brief-dialog" aria-labelledby="brief-title">
   <div class="dialog-top"><span class="eyebrow">Начало проекта</span><button class="close-button" data-close="brief-dialog" aria-label="Закрыть бриф">Закрыть <span aria-hidden="true">×</span></button></div>
@@ -81,7 +18,5 @@
     <p class="form-error" id="form-error" role="alert"></p><div class="brief-controls"><button type="button" id="brief-back" class="text-button" hidden>Назад</button><button type="submit" id="brief-next" class="solid-button">Дальше <span aria-hidden="true">+</span></button></div>
   </form></div>
 </dialog>
-<noscript><div class="noscript-note">Для просмотра проектов и брифа включите JavaScript. Написать Кириллу: <a href="https://t.me/KiriwPerih">Telegram @KiriwPerih</a>. <a href="demos/tiho/">Открыть демо ТИХО</a>.</div></noscript>
-</body></html>
 
-
+<noscript><div class="noscript-note">Откройте проекты: <a href="demos/lesno/">lesno</a> · <a href="demos/plan/">plan</a> · <a href="demos/mile/">mile</a> · <a href="demos/tiho/">tiho</a> · <a href="demos/liniya/">liniya</a> · <a href="demos/hvost/">hvost</a> · <a href="demos/yasno/">yasno</a> · <a href="demos/stebel/">stebel</a>. <a href="https://t.me/KiriwPerih">Написать Кириллу</a>.</div></noscript></body></html>
