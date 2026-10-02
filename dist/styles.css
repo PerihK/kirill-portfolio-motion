@@ -226,7 +226,7 @@ body{background:var(--gallery-color,#e5e7dc)}
 /* One project title above a text-free image, across gallery, intro and catalog. */
 .project-cover.image-cover .cover-image{inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:none;transform:none;z-index:0}
 .project-cover.image-cover::after{content:'';display:block;position:absolute;inset:0;z-index:1;background:rgb(0 0 0 / .18);pointer-events:none}
-.project-cover.image-cover.cover-plan .cover-image{object-position:50% 20%}
+.project-cover.image-cover.cover-plan .cover-image{object-position:50% center}
 .project-cover.image-cover.cover-tiho .cover-image{object-position:center 20%}
 .project-cover.image-cover.cover-liniya .cover-image{object-position:center 20%}
 .project-cover.image-cover.cover-hvost{background:#eee7d9}

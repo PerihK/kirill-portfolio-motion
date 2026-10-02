@@ -28,7 +28,7 @@ identityName.replaceWith(identityLine(identityName.textContent));
 const identityDescription=identity.querySelector(':scope > span');
 identityDescription.replaceChildren(identityLine(identityDescription.textContent));
 const coverArt={
- plan:{src:'demos/plan/assets/project-sad.webp',width:1600,height:2000},
+ plan:{src:'images/covers/plan-art-v2.webp',width:1536,height:1024},
  tiho:{src:'images/covers/tiho-interior-hq.webp',width:1536,height:1024},
  mile:{src:'images/covers/mile-art-v2.webp',width:1536,height:1024},
  liniya:{src:'images/covers/liniya-art-v2.webp',width:1536,height:1024},
