@@ -1,12 +1,12 @@
 const projects = [
- {id:'lesno',name:'ЛЕСНО',type:'Ландшафтный дизайн',summary:'Природа. Архитектура. Вы.',color:'#d5e1ce',mark:'лесно',line:'Сады, в которых хочется остаться.',description:'Концепт сайта о ландшафтном дизайне: крупная фотография, спокойная типографика и истории садов. Сайт ведёт от знакомства с подходом команды к просмотру проектов и обсуждению своего участка.',features:['Проекты садов','Подход бюро','Адаптивная вёрстка']},
- {id:'yasno',name:'ЯСНО',type:'Клининг',summary:'Чистый дом. Новый старт.',color:'#dee8ec',mark:'ЯСНО.',line:'Клининг<br>после ремонта.',description:'Концепт клининга с понятным составом услуг и расчётом до первого сообщения. На сайте можно изменить площадь, проверить состав уборки и попробовать калькулятор.',features:['Калькулятор','Состав услуг','Демо-заявка']},
- {id:'liniya',name:'ЛИНИЯ',type:'Красота',summary:'Новая форма. Ваш характер.',color:'#e9dcd5',mark:'ЛИНИЯ',line:'Форма.<br>Характер.',description:'Концепт салона с акцентом на характер, услуги и работу мастеров. Фотография и крупная типографика создают настроение, а подбор услуги помогает найти следующий шаг.',features:['Услуги','Подбор образа','Мастера']},
- {id:'tiho',name:'ТИХО',type:'Кондиционеры',summary:'Комфорт, который продуман.',color:'#e5dfd0',mark:'ТИХО',line:'Тишина —<br>часть интерьера.',description:'Концепт сервиса подбора и установки кондиционеров. Вместо витрины оборудования — вопросы о комнате, ориентир по мощности и объяснение того, как проходит монтаж.',features:['Расчёт мощности','Модели систем','Монтаж по шагам']},
- {id:'mile',name:'MILE',type:'Английский язык',summary:'Новый город. Ваш язык.',color:'#d9e3e7',mark:'MILE.',line:'Make<br>your place.',description:'Концепт школы английского для жизни в новой стране. Тёплая редакционная подача соединяет программы, уровень языка и понятный маршрут к первому уроку.',features:['Программы','Выбор уровня','Первый урок']},
- {id:'hvost',name:'ХВОСТ',type:'Груминг',summary:'Чистые лапы. Довольный пёс.',color:'#d7e4d3',mark:'ХВОСТ.',line:'У каждого хвоста<br>свой характер.',description:'Концепт груминг-студии с дружелюбной подачей и вниманием к питомцу. Размер собаки и тип шерсти превращаются в понятный ориентир по программе ухода.',features:['Маршрут ухода','Программы','Демо-запись']},
- {id:'plan',name:'ПЛАН',type:'Девелопмент',summary:'Город начинается у вашего дома.',color:'#dce3e4',mark:'план.',line:'Место для<br>настоящей жизни.',description:'Концепт девелоперского сайта о доме и среде вокруг него. Архитектура задаёт визуальный ритм, а карточки проектов и подбор квартиры помогают перейти от впечатления к выбору.',features:['Жилые проекты','Подбор квартиры','Адаптивная вёрстка']},
- {id:'stebel',name:'СТЕБЕЛЬ',type:'Цветочная студия',summary:'Цветы к вашему моменту.',color:'#f0e1c6',mark:'СТЕБЕЛЬ',line:'Маленький повод.<br>Большое чувство.',description:'Иллюстрированный концепт цветочной студии. Подбор по поводу и бюджету, букеты и демо-корзина собраны в лёгкий сценарий выбора подарка.',features:['Подбор букета','Демо-корзина','Подписка']}
+ {id:'lesno',name:'ЛЕСНО',type:'Ландшафтный дизайн',summary:'Природа. Архитектура. Вы.',color:'#adbd93',mark:'лесно',line:'Сады, в которых хочется остаться.',description:'Концепт сайта о ландшафтном дизайне: крупная фотография, спокойная типографика и истории садов. Сайт ведёт от знакомства с подходом команды к просмотру проектов и обсуждению своего участка.',features:['Проекты садов','Подход бюро','Адаптивная вёрстка']},
+ {id:'yasno',name:'ЯСНО',type:'Клининг',summary:'Чистый дом. Новый старт.',color:'#cedde5',mark:'ЯСНО.',line:'Клининг<br>после ремонта.',description:'Концепт клининга с понятным составом услуг и расчётом до первого сообщения. На сайте можно изменить площадь, проверить состав уборки и попробовать калькулятор.',features:['Калькулятор','Состав услуг','Демо-заявка']},
+ {id:'liniya',name:'ЛИНИЯ',type:'Красота',summary:'Новая форма. Ваш характер.',color:'#cfafa0',mark:'ЛИНИЯ',line:'Форма.<br>Характер.',description:'Концепт салона с акцентом на характер, услуги и работу мастеров. Фотография и крупная типографика создают настроение, а подбор услуги помогает найти следующий шаг.',features:['Услуги','Подбор образа','Мастера']},
+ {id:'tiho',name:'ТИХО',type:'Кондиционеры',summary:'Комфорт, который продуман.',color:'#bdc7bc',mark:'ТИХО',line:'Тишина —<br>часть интерьера.',description:'Концепт сервиса подбора и установки кондиционеров. Вместо витрины оборудования — вопросы о комнате, ориентир по мощности и объяснение того, как проходит монтаж.',features:['Расчёт мощности','Модели систем','Монтаж по шагам']},
+ {id:'mile',name:'MILE',type:'Английский язык',summary:'Новый город. Ваш язык.',color:'#aebfc9',mark:'MILE.',line:'Make<br>your place.',description:'Концепт школы английского для жизни в новой стране. Тёплая редакционная подача соединяет программы, уровень языка и понятный маршрут к первому уроку.',features:['Программы','Выбор уровня','Первый урок']},
+ {id:'hvost',name:'ХВОСТ',type:'Груминг',summary:'Чистые лапы. Довольный пёс.',color:'#bdcba9',mark:'ХВОСТ.',line:'У каждого хвоста<br>свой характер.',description:'Концепт груминг-студии с дружелюбной подачей и вниманием к питомцу. Размер собаки и тип шерсти превращаются в понятный ориентир по программе ухода.',features:['Маршрут ухода','Программы','Демо-запись']},
+ {id:'plan',name:'ПЛАН',type:'Девелопмент',summary:'Город начинается у вашего дома.',color:'#c2b8a3',mark:'план.',line:'Место для<br>настоящей жизни.',description:'Концепт девелоперского сайта о доме и среде вокруг него. Архитектура задаёт визуальный ритм, а карточки проектов и подбор квартиры помогают перейти от впечатления к выбору.',features:['Жилые проекты','Подбор квартиры','Адаптивная вёрстка']},
+ {id:'stebel',name:'СТЕБЕЛЬ',type:'Цветочная студия',summary:'Цветы к вашему моменту.',color:'#dfc59a',mark:'СТЕБЕЛЬ',line:'Маленький повод.<br>Большое чувство.',description:'Иллюстрированный концепт цветочной студии. Подбор по поводу и бюджету, букеты и демо-корзина собраны в лёгкий сценарий выбора подарка.',features:['Подбор букета','Демо-корзина','Подписка']}
 ];
 const $=s=>document.querySelector(s);
 const arrow='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
@@ -42,8 +42,8 @@ $('#project-grid').innerHTML=projects.map(p=>`<button class="catalog-card" data-
 const previewDialog=$('#preview-dialog'),briefDialog=$('#brief-dialog'),catalogDialog=$('#catalog-dialog');
 const mobileToggle=$('#mobile-toggle'); // Optional: retained phone demo can be reused in a dedicated case study.
 const focusOrigins=new WeakMap(),closeTickets=new WeakMap();
-let currentProject=null,openingRect=null,openingRadius='28px',previewAnimation=null;
-document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>{const source=b.classList.contains('showcase-card')?b:b.closest('.work-slide')?.querySelector('.showcase-card')||b.querySelector('.project-cover')||b;if(catalogDialog.open){catalogDialog.close();$('#catalog-toggle').focus({preventScroll:true});}openPreview(b.dataset.project,true,source);}));
+let currentProject=null,previewScene=null,previewAnimations=[];
+document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>{const source=b.classList.contains('showcase-card')?b:b.closest('.work-slide')?.querySelector('.showcase-card')||b.querySelector('.project-cover')||b;openPreview(b.dataset.project,true,source);}));
 $('#catalog-toggle').setAttribute('aria-label','Все работы');
 $('#catalog-toggle').addEventListener('click',()=>{loadImages($('#project-grid'));showDialog(catalogDialog);});
 
@@ -123,11 +123,61 @@ stage.addEventListener('click',e=>{if(performance.now()<suppressClickUntil){e.pr
 document.querySelectorAll('.showcase-card[data-project]').forEach(card=>{card.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=card.getBoundingClientRect();card.style.setProperty('--cursor-x',`${clamp(e.clientX-r.left,64,r.width-64)}px`);card.style.setProperty('--cursor-y',`${clamp(e.clientY-r.top,52,r.height-52)}px`);});});
 
 function showDialog(dialog){if(dialog.open)return;focusOrigins.set(dialog,document.activeElement);dialog.showModal();document.body.classList.add('modal-open');dialog.scrollTop=0;}
-function coverTransform(rect){return `translate(${rect.left}px,${rect.top}px) scale(${rect.width/innerWidth},${rect.height/innerHeight})`;}
-function openPreview(id,changeUrl=true,source=null){const p=projects.find(p=>p.id===id);if(!p)return;closeTickets.delete(previewDialog);previewDialog.getAnimations().forEach(a=>a.cancel());delete previewDialog.dataset.closing;previewDialog.classList.remove('is-closing');phoneObserver?.disconnect();currentProject=p;previewDialog.classList.remove('show-mobile');if(mobileToggle){mobileToggle.setAttribute('aria-pressed','false');mobileToggle.textContent='Мобильная версия';}$('#preview-mobile').replaceChildren();$('#preview-mobile').hidden=true;$('#preview-title').textContent=p.name;$('#preview-niche').textContent=p.type;$('#preview-description').textContent=p.description;$('#preview-features').innerHTML=p.features.map(x=>`<span>${x}</span>`).join('');$('#preview-visit').href=`demos/${id}/`;$('#preview-backdrop').innerHTML=cover(p,true);openingRect=source?.getBoundingClientRect()||null;openingRadius=source?getComputedStyle(source).borderRadius:'var(--card-radius)';showDialog(previewDialog);
- previewAnimation?.cancel();if(!reduced.matches&&openingRect&&openingRect.width>0&&openingRect.top<innerHeight&&openingRect.bottom>0){previewAnimation=$('#preview-backdrop').animate([{transform:coverTransform(openingRect),borderRadius:openingRadius},{transform:'translate(0,0) scale(1)',borderRadius:'0px'}],{duration:1100,easing:'cubic-bezier(.22,1,.36,1)'});}
- if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);if(u.href!==location.href)history.pushState({portfolioProject:true},'',u);}}
-async function closeDialog(dialog,changeUrl=true){if(!dialog.open||dialog.dataset.closing)return;dialog.dataset.closing='true';const ticket=Symbol();closeTickets.set(dialog,ticket);dialog.classList.add('is-closing');previewAnimation?.cancel();if(!reduced.matches){const animations=[dialog.animate([{opacity:1},{opacity:0}],{duration:dialog===previewDialog?700:350,easing:'ease-in-out'})];if(dialog===previewDialog&&openingRect){animations.push($('#preview-backdrop').animate([{transform:'translate(0,0) scale(1)',borderRadius:'0px'},{transform:coverTransform(openingRect),borderRadius:openingRadius}],{duration:700,easing:'cubic-bezier(.22,1,.36,1)'}));}await Promise.all(animations.map(a=>a.finished.catch(()=>{})));}if(closeTickets.get(dialog)!==ticket)return;closeTickets.delete(dialog);dialog.close();delete dialog.dataset.closing;dialog.classList.remove('is-closing');if(dialog===previewDialog){phoneObserver?.disconnect();phoneObserver=null;$('#preview-mobile').replaceChildren();if(changeUrl){const u=new URL(location.href);u.searchParams.delete('project');history.replaceState(null,'',u);}}if(!document.querySelector('dialog[open]'))document.body.classList.remove('modal-open');const origin=focusOrigins.get(dialog);if(origin?.isConnected)origin.focus({preventScroll:true});}
+const previewEase='cubic-bezier(.65,0,.2,1)';
+function cancelPreviewAnimations(){previewAnimations.forEach(a=>a.cancel());previewAnimations=[];}
+function scenePose(x,y,scale=1){return `translate3d(${x}px,${y}px,0) scale(${scale})`;}
+function fullPreviewPose(scene){const scale=Math.max(innerWidth/scene.width,innerHeight/scene.height);return scenePose((innerWidth-scene.width*scale)/2,(innerHeight-scene.height*scale)/2,scale);}
+function openPreview(id,changeUrl=true,source=null){
+ const p=projects.find(p=>p.id===id);if(!p)return;
+ closeTickets.delete(previewDialog);cancelPreviewAnimations();delete previewDialog.dataset.closing;previewDialog.classList.remove('is-closing');phoneObserver?.disconnect();currentProject=p;
+ previewDialog.classList.remove('show-mobile');if(mobileToggle){mobileToggle.setAttribute('aria-pressed','false');mobileToggle.textContent='Мобильная версия';}
+ $('#preview-mobile').replaceChildren();$('#preview-mobile').hidden=true;$('#preview-title').textContent=p.name;$('#preview-niche').textContent=p.type;$('#preview-description').textContent=p.description;$('#preview-features').innerHTML=p.features.map(x=>`<span>${x}</span>`).join('');$('#preview-visit').href=`demos/${id}/`;
+ const detailLabels={lesno:'Коллекция садов',yasno:'Расчёт уборки',liniya:'Выбор услуги и запись',tiho:'Подбор кондиционера',mile:'Проверка уровня',hvost:'Подбор ухода',plan:'Выбор квартиры',stebel:'Подбор букета'};
+ $('#preview-shots').innerHTML=['hero','detail'].map((kind,i)=>`<figure><img src="images/project-screens/${id}-${kind}.webp" alt="${p.name} — ${i?detailLabels[id]:'первый экран сайта'}" width="1425" height="900" loading="lazy" decoding="async"><figcaption><span>${i?'02':'01'}</span>${i?detailLabels[id]:'Первый экран'}</figcaption></figure>`).join('');
+ previewDialog.style.setProperty('--preview-tone',rgb(p.color).map(c=>Math.round(c*.32)).join(' '));
+ const backdrop=$('#preview-backdrop');backdrop.innerHTML=cover(p,true);
+ const rect=source?.getBoundingClientRect(),valid=rect&&rect.width>0&&rect.height>0&&rect.top<innerHeight&&rect.bottom>0;
+ previewScene={source:valid?source:null,width:valid?rect.width:innerWidth,height:valid?rect.height:innerHeight,radius:valid?getComputedStyle(source).borderRadius:'0px'};
+ const scene=previewScene;Object.assign(backdrop.style,{width:scene.width+'px',height:scene.height+'px',transform:fullPreviewPose(scene),borderRadius:'0px'});
+ showDialog(previewDialog);document.body.classList.add('preview-open');
+ if(!reduced.matches){
+  if(valid)previewAnimations.push(backdrop.animate([
+   {offset:0,transform:scenePose(rect.left,rect.top),borderRadius:scene.radius,easing:previewEase},
+   {offset:.28,transform:scenePose((innerWidth-scene.width)/2,(innerHeight-scene.height)/2),borderRadius:scene.radius,easing:previewEase},
+   {offset:1,transform:fullPreviewPose(scene),borderRadius:'0px'}
+  ],{duration:1700,fill:'backwards'}));
+  previewAnimations.push($('.preview-scrim').animate([{opacity:0,offset:0},{opacity:0,offset:.22},{opacity:1,offset:1}],{duration:1700,easing:'ease-in-out',fill:'backwards'}));
+  for(const [selector,delay] of [['.preview-copy',650],['.preview-top',850],['.preview-screens',850]])previewAnimations.push($(selector).animate([{opacity:0,transform:'translateY(22px)'},{opacity:1,transform:'translateY(0)'}],{duration:950,delay,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}));
+ }
+ if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);if(u.href!==location.href)history.pushState({portfolioProject:true},'',u);}
+}
+async function closeDialog(dialog,changeUrl=true){
+ if(!dialog.open||dialog.dataset.closing)return;
+ dialog.dataset.closing='true';const ticket=Symbol();closeTickets.set(dialog,ticket);
+ const isPreview=dialog===previewDialog,animations=[];
+ if(isPreview){
+  const backdrop=$('#preview-backdrop'),currentTransform=getComputedStyle(backdrop).transform,currentRadius=getComputedStyle(backdrop).borderRadius;
+  const fading=['.preview-copy','.preview-top','.preview-screens','.preview-scrim'].map(selector=>({element:$(selector),opacity:getComputedStyle($(selector)).opacity}));
+  cancelPreviewAnimations();dialog.classList.add('is-closing');
+  if(!reduced.matches){
+   for(const {element,opacity} of fading)animations.push(element.animate([{opacity},{opacity:0}],{duration:element.classList.contains('preview-scrim')?850:400,easing:'ease-out',fill:'forwards'}));
+   const scene=previewScene,rect=scene?.source?.getBoundingClientRect(),valid=rect&&rect.width>0&&rect.top<innerHeight&&rect.bottom>0&&Math.abs(rect.width/rect.height-scene.width/scene.height)<.05;
+   if(valid){const scale=rect.width/scene.width;animations.push(backdrop.animate([
+    {offset:0,transform:currentTransform,borderRadius:currentRadius,easing:previewEase},
+    {offset:.72,transform:scenePose((innerWidth-rect.width)/2,(innerHeight-rect.height)/2,scale),borderRadius:scene.radius,easing:previewEase},
+    {offset:1,transform:scenePose(rect.left,rect.top,scale),borderRadius:scene.radius}
+   ],{duration:1500,fill:'forwards'}));}
+   else animations.push(backdrop.animate([{transform:currentTransform,opacity:1},{transform:currentTransform,opacity:0}],{duration:850,easing:'ease-in-out',fill:'forwards'}));
+   previewAnimations=animations;
+  }
+ }else{dialog.classList.add('is-closing');if(!reduced.matches)animations.push(dialog.animate([{opacity:1},{opacity:0}],{duration:350,easing:'ease-in-out'}));}
+ await Promise.all(animations.map(a=>a.finished.catch(()=>{})));
+ if(closeTickets.get(dialog)!==ticket)return;
+ closeTickets.delete(dialog);dialog.close();delete dialog.dataset.closing;dialog.classList.remove('is-closing');
+ if(isPreview){cancelPreviewAnimations();previewScene=null;document.body.classList.remove('preview-open');phoneObserver?.disconnect();phoneObserver=null;$('#preview-mobile').replaceChildren();if(changeUrl){const u=new URL(location.href);u.searchParams.delete('project');history.replaceState(null,'',u);}}
+ if(!document.querySelector('dialog[open]'))document.body.classList.remove('modal-open');const origin=focusOrigins.get(dialog);if(origin?.isConnected)origin.focus({preventScroll:true});
+}
+addEventListener('resize',()=>{if(!previewDialog.open||previewDialog.dataset.closing||!previewScene)return;cancelPreviewAnimations();$('#preview-backdrop').style.transform=fullPreviewPose(previewScene);});
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeDialog(document.getElementById(b.dataset.close))));
 document.querySelectorAll('dialog').forEach(d=>d.addEventListener('cancel',e=>{e.preventDefault();closeDialog(d);}));
 function phoneMarkup(p){if(p.id==='yasno')return `<div class="real-phone"><div class="mobile-stage" id="mobile-stage"><div class="mobile-artboard" id="mobile-artboard"><img class="phone-poster" src="images/yasno-phone.png" alt="ЯСНО — живой сайт в телефоне" width="1448" height="1086"><span class="poster-number-cover" aria-hidden="true"></span><div class="phone-cutout"><div class="phone-glass"><div class="phone-screen"><img class="phone-fallback" src="images/yasno-mobile.webp" alt="Мобильная версия ЯСНО" width="414" height="882"><iframe src="demos/yasno/?embedded=1" title="Мобильный сайт ЯСНО — прокрутка и калькулятор уборки"></iframe></div></div></div></div></div></div><p>Живой сайт — листайте и попробуйте расчёт.</p>`;return `<div class="preview-handset"><span class="handset-speaker" aria-hidden="true"></span><div class="handset-viewport" tabindex="0" aria-label="Мобильное превью ${p.name}, можно прокручивать"><img src="images/${p.id}-mobile.webp" alt="Актуальный мобильный экран сайта ${p.name}" width="375" height="690"></div></div><p>Мобильный экран. Полный сайт — по кнопке ниже.</p>`;}
