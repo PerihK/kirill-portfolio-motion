@@ -86,7 +86,7 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0;max-width:non
 @media(max-width:600px) and (max-height:700px){.work-heading{padding-top:80px}#project-titles{margin-top:14px}.project-title-block h2{font-size:48px}.project-title-block p{margin-top:11px}}
 .masthead{transition:background .3s,opacity .6s var(--ease),transform .9s var(--ease)}
 .work-heading,.stage-foot{transition:opacity .6s var(--ease),transform .9s var(--ease)}
-.intro-playing .masthead{z-index:91}
+.intro-playing .masthead{opacity:0;transform:translateY(8px);pointer-events:none}
 .intro-playing .work-heading,.intro-playing .stage-foot{opacity:0;transform:translateY(14px)}
 body:has(#preview-dialog[open]) .masthead{opacity:0;pointer-events:none}
 .preview-top{animation:preview-copy-in .8s var(--ease) .35s both}

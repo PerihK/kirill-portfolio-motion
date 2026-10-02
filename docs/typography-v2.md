@@ -14,6 +14,6 @@ The full-screen entrance uses card-relative scene dimensions, including perspect
 
 Both masthead identity lines roll vertically, letter by letter, on pointer hover or keyboard focus. The SVG spark turns a quarter rotation. Echo letters are hidden from assistive technology, the link retains one descriptive accessible name, touch layouts remain still, and reduced-motion preferences disable the effect.
 
-The regular masthead remains visible above the entrance overlay, with identical typography and position before and after the animation. The duplicate tiny entrance identity is removed. The skip action sits at the lower right; interacting with the masthead ends the entrance and removes its temporary listeners.
+The entrance now shows only the moving cards. The regular masthead, project heading, caption and gallery controls remain hidden until the cards finish landing, then appear smoothly with the overlay's one-second crossfade. The duplicate entrance identity and skip button are removed. An initial pending state prevents a flash of interface before the entrance starts. Wheel, touch and keyboard input still dismiss the entrance; reduced-motion preferences and direct project/contact links bypass it.
 
 Sources: https://fonts.google.com/specimen/Oswald, https://fonts.google.com/specimen/Roboto, https://github.com/google/fonts/tree/main/ofl/oswald, https://github.com/google/fonts/tree/main/ofl/roboto.

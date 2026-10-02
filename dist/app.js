@@ -138,16 +138,16 @@ const initialProject=new URL(location.href).searchParams.get('project');if(initi
 
 // Depth-based entrance: a level stack settles into the gallery, without sideways rotation.
 async function intro(){
- if(reduced.matches||initialProject||location.hash==='#contact')return;
+ if(reduced.matches||initialProject||location.hash==='#contact'){document.body.classList.remove('intro-pending');return;}
  const overlay=$('#intro-screen'),deck=$('#intro-deck');
  const activeIndex=Math.round(target),order=projects.filter((_,i)=>i!==activeIndex).reverse();order.push(projects[activeIndex]);
- const frame=slides[activeIndex].querySelector('.showcase-card').getBoundingClientRect();if(frame.top<0||frame.bottom>innerHeight)return;
+ const frame=slides[activeIndex].querySelector('.showcase-card').getBoundingClientRect();if(frame.top<0||frame.bottom>innerHeight){document.body.classList.remove('intro-pending');return;}
  function align(){const r=slides[activeIndex].querySelector('.showcase-card').getBoundingClientRect();Object.assign(deck.style,{left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'});}
- align();deck.innerHTML=order.map(p=>'<div class="intro-card">'+cover(p)+'</div>').join('');loadImages(deck);overlay.style.backgroundColor=getComputedStyle(document.body).backgroundColor;overlay.hidden=false;document.body.classList.add('intro-playing');
+ align();deck.innerHTML=order.map(p=>'<div class="intro-card">'+cover(p)+'</div>').join('');loadImages(deck);overlay.style.backgroundColor=getComputedStyle(document.body).backgroundColor;overlay.hidden=false;document.body.classList.add('intro-playing');document.body.classList.remove('intro-pending');
  let finished=false;const animations=[],events=['wheel','touchstart','keydown'],entranceWidth=innerWidth;
  function resized(){if(innerWidth!==entranceWidth)finish();else align();}
- function finish(){if(finished)return;finished=true;animations.forEach(a=>a.cancel());overlay.hidden=true;deck.replaceChildren();document.body.classList.remove('intro-playing');events.forEach(e=>removeEventListener(e,finish));removeEventListener('resize',resized);reduced.removeEventListener('change',finish);$('#intro-skip').removeEventListener('click',finish);$('.masthead').removeEventListener('click',finish);}
- events.forEach(e=>addEventListener(e,finish,{passive:true,once:true}));addEventListener('resize',resized);reduced.addEventListener('change',finish);$('#intro-skip').addEventListener('click',finish);$('.masthead').addEventListener('click',finish,{once:true});
+ function finish(){if(finished)return;finished=true;animations.forEach(a=>a.cancel());overlay.hidden=true;deck.replaceChildren();document.body.classList.remove('intro-playing','intro-pending');events.forEach(e=>removeEventListener(e,finish));removeEventListener('resize',resized);reduced.removeEventListener('change',finish);}
+ events.forEach(e=>addEventListener(e,finish,{passive:true,once:true}));addEventListener('resize',resized);reduced.addEventListener('change',finish);
  await Promise.race([Promise.all([...deck.querySelectorAll('img')].map(im=>im.decode().catch(()=>{}))),new Promise(resolve=>setTimeout(resolve,500))]);if(finished)return;
  const cards=[...deck.children],ease='cubic-bezier(.785,.135,.15,.86)';
  // Use the actual card as the scene ruler. The gallery caps its width on large
