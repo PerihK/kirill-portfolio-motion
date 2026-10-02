@@ -146,8 +146,8 @@ async function intro(){
  align();deck.innerHTML=order.map(p=>'<div class="intro-card">'+cover(p)+'</div>').join('');loadImages(deck);overlay.style.backgroundColor=getComputedStyle(document.body).backgroundColor;overlay.hidden=false;document.body.classList.add('intro-playing');
  let finished=false;const animations=[],events=['wheel','touchstart','keydown'],entranceWidth=innerWidth;
  function resized(){if(innerWidth!==entranceWidth)finish();else align();}
- function finish(){if(finished)return;finished=true;animations.forEach(a=>a.cancel());overlay.hidden=true;deck.replaceChildren();document.body.classList.remove('intro-playing');events.forEach(e=>removeEventListener(e,finish));removeEventListener('resize',resized);reduced.removeEventListener('change',finish);$('#intro-skip').removeEventListener('click',finish);}
- events.forEach(e=>addEventListener(e,finish,{passive:true,once:true}));addEventListener('resize',resized);reduced.addEventListener('change',finish);$('#intro-skip').addEventListener('click',finish);
+ function finish(){if(finished)return;finished=true;animations.forEach(a=>a.cancel());overlay.hidden=true;deck.replaceChildren();document.body.classList.remove('intro-playing');events.forEach(e=>removeEventListener(e,finish));removeEventListener('resize',resized);reduced.removeEventListener('change',finish);$('#intro-skip').removeEventListener('click',finish);$('.masthead').removeEventListener('click',finish);}
+ events.forEach(e=>addEventListener(e,finish,{passive:true,once:true}));addEventListener('resize',resized);reduced.addEventListener('change',finish);$('#intro-skip').addEventListener('click',finish);$('.masthead').addEventListener('click',finish,{once:true});
  await Promise.race([Promise.all([...deck.querySelectorAll('img')].map(im=>im.decode().catch(()=>{}))),new Promise(resolve=>setTimeout(resolve,500))]);if(finished)return;
  const cards=[...deck.children],ease='cubic-bezier(.785,.135,.15,.86)';
  // Use the actual card as the scene ruler. The gallery caps its width on large
@@ -182,14 +182,23 @@ async function intro(){
 requestAnimationFrame(()=>requestAnimationFrame(intro));
 
 const form=$('#brief-form');form.noValidate=true;let step=0;
+function updateBriefTelegram(){
+ const text=$('#brief-result').value;
+ $('#telegram-brief').href=`https://t.me/KiriwPerih?text=${encodeURIComponent(text)}`;
+}
+$('#brief-result').addEventListener('input',updateBriefTelegram);
+$('#telegram-brief').addEventListener('click',e=>{
+ if(!$('#brief-result').value.trim()){e.preventDefault();$('#copy-status').textContent='Добавьте описание задачи перед переходом в Telegram.';$('#brief-result').focus();return;}
+ updateBriefTelegram();
+});
 function renderStep(){form.querySelectorAll('.brief-step').forEach((s,i)=>s.hidden=i!==step);document.querySelectorAll('.brief-progress li').forEach((li,i)=>{li.classList.toggle('current',i===step);li.classList.toggle('complete',i<step);});$('#brief-back').hidden=step===0;$('#brief-back').textContent=step===4?'Изменить ответы':'Назад';$('#brief-next').hidden=step===4;$('#brief-next').textContent=step===3?'Собрать описание':'Дальше +';$('#form-error').textContent='';}
 document.querySelectorAll('[data-brief]').forEach(b=>b.addEventListener('click',()=>{renderStep();showDialog(briefDialog);}));
 function validateStep(){const fields=[...form.querySelector(`[data-step="${step}"]`).querySelectorAll('[required]')];let invalid=fields.find(f=>!f.checkValidity());if(step===0&&!$('#business').value.trim())invalid=$('#business');if(invalid){$('#form-error').textContent=step===0?'Напишите пару слов о бизнесе или идее.':'Выберите один из вариантов.';invalid.focus();return false;}return true;}
 function makeBrief(){const d=new FormData(form);const business=d.get('business').trim();const site=d.get('site').trim();const materials=d.getAll('materials');const extra=d.get('extra').trim();
- const lines=['Кирилл, здравствуйте! Хочу обсудить сайт.','',`Бизнес / идея: ${business}`,`Формат: ${d.get('format')}`,`Основная задача: ${d.get('goal')}`,`Материалы: ${materials.length?materials.join(', '):'обсудим, что потребуется подготовить'}`,`Желаемый срок: ${d.get('timing')}`];if(site)lines.push(`Текущий сайт: ${site}`);if(extra)lines.push('',`Дополнительно: ${extra}`);lines.push('','Подскажите, с чего лучше начать и какой объём работы вы видите.');$('#brief-result').value=lines.join('\n');
+ const lines=['Кирилл, здравствуйте! Хочу обсудить сайт.','',`Бизнес / идея: ${business}`,`Формат: ${d.get('format')}`,`Основная задача: ${d.get('goal')}`,`Материалы: ${materials.length?materials.join(', '):'обсудим, что потребуется подготовить'}`,`Желаемый срок: ${d.get('timing')}`];if(site)lines.push(`Текущий сайт: ${site}`);if(extra)lines.push('',`Дополнительно: ${extra}`);lines.push('','Подскажите, с чего лучше начать и какой объём работы вы видите.');$('#brief-result').value=lines.join('\n');updateBriefTelegram();
  const goal=d.get('goal');const recommendations={'Рассчитать стоимость':'На старте обсудим правила расчёта и то, что посетителю нужно знать до заявки.','Записаться на услугу':'На старте обсудим услуги и способ записи: мессенджер или подключённая система.','Выбрать товар или услугу':'На старте обсудим структуру каталога, параметры выбора и следующий шаг после выбора.','Познакомиться с компанией и работами':'На старте обсудим содержание и проекты, которые лучше всего представят вашу компанию.'};$('#brief-recommendation').textContent=recommendations[goal]||'На старте обсудим предложение, содержание и удобный способ обращения.';$('#copy-status').textContent='';
 }
 form.addEventListener('submit',e=>{e.preventDefault();if(step>=4)return;if(!validateStep())return;if(step===3)makeBrief();step++;renderStep();briefDialog.scrollTop=0;const heading=form.querySelector(`[data-step="${step}"] h3`);heading.tabIndex=-1;heading.focus({preventScroll:true});});
 $('#brief-back').addEventListener('click',()=>{step=Math.max(0,step-1);renderStep();briefDialog.scrollTop=0;});
-$('#copy-brief').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#brief-result').value);$('#copy-status').textContent='Скопировано. Теперь откройте мессенджер и вставьте описание.';}catch{$('#brief-result').focus();$('#brief-result').select();$('#copy-status').textContent='Выделили текст. Скопируйте его вручную или скачайте файл.';}});
+$('#copy-brief').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#brief-result').value);$('#copy-status').textContent='Описание скопировано.';}catch{$('#brief-result').focus();$('#brief-result').select();$('#copy-status').textContent='Выделили текст. Скопируйте его вручную или скачайте файл.';}});
 $('#download-brief').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob(['\uFEFF'+$('#brief-result').value],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Задача-на-сайт.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);$('#copy-status').textContent='Описание подготовлено для скачивания. Бриф не отправлен.';});

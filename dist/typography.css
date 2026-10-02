@@ -1,5 +1,6 @@
 /* Cyrillic display typography and larger gallery proportions. */
 :root{--font-text:Roboto,Arial,sans-serif;--font-display:Oswald,'Arial Narrow',sans-serif;--card-radius:28px;font-family:var(--font-text)}
+.intro-top{inset:auto 5% 24px auto;padding:0}
 .identity strong{font-family:var(--font-display);font-size:24px;font-weight:400;letter-spacing:0;line-height:1.2}
 .identity>span{font-family:var(--font-display);font-size:14px;letter-spacing:.025em;line-height:1.45}
 .identity strong>.identity-line{color:inherit;margin:0}
