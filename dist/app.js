@@ -139,7 +139,7 @@ function openPreview(id,changeUrl=true,source=null){
  const rect=source?.getBoundingClientRect(),valid=rect&&rect.width>0&&rect.height>0&&rect.top<innerHeight&&rect.bottom>0;
  previewScene={source:valid?source:null,width:valid?rect.width:innerWidth,height:valid?rect.height:innerHeight,radius:valid?getComputedStyle(source).borderRadius:'0px'};
  const scene=previewScene;Object.assign(backdrop.style,{width:scene.width+'px',height:scene.height+'px',transform:fullPreviewPose(scene),borderRadius:'0px'});
- showDialog(previewDialog);document.body.classList.add('preview-open');
+ previewDialog.style.width=innerWidth+'px';showDialog(previewDialog);document.body.classList.add('preview-open');
  if(!reduced.matches){
   if(valid)previewAnimations.push(backdrop.animate([
    {offset:0,transform:scenePose(rect.left,rect.top),borderRadius:scene.radius,easing:previewEase},
@@ -177,7 +177,7 @@ async function closeDialog(dialog,changeUrl=true){
  if(isPreview){cancelPreviewAnimations();previewScene=null;document.body.classList.remove('preview-open');phoneObserver?.disconnect();phoneObserver=null;$('#preview-mobile').replaceChildren();if(changeUrl){const u=new URL(location.href);u.searchParams.delete('project');history.replaceState(null,'',u);}}
  if(!document.querySelector('dialog[open]'))document.body.classList.remove('modal-open');const origin=focusOrigins.get(dialog);if(origin?.isConnected)origin.focus({preventScroll:true});
 }
-addEventListener('resize',()=>{if(!previewDialog.open||previewDialog.dataset.closing||!previewScene)return;cancelPreviewAnimations();$('#preview-backdrop').style.transform=fullPreviewPose(previewScene);});
+addEventListener('resize',()=>{if(!previewDialog.open||previewDialog.dataset.closing||!previewScene)return;cancelPreviewAnimations();previewDialog.style.width=innerWidth+'px';$('#preview-backdrop').style.transform=fullPreviewPose(previewScene);});
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeDialog(document.getElementById(b.dataset.close))));
 document.querySelectorAll('dialog').forEach(d=>d.addEventListener('cancel',e=>{e.preventDefault();closeDialog(d);}));
 function phoneMarkup(p){if(p.id==='yasno')return `<div class="real-phone"><div class="mobile-stage" id="mobile-stage"><div class="mobile-artboard" id="mobile-artboard"><img class="phone-poster" src="images/yasno-phone.png" alt="ЯСНО — живой сайт в телефоне" width="1448" height="1086"><span class="poster-number-cover" aria-hidden="true"></span><div class="phone-cutout"><div class="phone-glass"><div class="phone-screen"><img class="phone-fallback" src="images/yasno-mobile.webp" alt="Мобильная версия ЯСНО" width="414" height="882"><iframe src="demos/yasno/?embedded=1" title="Мобильный сайт ЯСНО — прокрутка и калькулятор уборки"></iframe></div></div></div></div></div></div><p>Живой сайт — листайте и попробуйте расчёт.</p>`;return `<div class="preview-handset"><span class="handset-speaker" aria-hidden="true"></span><div class="handset-viewport" tabindex="0" aria-label="Мобильное превью ${p.name}, можно прокручивать"><img src="images/${p.id}-mobile.webp" alt="Актуальный мобильный экран сайта ${p.name}" width="375" height="690"></div></div><p>Мобильный экран. Полный сайт — по кнопке ниже.</p>`;}
