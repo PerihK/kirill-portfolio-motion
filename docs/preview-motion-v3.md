@@ -7,3 +7,8 @@ The flight retains the source image's crop and aspect ratio. Closing reads the c
 Each project has a more distinct gallery palette. The fullscreen image uses a darker tint derived from that project's palette, behind white text. Actual desktop screenshots appear below the introduction: first screen plus a project-specific interactive section. They are captured from the local demo pages with embedded mode, not fabricated interfaces; the screenshot UI content must be reviewed before release. PNG QA captures remain ignored. The shipped WebP files in `dist/images/project-screens` load lazily and are not requested by the main gallery.
 
 Reference: https://johngearhart.me/ — observed centering, camera approach, reverse return, project palette and screenshot presentation. Own typography, copy, images and implementation remain in use.
+
+
+Palette revision: LESNO uses pale lichen (#c8ceba), LINIYA neutral stone (#c9c5bc), MILE warm paper (#e0d5bf), and HVOST soft oat milk (#e8dccb). YASNO, TIHO, PLAN and STEBEL retain their approved colors. LESNO also supplies the entrance background.
+
+Duplicate-card fix: slides receive inline visibility from the gallery renderer and can override inherited visibility:hidden. The preview now hides the gallery through parent opacity:0, which composites every slide away immediately, and restores the layer only after the return flight finishes. Desktop and mobile opening / early closing were checked.
