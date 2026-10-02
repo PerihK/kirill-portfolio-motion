@@ -126,7 +126,8 @@ function showDialog(dialog){if(dialog.open)return;if(!document.body.classList.co
 const previewEase='cubic-bezier(.65,0,.2,1)';
 function cancelPreviewAnimations(){previewAnimations.forEach(a=>a.cancel());previewAnimations=[];}
 function scenePose(x,y,scale=1){return `translate3d(${x}px,${y}px,0) scale(${scale})`;}
-function fullPreviewPose(scene){const scale=Math.max(innerWidth/scene.width,innerHeight/scene.height);return scenePose((innerWidth-scene.width*scale)/2,(innerHeight-scene.height*scale)/2,scale);}
+// Keep the gallery card's axis: the page excludes the scrollbar, the viewport does not.
+function fullPreviewPose(scene){const centerX=innerWidth*scene.centerRatio;const scale=Math.max(2*Math.max(centerX,innerWidth-centerX)/scene.width,innerHeight/scene.height);return scenePose(centerX-scene.width*scale/2,(innerHeight-scene.height*scale)/2,scale);}
 function openPreview(id,changeUrl=true,source=null){
  const p=projects.find(p=>p.id===id);if(!p)return;
  closeTickets.delete(previewDialog);cancelPreviewAnimations();delete previewDialog.dataset.closing;previewDialog.classList.remove('is-closing');phoneObserver?.disconnect();currentProject=p;
@@ -137,13 +138,13 @@ function openPreview(id,changeUrl=true,source=null){
  previewDialog.style.setProperty('--preview-tone',rgb(p.color).map(c=>Math.round(c*.32)).join(' '));
  const backdrop=$('#preview-backdrop');backdrop.innerHTML=cover(p,true);
  const rect=source?.getBoundingClientRect(),valid=rect&&rect.width>0&&rect.height>0&&rect.top<innerHeight&&rect.bottom>0;
- previewScene={source:valid?source:null,width:valid?rect.width:innerWidth,height:valid?rect.height:innerHeight,radius:valid?getComputedStyle(source).borderRadius:'0px'};
+ previewScene={source:valid?source:null,width:valid?rect.width:innerWidth,height:valid?rect.height:innerHeight,radius:valid?getComputedStyle(source).borderRadius:'0px',gallery:valid&&source.classList.contains('showcase-card'),centerRatio:valid&&source.classList.contains('showcase-card')?(rect.left+rect.width/2)/innerWidth:.5};
  const scene=previewScene;Object.assign(backdrop.style,{width:scene.width+'px',height:scene.height+'px',transform:fullPreviewPose(scene),borderRadius:'0px'});
  previewDialog.style.width=innerWidth+'px';showDialog(previewDialog);document.body.classList.add('preview-open');
  if(!reduced.matches){
   if(valid)previewAnimations.push(backdrop.animate([
    {offset:0,transform:scenePose(rect.left,rect.top),borderRadius:scene.radius,easing:previewEase},
-   {offset:.28,transform:scenePose((innerWidth-scene.width)/2,(innerHeight-scene.height)/2),borderRadius:scene.radius,easing:previewEase},
+   {offset:.28,transform:scenePose(scene.centerRatio*innerWidth-scene.width/2,(innerHeight-scene.height)/2),borderRadius:scene.radius,easing:previewEase},
    {offset:1,transform:fullPreviewPose(scene),borderRadius:'0px'}
   ],{duration:1700,fill:'backwards'}));
   previewAnimations.push($('.preview-scrim').animate([{opacity:0,offset:0},{opacity:0,offset:.22},{opacity:1,offset:1}],{duration:1700,easing:'ease-in-out',fill:'backwards'}));
@@ -164,7 +165,7 @@ async function closeDialog(dialog,changeUrl=true){
    const scene=previewScene,rect=scene?.source?.getBoundingClientRect(),valid=rect&&rect.width>0&&rect.top<innerHeight&&rect.bottom>0&&Math.abs(rect.width/rect.height-scene.width/scene.height)<.05;
    if(valid){const scale=rect.width/scene.width;animations.push(backdrop.animate([
     {offset:0,transform:currentTransform,borderRadius:currentRadius,easing:previewEase},
-    {offset:.72,transform:scenePose((innerWidth-rect.width)/2,(innerHeight-rect.height)/2,scale),borderRadius:scene.radius,easing:previewEase},
+    {offset:.72,transform:scenePose(scene.gallery?rect.left:(innerWidth-rect.width)/2,(innerHeight-rect.height)/2,scale),borderRadius:scene.radius,easing:previewEase},
     {offset:1,transform:scenePose(rect.left,rect.top,scale),borderRadius:scene.radius}
    ],{duration:1500,fill:'forwards'}));}
    else animations.push(backdrop.animate([{transform:currentTransform,opacity:1},{transform:currentTransform,opacity:0}],{duration:850,easing:'ease-in-out',fill:'forwards'}));

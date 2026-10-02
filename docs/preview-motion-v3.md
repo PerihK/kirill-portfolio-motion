@@ -12,3 +12,8 @@ Reference: https://johngearhart.me/ — observed centering, camera approach, rev
 Palette revision: LESNO uses pale lichen (#c8ceba), LINIYA neutral stone (#c9c5bc), MILE warm paper (#e0d5bf), and HVOST soft oat milk (#e8dccb). YASNO, TIHO, PLAN and STEBEL retain their approved colors. LESNO also supplies the entrance background.
 
 Duplicate-card fix: slides receive inline visibility from the gallery renderer and can override inherited visibility:hidden. The preview now hides the gallery through parent opacity:0, which composites every slide away immediately, and restores the layer only after the return flight finishes. Desktop and mobile opening / early closing were checked.
+
+
+Axis correction: the gallery card is centered in the page area, which excludes the desktop scrollbar. Preview flight now keeps that actual horizontal axis during lift and zoom; it no longer shifts to innerWidth / 2. Fullscreen cover scaling accounts for both distances from the axis to the viewport edges. The reverse lift uses the current source left coordinate. Catalog cards retain their deliberate move toward the viewport center.
+
+Browser geometry verification: at 1920 × 1080 the card and flight stayed at X = 952.5 px through lift, fullscreen zoom and return (less than 0.005 px rounding). At 2560 × 1440 the lift stayed at X = 1272.5 px. Both zoom axes use the same scale and the background covers both viewport edges.
