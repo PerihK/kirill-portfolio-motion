@@ -1,6 +1,9 @@
-qa/
-.openai/
-*.zip
-*.tar.gz
-node_modules/
+.git/
+.vercel/
 .env*
+node_modules/
+qa/
+qa-astra/
+.openai/
+*.tar.gz
+*.zip

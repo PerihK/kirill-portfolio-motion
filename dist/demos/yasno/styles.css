@@ -7,3 +7,8 @@
 /* Keep interactive labels readable on narrow screens. */
 .segmented span{font-size:14px}.header-cta{font-size:14px}@media(max-width:560px){.header-cta{font-size:14px;padding:12px;gap:12px}.header-cta>span{display:none}}
 
+
+/* The calculator copy must shrink inside its grid on small phones. */
+.calculator-intro{min-width:0}.calculator-intro h2{overflow-wrap:break-word}@media(max-width:360px){.calculator-intro h2{font-size:34px;letter-spacing:-.04em;line-height:1.15}}
+
+.calculator-card{min-width:0}@media(max-width:560px){.calculator-layout{grid-template-columns:minmax(0,1fr)}}@media(max-width:380px){.segmented{flex-direction:column}.segmented span{text-align:left;font-size:14px;padding:12px}}

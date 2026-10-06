@@ -3,10 +3,11 @@ const areaRange = document.querySelector('#area-range');
 const capacityOutput = document.querySelector('#capacity');
 const explanation = document.querySelector('#calc-explain');
 
-function updateCalculator(source) {
+function updateCalculator(source, commit=false) {
   let area = Number(source.value);
-  if (!Number.isFinite(area)) area = 24;
-  area = Math.min(100, Math.max(8, area));
+  if (!commit && (source.value.trim() === '' || !Number.isFinite(area) || area < 8 || area > 100)) { explanation.textContent = 'Укажите площадь от 8 до 100 м².'; return; }
+  if (!source.value.trim() || !Number.isFinite(area)) area = 24;
+  area = Math.round(Math.min(100, Math.max(8, area))*10)/10;
   areaInput.value = String(area);
   areaRange.value = String(area);
   const sunny = document.querySelector('input[name="sun"]:checked')?.value === 'sunny';
@@ -18,6 +19,7 @@ function updateCalculator(source) {
 }
 
 areaInput.addEventListener('input', () => updateCalculator(areaInput));
+areaInput.addEventListener('change', () => updateCalculator(areaInput,true));
 areaRange.addEventListener('input', () => updateCalculator(areaRange));
 document.querySelectorAll('input[name="sun"]').forEach(input => input.addEventListener('change', () => updateCalculator(areaInput)));
 updateCalculator(areaInput);
@@ -28,10 +30,12 @@ const models = [
   { kicker: 'ТИХО / 50', title: 'Для пространства\nс запасом задачи.', text: 'Класс повышенной мощности для больших комнат. Здесь особенно важны окна, высота потолка и фактическая тепловая нагрузка.', power: '5,0 кВт', area: 'до 50 м²', image: 'assets/ac-unit-50.webp', alt: 'Графитовый угловатый настенный блок модели ТИХО 50', caption: 'ГРАФИТОВЫЙ АКЦЕНТ В ИНТЕРЬЕРЕ' }
 ];
 
+let selectedModelIndex=0;
 const modelTabs = [...document.querySelectorAll('.model-tab')];
 models.forEach(model => { const preload = new Image(); preload.src = model.image; });
 function selectModel(index) {
   const model = models[index];
+  selectedModelIndex=index;
   document.querySelector('#model-kicker').textContent = model.kicker;
   document.querySelector('#model-title').textContent = model.title;
   document.querySelector('#model-text').textContent = model.text;
@@ -49,6 +53,7 @@ function selectModel(index) {
     tab.setAttribute('aria-selected', String(tabIndex === index));
     tab.tabIndex = tabIndex === index ? 0 : -1;
   });
+  document.dispatchEvent(new Event('tiho:selection'));
 }
 modelTabs.forEach((tab, index) => {
   tab.addEventListener('click', () => selectModel(index));
@@ -61,10 +66,5 @@ modelTabs.forEach((tab, index) => {
   });
 });
 
-const requestForm = document.querySelector('#request-form');
-requestForm.addEventListener('submit', event => {
-  event.preventDefault();
-  const name = requestForm.elements.name.value.trim();
-  const request = requestForm.elements.request.value;
-  document.querySelector('#form-status').textContent = `${name}, сценарий «${request}» готов. Это портфолио-макет: заявка не отправлена.`;
-});
+
+selectModel(0);

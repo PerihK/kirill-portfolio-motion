@@ -1,106 +1,21 @@
-const products = {
-  coral: { name: 'Тёплый привет', price: 3200, image: './images/bouquet-coral.png', description: 'Лёгкий букет для дня, которому хочется добавить цвета.' },
-  blue: { name: 'Синяя история', price: 4200, image: './images/bouquet-blue.png', description: 'Нежный букет для слов, которые хочется запомнить.' }
-};
-const formatPrice = value => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
-let occasion = 'just';
-let budget = '3500';
-let recommended = 'coral';
-let plan = 'twice';
-let bag = [];
-const bagDialog = document.querySelector('#bag-dialog');
-
-function setPressed(selector, selected) {
-  document.querySelectorAll(selector).forEach(button => {
-    const key = button.dataset.occasion ?? button.dataset.budget ?? button.dataset.plan;
-    button.setAttribute('aria-pressed', String(key === selected));
-  });
-}
-function updateRecommendation() {
-  recommended = budget === '3500' ? 'coral' : ['birthday','love'].includes(occasion) ? 'blue' : 'coral';
-  const product = products[recommended];
-  document.querySelector('#result-name').textContent = product.name;
-  document.querySelector('#result-description').textContent = product.description;
-  document.querySelector('#result-price').textContent = formatPrice(product.price);
-  document.querySelector('#result-image').style.backgroundImage = `url('${product.image}')`;
-}
-document.querySelectorAll('[data-occasion]').forEach(button => button.addEventListener('click', () => {
-  occasion = button.dataset.occasion;
-  setPressed('[data-occasion]', occasion);
-  updateRecommendation();
-}));
-document.querySelectorAll('[data-budget]').forEach(button => button.addEventListener('click', () => {
-  budget = button.dataset.budget;
-  setPressed('[data-budget]', budget);
-  updateRecommendation();
-}));
-
-function renderBag() {
-  const container = document.querySelector('#bag-items');
-  container.replaceChildren();
-  document.querySelector('#bag-count').textContent = String(bag.length);
-  document.querySelector('#bag-count').setAttribute('aria-label', `${bag.length} букетов`);
-  document.querySelector('#bag-controls').hidden = bag.length === 0;
-  document.querySelector('#order-message').hidden = true;
-  if (!bag.length) {
-    const empty = document.createElement('div');
-    empty.className = 'bag-empty';
-    empty.append('Пока здесь пусто. Выберите букет, который хочется подарить.');
-    const link = document.createElement('a'); link.href = '#catalog'; link.textContent = 'Посмотреть букеты ↗';
-    link.addEventListener('click', () => bagDialog.close());
-    empty.append(document.createElement('br'), link);
-    container.append(empty);
-    return;
-  }
-  bag.forEach((id, index) => {
-    const product = products[id];
-    const item = document.createElement('div'); item.className = 'bag-item';
-    const image = document.createElement('img'); image.src = product.image; image.alt = '';
-    const name = document.createElement('div');
-    const strong = document.createElement('strong'); strong.textContent = product.name;
-    const small = document.createElement('small'); small.textContent = 'Иллюстрированный букет';
-    name.append(strong, small);
-    const price = document.createElement('span'); price.textContent = formatPrice(product.price);
-    const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Убрать';
-    remove.setAttribute('aria-label', `Убрать «${product.name}»`);
-    remove.addEventListener('click', () => { bag.splice(index,1); renderBag(); });
-    item.append(image,name,price,remove); container.append(item);
-  });
-  document.querySelector('#bag-total').textContent = formatPrice(bag.reduce((sum,id) => sum + products[id].price, 0));
-}
-function addToBag(id) {
-  bag.push(id);
-  renderBag();
-  if (!bagDialog.open) bagDialog.showModal();
-}
-document.querySelector('#add-recommended').addEventListener('click', () => addToBag(recommended));
-document.querySelectorAll('[data-add]').forEach(button => button.addEventListener('click', () => addToBag(button.dataset.add)));
-document.querySelector('#open-bag').addEventListener('click', () => { renderBag(); bagDialog.showModal(); });
-document.querySelector('#clear-bag').addEventListener('click', () => { bag = []; renderBag(); });
-document.querySelector('#demo-order').addEventListener('click', () => {
-  const handoff = document.querySelector('input[name="handoff"]:checked').value;
-  const message = document.querySelector('#order-message');
-  message.textContent = `Это демонстрация. Заказ (${handoff === 'delivery' ? 'доставка' : 'самовывоз'}) не создан и оплата не требуется.`;
-  message.hidden = false;
-});
-
-const plans = {
-  twice: { detail: '2 букета в месяц', price: '5 600 ₽', copy: 'Два сезонных букета в месяц. Каждый раз — новая композиция по настроению сезона.' },
-  monthly: { detail: '1 букет в месяц', price: '3 200 ₽', copy: 'Один сезонный букет в месяц. Небольшой красивый ритуал для дома.' }
-};
-document.querySelectorAll('[data-plan]').forEach(button => button.addEventListener('click', () => {
-  plan = button.dataset.plan;
-  setPressed('[data-plan]', plan);
-  document.querySelector('#plan-detail').textContent = plans[plan].detail;
-  document.querySelector('#plan-price').firstChild.textContent = plans[plan].price;
-}));
-document.querySelector('#open-subscription').addEventListener('click', () => {
-  document.querySelector('#subscription-dialog-copy').textContent = plans[plan].copy;
-  document.querySelector('#subscription-dialog').showModal();
-});
-document.querySelector('#open-event').addEventListener('click', () => document.querySelector('#event-dialog').showModal());
-document.querySelectorAll('[data-close-dialog]').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
-document.querySelectorAll('dialog').forEach(dialog => dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); }));
-document.querySelectorAll('.mobile-nav nav a').forEach(link => link.addEventListener('click', () => { document.querySelector('.mobile-nav').open = false; }));
-updateRecommendation();
-renderBag();
+const products={coral:{name:'Тёплый привет',prices:[2200,3200,4800],image:'images/bouquet-coral.webp',copy:'Коралловый, розовый и немного солнца. Для радости без расписания.',composition:'Маки / тюльпаны / сезонная зелень'},blue:{name:'Синяя история',prices:[2900,4200,6200],image:'images/bouquet-blue.webp',copy:'Синий, молочный и светлые акценты. Для слов, которые хочется запомнить.',composition:'Дельфиниум / ромашки / сезонная зелень'}};
+const sizes=[{name:'S',title:'Маленький знак',stems:'9–11 стеблей'},{name:'M',title:'Самое то',stems:'15–17 стеблей'},{name:'L',title:'Большое чувство',stems:'23–25 стеблей'}];
+const formatPrice=v=>new Intl.NumberFormat('ru-RU').format(v)+' ₽';
+const q=s=>document.querySelector(s);
+let occasion='just',budget='3500',recommended={id:'coral',size:1},plan='twice',bag=[],selectedProduct='coral',selectedSize=1;
+const bagDialog=q('#bag-dialog'),productDialog=q('#product-dialog');
+try{const cached=JSON.parse(localStorage.getItem('stebel-bag-v2')||'[]');if(Array.isArray(cached))bag=cached.filter(a=>products[a.id]&&Number.isInteger(a.size)&&a.size>=0&&a.size<3&&Number.isInteger(a.qty)&&a.qty>0&&a.qty<=20&&typeof a.note==='string').slice(0,20).map(a=>({...a,note:a.note.slice(0,180)}));}catch{}
+function pressed(selector,value){document.querySelectorAll(selector).forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.occasion??b.dataset.budget??b.dataset.plan)===value)));}
+function recommend(){const id=['love','birthday'].includes(occasion)?'blue':'coral',cap=budget==='any'?Infinity:Number(budget),size=occasion==='birthday'&&products[id].prices[2]<=cap?2:products[id].prices[1]<=cap?1:0;recommended={id,size};const p=products[id];q('#result-name').textContent=p.name;q('#result-description').textContent=`${sizes[size].name} · ${sizes[size].title}. ${['love','birthday'].includes(occasion)?'Спокойная палитра для особенного человека.':'Тёплая палитра для простого, доброго жеста.'} ${budget==='any'?'':`Укладывается в ${formatPrice(cap)}.`}`;q('#result-price').textContent=formatPrice(p.prices[size]);q('#result-image').style.backgroundImage=`url('${p.image}')`;}
+document.querySelectorAll('[data-occasion]').forEach(b=>b.addEventListener('click',()=>{occasion=b.dataset.occasion;pressed('[data-occasion]',occasion);recommend();}));document.querySelectorAll('[data-budget]').forEach(b=>b.addEventListener('click',()=>{budget=b.dataset.budget;pressed('[data-budget]',budget);recommend();}));
+q('#add-recommended').addEventListener('click',()=>openProduct(recommended.id,recommended.size));document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>openProduct(b.dataset.add,1)));
+function openProduct(id,size){selectedProduct=id;selectedSize=size;q('#product-card-note').value='';q('#product-image').src=products[id].image;q('#product-image').alt=`Иллюстрация палитры «${products[id].name}»`;q('#product-title').textContent=products[id].name;q('#product-copy').textContent=products[id].copy;q('#product-composition').textContent=products[id].composition;updateProduct();productDialog.showModal();}
+function updateProduct(){document.querySelectorAll('[data-size]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.size)===selectedSize)));q('#product-price').textContent=formatPrice(products[selectedProduct].prices[selectedSize]);q('#product-size-detail').textContent=`${sizes[selectedSize].title} · ${sizes[selectedSize].stems}`;q('#product-image').dataset.size=sizes[selectedSize].name;}
+document.querySelectorAll('[data-size]').forEach(b=>b.addEventListener('click',()=>{selectedSize=Number(b.dataset.size);updateProduct();}));
+q('#product-add').addEventListener('click',()=>{const note=q('#product-card-note').value.trim().slice(0,180),existing=bag.find(a=>a.id===selectedProduct&&a.size===selectedSize&&a.note===note);if(existing&&existing.qty<20)existing.qty++;else if(!existing&&bag.length<20)bag.push({id:selectedProduct,size:selectedSize,note,qty:1});productDialog.close();renderBag();bagDialog.showModal();});
+function renderBag(){const box=q('#bag-items');box.replaceChildren();const count=bag.reduce((sum,a)=>sum+a.qty,0);q('#bag-count').textContent=count;q('#bag-count').setAttribute('aria-label',`${count} ${{one:'букет',few:'букета',many:'букетов',other:'букета'}[new Intl.PluralRules('ru').select(count)]}`);q('#bag-controls').hidden=!count;q('#order-message').hidden=true;try{localStorage.setItem('stebel-bag-v2',JSON.stringify(bag));}catch{}if(!count){const empty=document.createElement('p');empty.className='bag-empty';empty.textContent='Здесь появятся ваши цветы. Выберите палитру и размер — остальное уже проще.';box.append(empty);return;}
+bag.forEach((a,index)=>{const p=products[a.id],row=document.createElement('div');row.className='bag-item';const image=document.createElement('img');image.src=p.image;image.alt='';const info=document.createElement('div'),name=document.createElement('strong'),desc=document.createElement('small');name.textContent=`${p.name} / ${sizes[a.size].name}`;desc.textContent=a.note?'Открытка: '+a.note:sizes[a.size].title;info.append(name,desc);const qty=document.createElement('div');qty.className='bag-quantity';for(const[label,delta]of[['−',-1],['+',1]]){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-label',`${delta>0?'Добавить':'Убрать'} один букет ${p.name}`);b.disabled=delta>0&&a.qty>=20;b.addEventListener('click',()=>{a.qty+=delta;if(!a.qty)bag.splice(index,1);renderBag();});qty.append(b);if(delta<0){const n=document.createElement('span');n.textContent=a.qty;qty.append(n);}}const price=document.createElement('span');price.textContent=formatPrice(p.prices[a.size]*a.qty);const remove=document.createElement('button');remove.type='button';remove.className='bag-remove';remove.textContent='Убрать';remove.addEventListener('click',()=>{bag.splice(index,1);renderBag();});row.append(image,info,qty,price,remove);box.append(row);});q('#bag-total').textContent=formatPrice(bag.reduce((sum,a)=>sum+products[a.id].prices[a.size]*a.qty,0));}
+q('#open-bag').addEventListener('click',()=>{renderBag();bagDialog.showModal();});q('#clear-bag').addEventListener('click',()=>{bag=[];renderBag();});
+q('#demo-order').addEventListener('click',()=>{const handoff=q('[name=handoff]:checked').value==='pickup'?'Самовывоз':'Доставка',text=['СТЕБЕЛЬ / МОЙ ПОДБОР',...bag.map(a=>`${products[a.id].name} / ${sizes[a.size].name} × ${a.qty} · ${formatPrice(products[a.id].prices[a.size]*a.qty)}${a.note?'\nОткрытка: '+a.note:''}`),handoff,'Итого: '+q('#bag-total').textContent,'Концепт. Подбор сохранён, заказ не создан.'].join('\n\n'),url=URL.createObjectURL(new Blob(['\uFEFF'+text],{type:'text/plain;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download='Мой-букет.txt';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);q('#order-message').hidden=false;q('#order-message').textContent='Подбор готов к сохранению. Заказ и доставка не оформлены.';});
+document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{plan=b.dataset.plan;pressed('[data-plan]',plan);q('#plan-detail').textContent=plan==='twice'?'Два сезонных букета каждый месяц.':'Один сезонный букет каждый месяц.';q('#plan-price').firstChild.textContent=formatPrice(plan==='twice'?5600:3200)+' ';}));q('#open-subscription').addEventListener('click',()=>{q('#subscription-dialog-copy').textContent=plan==='twice'?'Два букета в месяц · 5 600 ₽. Сезонная палитра, которую выбираете вы.':'Один букет в месяц · 3 200 ₽. Небольшой цветочный ритуал для дома.';q('#subscription-dialog').showModal();});q('#open-event').addEventListener('click',()=>q('#event-dialog').showModal());
+document.querySelectorAll('[data-close-dialog]').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target!==d)return;const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}));document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>q('.mobile-nav').removeAttribute('open')));recommend();renderBag();

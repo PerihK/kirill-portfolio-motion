@@ -1,19 +1,36 @@
 # Kirill Motion
 
-An independent experimental portfolio for Kirill Perikh. The original remains at https://kirill-portfolio-black.vercel.app/.
+Основной проект портфолио — эта папка. Публикация: https://kirill-portfolio-motion.vercel.app/. Исходное портфолио `kirill-portfolio` — отдельный проект.
 
-Eight projects form a full-screen gallery with individually composed covers. Native page scrolling controls card transforms, title transitions and the shared background. An interruptible entrance passes all eight covers across the screen on each page load. Thumbnail buttons jump to any project.
+В главной подборке четыре работы: **NIVAL → ЛЕСНО → ТИХО → ПЛАН**. Остальные пять сохранены в каталоге. Обложки — чистые изображения; интерфейс и объяснения решений находятся в кейсе. Кнопка «Открыть сайт» ведёт на самостоятельное адаптивное демо. Уменьшенный телефон с iframe удалён по запросу пользователя.
 
-Selecting a cover opens a slowly expanding project preview with a dimmed visual, a short description and a link to the demo in a new tab. Each project has an optional mobile view. Seven use lightweight screenshots in a scrollable handset; YASNO retains its live phone and calculator, loaded only when requested. STEBEL appears as a regular project.
+## Основные файлы
 
-No animation framework or WebGL runtime is required. Motion respects prefers-reduced-motion. The eight optimized cover assets total about 1.1 MB; full mobile screenshots and the live phone load on demand. Fonts, demos and images are local files.
+- `dist/index.html` — структура, авторское позиционирование, контакты.
+- `dist/app.js` — галерея, данные девяти проектов, четыре основных кейса, диалоги, мобильное превью и бриф.
+- `dist/styles.css`, `typography.css`, `preview-motion.css`, `curation.css`, `polish.css` и `fonts/fonts.css` — редактируемые стили. `dist/bundle.css` собирается из них; вручную его не редактировать.
+- `dist/images/covers` — обложки без интерфейса, включая версии 800 и 1400 px.
+- `dist/images/project-screens` — настоящие экраны для кейсов.
+- `dist/demos` — опубликованные демо. Изменения в исходниках сначала скопировать командой ниже.
 
-The previous live-demo version is preserved in the Git tag `backup-motion-live-sites-2026-10-01`.
+## Обновление
 
-## Development
+Исходники расположены рядом: `lesno-landscape`, `tiho-climate`, `nival-residences`, `plan-development`. ЛЕСНО редактируется в `app`; остальные три — в своих `dist`.
 
-Run node serve.mjs and open http://127.0.0.1:4188/.
+1. После изменений ЛЕСНО выполнить `npm run build` и `npx tsc --noEmit` в `lesno-landscape`.
+2. В этой папке выполнить `node prepare-demos.mjs`, затем `node prepare-styles.mjs`.
+3. `node --check dist/app.js` и `node check.mjs` проверяют скрипт, ссылки, шрифты и изображения.
+4. `node serve.mjs` — локальное портфолио на http://127.0.0.1:4188/.
+5. Публикация только в Vercel `kiriw1/kirill-portfolio-motion`: `vercel deploy --prod --yes --scope kiriw1`.
 
-Before publishing, run node --check dist/app.js and node check.mjs. Deploy dist using vercel.json to the separate kiriw1/kirill-portfolio-motion project. Never deploy this repository to the original portfolio project.
+Не копировать этот проект поверх `kirill-portfolio`. Отдельный NIVAL публикуется из своей папки в `kiriw1/nival-residences`.
 
-Telegram: https://t.me/KiriwPerih
+ЛЕСНО: схема сада и сезоны, три проекта с подробностями, связь выбора с заданием, валидация, редактирование и TXT. ТИХО: расчёт, положение блока, подбор системы. NIVAL: сцены, три дома и планы. ПЛАН: связанные фильтры, сравнение, избранное и расчёт для выбранной квартиры.
+
+Вступление со стопкой карточек показывается при каждом обновлении галереи, включая телефоны. Его скорость — ×1,25 от исходной: около 4,88 секунды, пролёт 1600 мс со смещением карточек до 800 мс, выравнивание и посадка по 800 мс, плавное исчезновение 800 мс. Коэффициент задаётся `introSpeed` внутри `intro()`. Перелистывание работ использует обычную плавную прокрутку браузера и исходное сглаживание 150 мс; искусственный переход 1500 мс удалён. Переход из карточки в кейс — 950 мс, обратный — 700 мс; прямые ссылки открывают кейс сразу. Фон кейса сохраняет цвет проекта с небольшим затемнением и тёмным читаемым текстом. `prefers-reduced-motion` поддерживается. Шрифты и фотографии локальные; оригиналы фотографий NIVAL сохранены. `node check-gallery.mjs` проверяет округление последней позиции, обратное и непрерывное движение, обычную прокрутку и уменьшение движения.
+
+История и проверка: `ASTRA-CHANGES.md` и `POLISH-REPORT.md`. Детальные отчёты Lighthouse и снимки — в локальной игнорируемой `qa-astra`, они не публикуются.
+
+Кейсы дополнены экраном интерфейса в первом блоке, единой сеткой разбора и переходом к следующей работе (все 9 концептов). Редакционные стили находятся в конце `dist/polish.css`; после правки пересобрать `bundle.css` через `node prepare-styles.mjs`.
+
+Обновление 6 октября: в исходном `tiho-climate/dist` добавлены `refinement.css` и `refinement.js`; форма собирает личное задание. Изменения исходников демо переносятся через `node prepare-demos.mjs`. Встроенный телефон в кейсах больше не используется.
