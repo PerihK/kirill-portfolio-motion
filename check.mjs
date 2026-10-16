@@ -11,7 +11,7 @@ for(const id of projectIds){
  if(!js.includes(`id:'${id}'`))errors.push('Missing project '+id);
  for(const asset of [...(ids.includes(id)?[`images/${id}.webp`,`images/${id}-mobile.webp`]:[]),`images/covers/${id}.webp`,...['800','1400'].map(size=>`images/covers/${id}-optimized-${size}.webp`),...['hero','detail'].map(kind=>`images/project-screens/${id}-${kind}.webp`)])await stat(resolve(root,asset));
 }
-const css=(await Promise.all(['bundle.css','commercial.css','commercial-v2.css'].map(file=>readFile(resolve(root,file),'utf8')))).join('\n');
+const css=(await Promise.all(['bundle.css','commercial.css','commercial-v2.css','showcase.css'].map(file=>readFile(resolve(root,file),'utf8')))).join('\n');
 for(const [,raw] of css.matchAll(/url\(\s*["']?([^)'"\s]+)["']?\s*\)/g)){
  if(/^(?:data:|https?:|#)/.test(raw))continue;
  try{await stat(resolve(root,raw.split(/[?#]/)[0]));count++;}catch{errors.push('bundle.css: '+raw);}

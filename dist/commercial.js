@@ -77,24 +77,8 @@
     catch{$('#brief-message').focus();$('#brief-message').select();$('#brief-status').textContent='Выделил текст. Скопируйте его вручную.';}
   });
 
-  const chat=$('#chat-log'),choices=$('#chat-choices'),lead=$('#lead-preview');
-  let demo={};
-  function message(text,user=false){const node=document.createElement('div');node.className='message'+(user?' user':'');const label=document.createElement('small');label.textContent=user?'ВЫ':'ПЕРВЫЙ КОНТАКТ';node.append(label,document.createTextNode(text));chat.append(node);chat.scrollTop=chat.scrollHeight;}
-  function options(items,handler){choices.replaceChildren();for(const [label,value] of items){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>{message(label,true);handler(value,label);});choices.append(b);}}
-  function reset(){demo={};chat.replaceChildren();lead.hidden=true;lead.replaceChildren();message('Здравствуйте! Помогу выбрать формат сайта. Попробуйте пройти путь клиента — от первого вопроса до готовой задачи. Что хотите сделать?');options([['Нужен сайт для бизнеса','site'],['Хочу навести порядок в заявках','crm'],['Сколько стоит сайт?','price']],start);}
-  function start(value){
-    if(value==='price'){message('Лендинг — от 15 000 ₽, сайт для бизнеса — от 35 000 ₽, веб-сервис с CRM — от 60 000 ₽. Точная смета зависит от задачи. Что для вас актуальнее?');options([['Сайт с услугами','site'],['Сервис для команды','crm']],start);return;}
-    demo.kind=value;message(value==='crm'?'Понятно. Что сейчас сложнее всего в работе с заявками?':'Хорошо. Какое главное действие должен сделать посетитель?');
-    options(value==='crm'?[['Не терять обращения','Не терять обращения'],['Планировать работу команды','Планировать работу команды'],['Собирать заказы с сайта','Собирать заказы с сайта']]:[['Оставить заявку','Оставить заявку'],['Выбрать услугу или товар','Выбрать услугу или товар'],['Рассчитать стоимость','Рассчитать стоимость']],chooseGoal);
-  }
-  function chooseGoal(goal){demo.goal=goal;message(demo.kind==='crm'?'Для такой задачи можно связать заказ, статус и ответственного в одном интерфейсе. Когда хотите запуститься?':'Тогда начнём с понятного предложения и короткого пути к этому действию. Когда хотите запуститься?');options([['В течение месяца','В течение месяца'],['Через 1–2 месяца','Через 1–2 месяца'],['Пока изучаю варианты','Пока изучаю варианты']],finish);}
-  function finish(timing){
-    demo.timing=timing;demo.format=demo.kind==='crm'?'Веб-сервис / CRM':demo.goal==='Оставить заявку'?'Лендинг':'Сайт для бизнеса';
-    const price=demo.format==='Лендинг'?'15 000':demo.kind==='crm'?'60 000':'35 000';
-    message(`Отправная точка — ${demo.format.toLowerCase()}, от ${price} ₽. Я собрал задачу ниже. В рабочем проекте такой контекст можно передавать менеджеру вместе с контактом клиента.`);
-    choices.replaceChildren();lead.hidden=false;
-    lead.innerHTML=`<div class="lead-card"><strong>ПРИМЕР ПОДГОТОВЛЕННОЙ ЗАДАЧИ</strong><p>Формат: ${escape(demo.format)}<br>Цель: ${escape(demo.goal)}<br>Запуск: ${escape(demo.timing)}</p></div><button class="button button-dark" id="use-demo-brief">Обсудить эту задачу с Кириллом ${arrow}</button>`;
-    $('#use-demo-brief').addEventListener('click',()=>{openBrief(demo.format,`Цель: ${demo.goal}. `);if([...$('#brief-time').options].some(o=>o.value===demo.timing))$('#brief-time').value=demo.timing;else $('#brief-time').value='Сроки обсудим';});
-  }
-  $('#reset-agent').addEventListener('click',reset);reset();
+  document.addEventListener('portfolio:brief',e=>{
+    openBrief(e.detail.format,e.detail.task);
+    if(e.detail.timing && [...$('#brief-time').options].some(o=>o.value===e.detail.timing))$('#brief-time').value=e.detail.timing;
+  });
 })();
