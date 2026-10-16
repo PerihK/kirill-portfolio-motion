@@ -33,6 +33,7 @@
   function selectPeriod(key,animate=true){
     if(!periods[key])return;
     cancelAnimationFrame(counterFrame);currentPeriod=key;
+    $('.period-switch').style.setProperty('--period-index',String(Object.keys(periods).indexOf(key)));
     const p=periods[key],from={...displayed};
     periodButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.period===key)));
     $('#metric-leads-label').textContent=`Заявок за ${p.period}`;
