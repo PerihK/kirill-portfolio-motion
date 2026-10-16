@@ -4,6 +4,8 @@
 node_modules/
 qa/
 qa-astra/
+qa-commercial/
+prepare-commercial.mjs
 .openai/
 *.tar.gz
 *.zip
