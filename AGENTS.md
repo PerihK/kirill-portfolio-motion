@@ -5,3 +5,5 @@ This is the separate Kirill Motion experiment, hosted on Vercel in the `kiriw1/k
 The site is static. Deploy `dist` using the repository's `vercel.json`; no build or package installation is required. Run `node --check dist/app.js` and `node check.mjs` after source changes. Keep all nine project demos in `dist/demos` working. The user requested removing the phone-in-a-dialog preview; cases now link directly to the responsive demos.
 
 Never commit or upload `.env*`, `.vercel`, credentials, or local QA screenshots.
+
+Selected works: NIVAL → ЛЕСНО → ПОРЯДОК → ПЛАН. Keep ТИХО in the full catalog. ПОРЯДОК is the tenth project; link to its existing standalone origin `https://poryadok-cleaning-demo.vercel.app/` so `/order`, `/admin` and browser-local CRM data stay together. Do not overwrite or rebuild the other nine demos when updating this entry. Preserve the gallery and intro animation timings.
