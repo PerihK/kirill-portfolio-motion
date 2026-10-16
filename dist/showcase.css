@@ -90,8 +90,10 @@
 #agent .agent-benefits{font-size:12px;line-height:1.7;color:#c2cbd7;margin-block:27px 30px;letter-spacing:-.01em}
 #agent .agent-benefits li{gap:14px;padding-block:10px}
 #agent .agent-benefits span{color:#51c3aa;background:#203b37;border-radius:50%;font-size:9px;width:23px;height:23px;padding:0;line-height:1}
-#agent .agent-copy>.text-link{display:inline-flex;background:linear-gradient(115deg,#0cb69e,#09a493);color:#06231d;padding:17px 22px;border-radius:9px;font-size:13px;font-weight:750;box-shadow:0 14px 35px #00b59916}
-#agent .agent-copy>.text-link:hover{text-decoration:none;background:#48d3bc}
+#agent .agent-copy>.text-link{position:relative;isolation:isolate;display:inline-flex;background:linear-gradient(115deg,#0cb69e,#09a493);color:#06231d;padding:17px 22px;border-radius:9px;font-size:13px;font-weight:750;box-shadow:0 0 25px #00c7a72b,0 14px 50px #00bc9f38;filter:brightness(1);transition:filter .35s ease,box-shadow .35s ease}
+#agent .agent-copy>.text-link:before{content:'';position:absolute;inset:-28px -36px;z-index:-1;border-radius:50%;background:radial-gradient(ellipse,#00c7ab35 0%,#00b89e1c 36%,transparent 70%);filter:blur(13px);opacity:.8;pointer-events:none;transition:opacity .35s}
+#agent .agent-copy>.text-link:hover,#agent .agent-copy>.text-link:focus-visible{text-decoration:none;filter:brightness(1.12);box-shadow:0 0 32px #00d4b044,0 16px 65px #00bc9f50}
+#agent .agent-copy>.text-link:hover:before,#agent .agent-copy>.text-link:focus-visible:before{opacity:1}
 #agent .agent-demo{border-radius:12px;background:#171c27;border:1px solid #2b3343;color:#e1e8f1;box-shadow:0 24px 60px #0003;min-height:0;overflow:hidden;font-family:InterUI,Arial,sans-serif}
 #agent .agent-demo-head{min-height:61px;padding:15px 18px;background:#1d2230;border-bottom:1px solid #2b3343;gap:13px;align-items:center}
 .agent-window-title{display:flex;align-items:center;gap:11px;margin-right:auto;min-width:0}
@@ -190,3 +192,13 @@
   .work-benefit h3{font-size:17px}.work-benefit p{font-size:14px}
 }
 @media(max-width:370px){#results .metric>strong{font-size:24px}#results .metric>span{font-size:10px}.work-benefit{padding:23px 18px;gap:16px}.work-benefit h3{font-size:16px}.work-benefit p{font-size:13px}}
+
+/* Shared turquoise light on the white hero and both sides of dark boundaries. */
+body{position:relative;isolation:isolate;overflow-x:clip}
+body:before{content:'';position:absolute;z-index:-1;inset:0 0 auto;height:900px;pointer-events:none;background:radial-gradient(ellipse 70% 85% at 100% 0,#ace5d980 0%,#d8f3e84d 37%,transparent 72%)}
+.section-glow-enter{background:radial-gradient(ellipse 65% 260px at 78% 100%,#14ba9d24 0%,#5fd9bd0d 45%,transparent 72%)}
+.results-section:before{inset:0 0 auto;width:100%;height:460px;border-radius:0;background:radial-gradient(ellipse 70% 90% at 78% 0,#0b9e8240 0%,#08785e0d 48%,transparent 76%)}
+#agent:after{content:'';position:absolute;inset:auto 0 0;height:300px;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 100% at 23% 100%,#0b9e823b 0%,#08785e0d 48%,transparent 76%)}
+.section-glow-exit{background:radial-gradient(ellipse 70% 250px at 23% 0,#14ba9d26 0%,#5fd9bd0d 45%,transparent 72%)}
+@media(max-width:700px){body:before{height:650px;background:radial-gradient(ellipse 110% 80% at 100% 0,#ace5d96b 0%,#d8f3e82b 43%,transparent 80%)}.section-glow-enter{background:radial-gradient(ellipse 85% 190px at 78% 100%,#14ba9d24,transparent 72%)}.section-glow-exit{background:radial-gradient(ellipse 85% 200px at 23% 0,#14ba9d26,transparent 72%)}.results-section:before{height:330px}}
+@media(prefers-reduced-motion:reduce){#agent .agent-copy>.text-link,#agent .agent-copy>.text-link:before{transition:none}}
