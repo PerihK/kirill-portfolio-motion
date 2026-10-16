@@ -7,3 +7,5 @@ The site is static. Deploy `dist` using the repository's `vercel.json`; no build
 Never commit or upload `.env*`, `.vercel`, credentials, or local QA screenshots.
 
 Selected works: NIVAL → ЛЕСНО → ПОРЯДОК → ПЛАН. Keep ТИХО in the full catalog. ПОРЯДОК is the tenth project; link to its existing standalone origin `https://poryadok-cleaning-demo.vercel.app/` so `/order`, `/admin` and browser-local CRM data stay together. Do not overwrite or rebuild the other nine demos when updating this entry. Preserve the gallery and intro animation timings.
+
+Decorative arrows, checks and stars in demos must be inline SVG with currentColor; CSS pseudo-elements use SVG masks. Do not reintroduce Unicode emoji-capable glyphs or a runtime DOM replacement observer. Run `node check-ui-symbols.mjs` after demo updates. `node prepare-demos.mjs --only=lesno` updates just that export.
