@@ -1,9 +1,10 @@
 (() => {
   'use strict';
   const $ = s => document.querySelector(s);
-  const arrow = ''; 
-  const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const data = window.portfolioData;
+  const flow={id:'flow',name:'FLOW',type:'Веб-сервис / CRM',url:'https://flow-web-lime.vercel.app/',description:'Рабочее пространство для заказов, расписания и выездных команд. Самостоятельный проект с демонстрационными данными.'};
+  const projectById=id=>id==='flow'?flow:data.projects.find(p=>p.id===id);
+  const caseUrl=id=>{const u=new URL(document.querySelector('link[rel="canonical"]').href);u.searchParams.set('project',id);u.hash='works';return u.href;};
   const copy = {
     nival:'Архитектура, атмосфера места и выбор резиденции — в одном последовательном знакомстве.',
     lesno:'От прогулки по саду в разные сезоны — к заданию на собственный участок.',
@@ -11,7 +12,7 @@
     plan:'От генплана квартала — к фильтрам, сравнению и выбору своей квартиры.'
   };
   const urlFor = p => p.url || `demos/${p.id}/`;
-  const card = p => `<article class="project-card"><a class="project-image" style="--project-color:${p.color}" href="${urlFor(p)}" target="_blank" rel="noopener" aria-label="Открыть сайт ${p.name}"><img src="images/project-screens/${p.id}-hero.webp" alt="${p.name} — первый экран сайта" loading="lazy" width="1440" height="900"><span class="image-cta">Открыть сайт</span></a><div class="project-meta"><h3>${p.name}</h3><span>${p.type} / Концепт</span></div><p class="project-description">${copy[p.id] || p.description}</p><div class="project-links"><button data-case="${p.id}">Разбор проекта ${arrow}</button><a href="${urlFor(p)}" target="_blank" rel="noopener">Открыть сайт ${arrow}</a></div></article>`;
+  const card = p => `<article class="project-card" id="project-${p.id}"><a class="project-image" style="--project-color:${p.color}" href="${urlFor(p)}" target="_blank" rel="noopener" aria-label="Открыть сайт ${p.name}"><img src="images/project-screens/${p.id}-hero.webp" alt="${p.name} — первый экран сайта" loading="lazy" width="1440" height="900"><span class="image-cta">Открыть сайт</span></a><div class="project-meta"><h3>${p.name}</h3><span>${p.type} / Концепт</span></div><p class="project-description">${copy[p.id] || p.description}</p><div class="project-links"><a href="?project=${p.id}#works" data-case="${p.id}">Разбор проекта</a><a href="${urlFor(p)}" target="_blank" rel="noopener">Открыть сайт</a></div></article>`;
   $('#featured-projects').innerHTML = data.projects.slice(0,4).map(card).join('');
   $('#more-grid').innerHTML = data.projects.slice(4).map(card).join('');
   $('#catalog-toggle').addEventListener('click', e => {
@@ -41,24 +42,38 @@
   });
   document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>close(document.getElementById(button.dataset.close))));
   function openCase(id,changeUrl=true){
-    const p=data.projects.find(p=>p.id===id);if(!p)return;
-    const c=data.cases[id];
-    $('#case-content').innerHTML=`<div class="case-header"><p class="eyebrow">${p.type} / САМОСТОЯТЕЛЬНЫЙ КОНЦЕПТ</p><h2 id="case-title">${p.name}</h2><p>${p.description}</p><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">Открыть работающий сайт ${arrow}</a></div><img class="case-main-image" src="images/project-screens/${id}-hero.webp" alt="${p.name} — первый экран"><div class="case-body"><div class="case-context"><div><span>ЗАДАЧА</span><p>${c?.brief || p.description}</p></div><div><span>МОЯ РОЛЬ</span><p>Концепция, структура, дизайн, адаптивная вёрстка и разработка интерактивных сценариев.</p></div></div>${c ? c.decisions.map(([title,text],i)=>`<article class="case-decision"><h3>0${i+1} / ${title}</h3><p>${text}</p></article>`).join('') : `<div class="project-tags">${p.features.map(f=>`<span>${f}</span>`).join('')}</div>`}<p class="case-note">${c?.result || 'Самостоятельный концепт с работающим интерфейсом. Бренд и предложения вымышлены. Реальные клиентские заказы и показатели продаж не заявляются.'}</p><img class="case-detail-image" src="images/project-screens/${id}-detail.webp" loading="lazy" alt="${p.name} — интерактивные возможности сайта"><div class="case-footer"><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">Попробовать демо ${arrow}</a><button class="text-link" data-case-brief="${p.name}">Обсудить похожую задачу ${arrow}</button></div></div>`;
+    const p=projectById(id);if(!p)return;
+    const c=id==='flow'?{
+      brief:'Собрать в одном интерфейсе работу сервисной команды: заказы, рабочие статусы, расписание и назначение бригад.',
+      decisions:[['От обзора к заказу','На рабочем столе видны заказы и загрузка команды. Из обзора можно перейти к конкретной задаче.'],['Единая рабочая среда','Заказы, сотрудники и расписание связаны в одном интерфейсе — можно оценить логику сервиса, а не только его первый экран.']],
+      result:'FLOW — самостоятельный проект. Заказы и данные в демо вымышлены; интерфейс не подтверждает наличие коммерческого внедрения, защищённой серверной CRM или результатов продаж.'
+    }:data.cases[id];
+    const image=id==='flow'?'images/commercial/flow.webp':`images/project-screens/${id}-hero.webp`;
+    $('#case-content').innerHTML=`<div class="case-header"><p class="eyebrow">${p.type} / САМОСТОЯТЕЛЬНЫЙ ПРОЕКТ</p><h2 id="case-title">${p.name}</h2><p>${p.description}</p><div class="case-actions"><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">Открыть работающий сайт</a><button class="text-link" data-case-brief="${id}">Обсудить похожую задачу</button></div><button class="text-link case-share" data-copy-case="${id}">Скопировать ссылку на проект</button><input class="case-permalink" aria-label="Прямая ссылка на проект" readonly value="${caseUrl(id)}" hidden><p class="fine-print" id="case-share-status" role="status"></p></div><img class="case-main-image" src="${image}" alt="${p.name} — первый экран"><div class="case-body"><div class="case-context"><div><span>ЗАДАЧА</span><p>${c?.brief || p.description}</p></div><div><span>МОЯ РОЛЬ</span><p>Концепция, структура, дизайн, адаптивная вёрстка и разработка интерактивных сценариев.</p></div></div>${c ? c.decisions.map(([title,text],i)=>`<article class="case-decision"><h3>0${i+1} / ${title}</h3><p>${text}</p></article>`).join('') : `<div class="project-tags">${p.features.map(f=>`<span>${f}</span>`).join('')}</div>`}<p class="case-note">${c?.result || 'Самостоятельный концепт с работающим интерфейсом. Бренд и предложения вымышлены. Реальные клиентские заказы и показатели продаж не заявляются.'}</p>${id==='flow'?'':`<img class="case-detail-image" src="images/project-screens/${id}-detail.webp" loading="lazy" alt="${p.name} — интерактивные возможности сайта">`}<div class="case-footer"><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">Попробовать демо</a><button class="text-link" data-case-brief="${id}">Обсудить похожую задачу</button></div></div>`;
     if(!$('#case-dialog').open)show($('#case-dialog'));else $('#case-dialog').scrollTop=0;
-    if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);history.pushState(null,'',u);}
+    if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);u.hash='works';history.pushState(null,'',u);}
   }
-  document.addEventListener('click',e=>{const b=e.target.closest('[data-case]');if(b)openCase(b.dataset.case);const c=e.target.closest('[data-case-brief]');if(c){close($('#case-dialog'));openBrief('Помогите выбрать формат',`Интересует решение в духе проекта ${c.dataset.caseBrief}. `);}});
-  addEventListener('popstate',()=>{const id=new URL(location.href).searchParams.get('project');if(id)openCase(id,false);else if($('#case-dialog').open)close($('#case-dialog'));});
+  document.addEventListener('click',async e=>{
+    const b=e.target.closest('[data-case]');
+    if(b&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey&&e.button===0){e.preventDefault();openCase(b.dataset.case);}
+    const c=e.target.closest('[data-case-brief]');
+    if(c){const id=c.dataset.caseBrief;const p=projectById(id);close($('#case-dialog'));openBrief(id==='flow'?'Веб-сервис / CRM':'Помогите выбрать формат',`Интересует решение в духе проекта ${p.name}. `,id);}
+    const share=e.target.closest('[data-copy-case]');
+    if(share){try{await navigator.clipboard.writeText(caseUrl(share.dataset.copyCase));$('#case-share-status').textContent='Ссылка скопирована. Она сразу откроет этот проект.';}catch{const input=$('.case-permalink');input.hidden=false;input.focus();input.select();$('#case-share-status').textContent='Скопируйте выделенную ссылку вручную.';}}
+  });
+  addEventListener('popstate',()=>{const id=new URL(location.href).searchParams.get('project');if(projectById(id))openCase(id,false);else if($('#case-dialog').open)close($('#case-dialog'));});
   const initialCase=new URL(location.href).searchParams.get('project');if(initialCase)openCase(initialCase,false);
 
   const form=$('#brief-form'), result=$('#brief-result');
-  function openBrief(format,task){
+  let briefProject='';
+  function openBrief(format,task,project=''){
+    briefProject=project;
     $('#brief-format').value=format;
     if(!$('#brief-format').value)$('#brief-format').value='Помогите выбрать формат';
     if(task)$('#brief-business').value=task;
     form.hidden=false;result.hidden=true;show($('#brief-dialog'));
   }
-  document.querySelectorAll('[data-brief]').forEach(b=>b.addEventListener('click',()=>openBrief(b.dataset.brief)));
+  document.querySelectorAll('[data-brief]').forEach(b=>b.addEventListener('click',()=>openBrief(b.dataset.brief,b.dataset.task,b.closest('#flow')?'flow':'')));
   const telegramLink=text=>`https://t.me/KiriwPerih?text=${encodeURIComponent(text)}`;
   function syncBriefLink(){$('#send-brief').href=telegramLink($('#brief-message').value);}
   $('#brief-business').addEventListener('input',e=>e.target.setCustomValidity(''));
@@ -66,7 +81,8 @@
     e.preventDefault();const business=$('#brief-business').value.trim();
     if(business.length<5){$('#brief-business').setCustomValidity('Опишите задачу чуть подробнее — хотя бы 5 символов.');$('#brief-business').reportValidity();return;}
     const f=new FormData(form);
-    $('#brief-message').value=`Кирилл, привет! Хочу обсудить проект.\n\nФормат: ${f.get('format')}\nЗадача: ${business}\nБюджет: ${f.get('budget')}\nЗапуск: ${f.get('time')}\n\nПодскажите, с чего лучше начать?`;
+    const site=String(f.get('site')||'').trim();
+    $('#brief-message').value=`Кирилл, привет! Хочу обсудить проект.\n\nФормат: ${f.get('format')}${site?`\nМой сайт: ${site}`:''}${briefProject?`\nПример из портфолио: ${caseUrl(briefProject)}`:''}\nЗадача: ${business}\nБюджет: ${f.get('budget')}\nЗапуск: ${f.get('time')}\n\nПодскажите, с чего лучше начать?`;
     syncBriefLink();form.hidden=true;result.hidden=false;$('#brief-dialog').scrollTop=0;$('#brief-message').focus();
     $('#brief-status').textContent='Проверьте сообщение и отправьте его в открывшемся чате.';
   });
