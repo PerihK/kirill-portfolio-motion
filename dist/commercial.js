@@ -65,9 +65,11 @@
   const initialCase=new URL(location.href).searchParams.get('project');if(initialCase)openCase(initialCase,false);
 
   const form=$('#brief-form'), result=$('#brief-result');
-  let briefProject='';
+  let briefProject='',preparedFromContact=false;
   function openBrief(format,task,project=''){
-    briefProject=project;
+    briefProject=project;preparedFromContact=false;
+    $('#brief-title').textContent='С чего начнём?';
+    $('#edit-brief').textContent='Изменить ответы';
     $('#brief-format').value=format;
     if(!$('#brief-format').value)$('#brief-format').value='Помогите выбрать формат';
     if(task)$('#brief-business').value=task;
@@ -76,22 +78,42 @@
   document.querySelectorAll('[data-brief]').forEach(b=>b.addEventListener('click',()=>openBrief(b.dataset.brief,b.dataset.task,b.closest('#flow')?'flow':'')));
   const telegramLink=text=>`https://t.me/KiriwPerih?text=${encodeURIComponent(text)}`;
   function syncBriefLink(){$('#send-brief').href=telegramLink($('#brief-message').value);}
+  function showPreparedMessage(message,fromContact=false){
+    preparedFromContact=fromContact;
+    $('#brief-message').value=message;
+    syncBriefLink();form.hidden=true;result.hidden=false;
+    $('#brief-title').textContent='Проверьте сообщение';
+    $('#edit-brief').textContent=fromContact?'Изменить контакты':'Изменить ответы';
+    if(!$('#brief-dialog').open)show($('#brief-dialog'));
+    $('#brief-dialog').scrollTop=0;$('#brief-message').focus();
+    $('#brief-status').textContent='Проверьте сообщение и отправьте его в открывшемся чате.';
+  }
   $('#brief-business').addEventListener('input',e=>e.target.setCustomValidity(''));
   form.addEventListener('submit',e=>{
     e.preventDefault();const business=$('#brief-business').value.trim();
     if(business.length<5){$('#brief-business').setCustomValidity('Опишите задачу чуть подробнее — хотя бы 5 символов.');$('#brief-business').reportValidity();return;}
     const f=new FormData(form);
     const site=String(f.get('site')||'').trim();
-    $('#brief-message').value=`Кирилл, привет! Хочу обсудить проект.\n\nФормат: ${f.get('format')}${site?`\nМой сайт: ${site}`:''}${briefProject?`\nПример из портфолио: ${caseUrl(briefProject)}`:''}\nЗадача: ${business}\nБюджет: ${f.get('budget')}\nЗапуск: ${f.get('time')}\n\nПодскажите, с чего лучше начать?`;
-    syncBriefLink();form.hidden=true;result.hidden=false;$('#brief-dialog').scrollTop=0;$('#brief-message').focus();
-    $('#brief-status').textContent='Проверьте сообщение и отправьте его в открывшемся чате.';
+    showPreparedMessage(`Кирилл, привет! Хочу обсудить проект.\n\nФормат: ${f.get('format')}${site?`\nМой сайт: ${site}`:''}${briefProject?`\nПример из портфолио: ${caseUrl(briefProject)}`:''}\nЗадача: ${business}\nБюджет: ${f.get('budget')}\nЗапуск: ${f.get('time')}\n\nПодскажите, с чего лучше начать?`);
   });
   $('#brief-message').addEventListener('input',syncBriefLink);
-  $('#edit-brief').addEventListener('click',()=>{form.hidden=false;result.hidden=true;$('#brief-business').focus();});
+  $('#edit-brief').addEventListener('click',()=>{
+    if(preparedFromContact){origins.set($('#brief-dialog'),$('#contact-handle'));close($('#brief-dialog'));return;}
+    form.hidden=false;result.hidden=true;$('#brief-title').textContent='С чего начнём?';$('#brief-business').focus();
+  });
   $('#copy-brief').addEventListener('click',async()=>{
     try{await navigator.clipboard.writeText($('#brief-message').value);$('#brief-status').textContent='Текст скопирован. Вставьте его в сообщение Кириллу.';}
     catch{$('#brief-message').focus();$('#brief-message').select();$('#brief-status').textContent='Выделил текст. Скопируйте его вручную.';}
   });
+
+  $('#contact-handle').addEventListener('input',e=>e.target.setCustomValidity(''));
+  $('#contact-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=$('#contact-name').value.trim(),contact=$('#contact-handle').value.trim();
+    if(contact.length<3){$('#contact-handle').setCustomValidity('Укажите телефон или Telegram для связи.');$('#contact-handle').reportValidity();return;}
+    showPreparedMessage(`Кирилл, привет! Хочу обсудить сайт: что мешает заявкам и с чего лучше начать.${name?`\n\nИмя: ${name}`:'\n'}\nКонтакт для связи: ${contact}`,true);
+  });
+  $('#contact-form button[type="submit"]').disabled=false;
 
   document.addEventListener('portfolio:brief',e=>{
     openBrief(e.detail.format,e.detail.task);
