@@ -1,4 +1,23 @@
 /* Commercial copy additions; dashboard, canvas and chat styles stay unchanged. */
+.hero{padding-bottom:48px}
+.hero .eyebrow{max-width:580px;line-height:1.65}
+.sales-proof{max-width:1016px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:85px}
+.sales-proof article{padding:30px 29px 28px;background:#ffffffb3;border:1px solid #d9e1dc;border-radius:18px;box-shadow:0 14px 35px #15392b06}
+.sales-proof svg{width:28px;height:28px;color:#13b5a4;margin-bottom:26px;display:block}
+.sales-proof .proof-value{display:block;font-size:46px;font-weight:800;letter-spacing:-.065em;line-height:1.2;white-space:nowrap;color:var(--ink)}
+.proof-value small{font-size:17px;font-weight:500;letter-spacing:0}
+.sales-proof h2{font-size:18px;font-weight:800;letter-spacing:-.035em;line-height:1.45;margin-top:11px}
+.sales-proof p{font-size:15px;line-height:1.65;color:#505957;margin-top:6px}
+.sales-problems .problem-index{display:block;font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--green);margin-bottom:18px}
+.sales-problems h3{min-height:70px;margin-bottom:17px}
+.sales-problems article>p{min-height:140px}
+.sales-problems .problem-solution{margin-top:24px;padding-top:21px;border-top:1px solid var(--line)}
+.problem-solution>span{font-size:11px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.08em}
+.sales-problems .problem-solution p{font-size:15px;line-height:1.75;margin-top:13px}
+.problem-conclusion{display:grid;grid-template-columns:1.35fr 1fr;align-items:center;gap:55px;margin-top:55px;padding:36px 0 0;border-top:1px solid var(--line)}
+.problem-conclusion>p{font-size:clamp(32px,3.2vw,46px);font-weight:800;letter-spacing:-.055em;line-height:1.17}
+.problem-conclusion em{color:var(--green);font-style:normal}
+.problem-conclusion>span{font-size:16px;line-height:1.8;color:var(--muted);max-width:430px}
 .service-extensions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:55px;padding-top:35px;border-top:1px solid var(--line)}
 .service-extensions article{min-width:0}
 .service-extensions .eyebrow{font-size:12px;font-weight:700;letter-spacing:0;color:var(--green)}
@@ -14,7 +33,23 @@
 .case-permalink{width:100%;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:9px;padding:14px;margin-top:10px}
 .brief-content input{display:block;width:100%;min-height:48px;font:inherit;font-size:14px;padding:14px;border:1px solid #ced5cc;border-radius:9px;background:#fff;color:var(--ink);margin:10px 0 22px}
 .brief-content input:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+@media(max-width:1190px){.sales-proof article{padding:27px 24px}.sales-proof .proof-value{font-size:40px}.sales-proof h2{font-size:17px}.sales-proof p{font-size:14px}}
+@media(max-width:960px){.sales-proof{gap:16px;margin-bottom:65px}.sales-proof article{padding:24px 20px}.sales-proof .proof-value{font-size:34px}.sales-proof h2{font-size:16px}.sales-proof p{font-size:13px}.sales-problems{grid-template-columns:1fr;gap:0}.sales-problems h3,.sales-problems article>p{min-height:0}.sales-problems h3 br{display:none}.sales-problems article,.sales-problems article+article{padding-block:28px}.problem-conclusion{gap:30px;margin-top:20px}.problem-conclusion>span{font-size:14px}}
 @media(max-width:700px){
+  .hero{padding-bottom:30px}
+  .sales-proof{grid-template-columns:1fr;gap:16px;margin-bottom:50px}
+  .sales-proof article{padding:26px}
+  .sales-proof svg{margin-bottom:20px}
+  .sales-proof .proof-value{font-size:39px}
+  .sales-proof h2{font-size:18px}
+  .sales-proof p{font-size:15px}
+  .sales-proof h2 br{display:none}
+  .sales-problems .problem-index{margin-bottom:14px}
+  .sales-problems .problem-solution{margin-top:20px;padding-top:18px}
+  .sales-problems .problem-solution p{font-size:14px}
+  .problem-conclusion{grid-template-columns:1fr;gap:22px;padding-top:30px}
+  .problem-conclusion>p{font-size:clamp(30px,8vw,43px)}
+  .problem-conclusion>span{font-size:15px}
   .service-extensions{grid-template-columns:1fr;gap:35px;margin-top:35px;padding-top:30px}
   .service-extensions h3{font-size:24px}
   .service-extensions article>p:not(.eyebrow){font-size:14px}
