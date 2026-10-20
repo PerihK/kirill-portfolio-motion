@@ -20,5 +20,7 @@ for(const [slug,source] of Object.entries(projects)) {
  html=html.replace('</body>',badge+'</body>');await writeFile(entry,html);
  console.log('Prepared '+slug);
 }
+// The portfolio's production host is a GitHub Pages project subpath.
+await import('./scope-pages-paths.mjs');
 
 

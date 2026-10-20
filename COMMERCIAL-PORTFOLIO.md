@@ -31,11 +31,11 @@
 
 Открывают разбор сразу, без поиска карточки на странице:
 
-- [NIVAL](https://kirill-portfolio-motion.vercel.app/?project=nival#works)
-- [ЛЕСНО](https://kirill-portfolio-motion.vercel.app/?project=lesno#works)
-- [ПОРЯДОК](https://kirill-portfolio-motion.vercel.app/?project=poryadok#works)
-- [ПЛАН](https://kirill-portfolio-motion.vercel.app/?project=plan#works)
-- [FLOW](https://kirill-portfolio-motion.vercel.app/?project=flow#works)
+- [NIVAL](https://perihk.github.io/kirill-portfolio-motion/?project=nival#works)
+- [ЛЕСНО](https://perihk.github.io/kirill-portfolio-motion/?project=lesno#works)
+- [ПОРЯДОК](https://perihk.github.io/kirill-portfolio-motion/?project=poryadok#works)
+- [ПЛАН](https://perihk.github.io/kirill-portfolio-motion/?project=plan#works)
+- [FLOW](https://perihk.github.io/kirill-portfolio-motion/?project=flow#works)
 
 Остальные шесть проектов поддерживают тот же формат с ID из `portfolio-data.js`: `yasno`, `liniya`, `tiho`, `mile`, `hvost`, `stebel`.
 

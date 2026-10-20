@@ -2,7 +2,7 @@
   'use strict';
   const $ = s => document.querySelector(s);
   const data = window.portfolioData;
-  const flow={id:'flow',name:'FLOW',type:'Веб-сервис / CRM',url:'https://flow-web-lime.vercel.app/',description:'Рабочее пространство для заказов, расписания и выездных команд. Самостоятельный проект с демонстрационными данными.'};
+  const flow={id:'flow',name:'FLOW',type:'Веб-сервис / CRM',url:'demos/flow/',description:'Рабочее пространство для заказов, расписания и выездных команд. Самостоятельный проект с демонстрационными данными.'};
   const projectById=id=>id==='flow'?flow:data.projects.find(p=>p.id===id);
   const caseUrl=id=>{const u=new URL(document.querySelector('link[rel="canonical"]').href);u.searchParams.set('project',id);u.hash='works';return u.href;};
   const copy = {

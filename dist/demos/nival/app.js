@@ -94,7 +94,7 @@ $('#choose-home').addEventListener('click',openChoice);
 $$('[data-open-choice]').forEach(b=>b.addEventListener('click',openChoice));
 $('#choice-form').addEventListener('submit',e=>{
   e.preventDefault();const data=new FormData(e.currentTarget),h=homes[Number(data.get('residence'))];
-  const content=`NIVAL — моя высота\nРезиденция: ${h.name}\nПлощадь: ${h.area} м²\nСпальни: ${h.beds}\nТерраса: ${h.terrace} м²\n\nМои пожелания:\n${data.get('note')||'Пока без заметок.'}\n\nАвторский концепт. Архитектура и место вымышлены.\nhttps://nival-residences.vercel.app/\n`;
+  const content=`NIVAL — моя высота\nРезиденция: ${h.name}\nПлощадь: ${h.area} м²\nСпальни: ${h.beds}\nТерраса: ${h.terrace} м²\n\nМои пожелания:\n${data.get('note')||'Пока без заметок.'}\n\nАвторский концепт. Архитектура и место вымышлены.\nhttps://perihk.github.io/kirill-portfolio-motion/demos/nival/\n`;
   const url=URL.createObjectURL(new Blob(['\uFEFF'+content],{type:'text/plain;charset=utf-8'}));
   const a=document.createElement('a');a.href=url;a.download=`NIVAL-${['skala','greben','horizon'][Number(data.get('residence'))]}.txt`;a.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);$('#choice-status').textContent='Ваш выбор сохранён. Файл доступен в загрузках.';
