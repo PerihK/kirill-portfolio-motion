@@ -1,0 +1,7 @@
+Mode: built-in image_gen, one call per asset, two calls in parallel. Both images 1536x1024 (3:2).
+
+rock-garden.png:
+Use case: photorealistic-natural. Asset type: premium landscape architecture landing page project photo. Generate exactly one original photoreal editorial landscape photograph, 3:2 aspect ratio. Ural rocky hillside designed garden with strong terraced pale granite retaining walls and long low stone steps, sculptural rugged boulders, silver green low groundcover and sparse mountain pines, very open clear sky, a low modern stone house at the edge. Warm neutral sun, pale mineral surfaces dominate, striking designed site. Real architectural photography with natural material detail. No forest, no meadow, no people, no text, no watermarks.
+
+courtyard-formal.png:
+Use case: photorealistic-natural. Asset type: premium landscape architecture landing page project photo. Generate exactly one original photoreal editorial landscape photograph, 3:2 aspect ratio. Premium small enclosed contemporary courtyard, geometric rill of still water, clipped green hedges and single sculptural deciduous tree, warm pale plaster walls, brick or stone paving with strict grid, elegant minimal architecture. Calm editorial architectural photography, slightly elevated viewpoint revealing the precise courtyard geometry. Natural detailed materials. No forest, no birches, no tall grasses, no people, no text, no watermarks.
