@@ -79,7 +79,6 @@
   }
   document.querySelectorAll('[data-brief]').forEach(b=>b.addEventListener('click',()=>openBrief(b.dataset.brief,b.dataset.task,b.closest('#flow')?'flow':'')));
   const telegramLink=text=>`https://t.me/KiriwPerih?text=${encodeURIComponent(text)}`;
-  $('#brief-format').addEventListener('change',()=>{briefEstimate='';$('#brief-estimate').hidden=true;$('#brief-estimate').textContent='';});
   function syncBriefLink(){$('#send-brief').href=telegramLink($('#brief-message').value);}
   function showPreparedMessage(message,fromContact=false){
     preparedFromContact=fromContact;
@@ -122,24 +121,20 @@
   const pricing=window.portfolioPricing;
   const money=value=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0}).format(value)+' ₽';
   function calculatorQuote(){
-    return pricing.estimate({format:$('#calc-format').value,blocks:$('#calc-blocks').value,design:$('input[name="calc-design"]:checked').value,seo:$('#calc-seo').checked,analytics:$('#calc-analytics').checked});
+    return pricing.estimate({blocks:$('#calc-blocks').value,design:$('input[name="calc-design"]:checked').value,seo:$('#calc-seo').checked,analytics:$('#calc-analytics').checked});
   }
   function updateCalculator(){
     const q=calculatorQuote();
     $('#calc-total').textContent=money(q.total);
     $('#calc-blocks-label').textContent=q.blocks+' блоков';
     $('#calc-blocks').setAttribute('aria-valuetext',q.blocks+' блоков');
-    $('#calc-blocks').style.setProperty('--range-progress',((q.blocks-5)/15*100)+'%');
-    $('#calc-blocks-note').textContent=`До ${q.plan.includedBlocks} блоков включено. Далее — ${money(q.plan.blockRate)} за блок. Считаем блоки на всех страницах.`;
-    $('#calc-timing').textContent='Базовый срок: '+q.plan.timing.toLowerCase();
+    $('#calc-blocks').style.setProperty('--range-progress',((q.blocks-5)/10*100)+'%');
   }
-  $('#calc-format').addEventListener('change',()=>{$('#calc-blocks').value=pricing.plans[$('#calc-format').value].includedBlocks;updateCalculator();});
   document.querySelectorAll('#calc-blocks,input[name="calc-design"],#calc-seo,#calc-analytics').forEach(input=>input.addEventListener('input',updateCalculator));
   $('#calc-brief').addEventListener('click',()=>{
     const q=calculatorQuote();
-    const extras=[q.seo?'расширенная SEO-настройка':'',q.analytics?'подключение аналитики':''].filter(Boolean).join(', ')||'без дополнительных настроек';
-    const estimate=`${q.plan.label} · ${q.blocks} блоков\nДизайн: ${q.design.label}\nДополнительно: ${extras}\nПредварительная стоимость: ${money(q.total)}\nБазовый срок: ${q.plan.timing.toLowerCase()}`;
-    openBrief(q.plan.label,'','',estimate);
+    const estimate=`Сайт · ${q.blocks} блоков\nДизайн: ${q.design.label}\nSEO-настройка: ${q.seo?'нужна':'не нужна'}\nПодключение аналитики: ${q.analytics?'нужно':'не нужно'}\nСтоимость по калькулятору: ${money(q.total)}`;
+    openBrief('Помогите выбрать формат','','',estimate);
     $('#brief-budget').value=q.total<50000?'20–50 тыс. ₽':q.total<90000?'50–90 тыс. ₽':q.total<150000?'90–150 тыс. ₽':'От 150 тыс. ₽';
   });
   updateCalculator();
