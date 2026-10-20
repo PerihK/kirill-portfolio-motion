@@ -65,9 +65,11 @@
   const initialCase=new URL(location.href).searchParams.get('project');if(initialCase)openCase(initialCase,false);
 
   const form=$('#brief-form'), result=$('#brief-result');
-  let briefProject='',preparedFromContact=false;
-  function openBrief(format,task,project=''){
-    briefProject=project;preparedFromContact=false;
+  let briefProject='',briefEstimate='',preparedFromContact=false;
+  function openBrief(format,task,project='',estimate=''){
+    briefProject=project;briefEstimate=estimate;preparedFromContact=false;
+    $('#brief-estimate').hidden=!estimate;
+    $('#brief-estimate').textContent=estimate;
     $('#brief-title').textContent='С чего начнём?';
     $('#edit-brief').textContent='Изменить ответы';
     $('#brief-format').value=format;
@@ -77,9 +79,11 @@
   }
   document.querySelectorAll('[data-brief]').forEach(b=>b.addEventListener('click',()=>openBrief(b.dataset.brief,b.dataset.task,b.closest('#flow')?'flow':'')));
   const telegramLink=text=>`https://t.me/KiriwPerih?text=${encodeURIComponent(text)}`;
+  $('#brief-format').addEventListener('change',()=>{briefEstimate='';$('#brief-estimate').hidden=true;$('#brief-estimate').textContent='';});
   function syncBriefLink(){$('#send-brief').href=telegramLink($('#brief-message').value);}
   function showPreparedMessage(message,fromContact=false){
     preparedFromContact=fromContact;
+    if(fromContact)$('#brief-estimate').hidden=true;
     $('#brief-message').value=message;
     syncBriefLink();form.hidden=true;result.hidden=false;
     $('#brief-title').textContent='Проверьте сообщение';
@@ -94,7 +98,7 @@
     if(business.length<5){$('#brief-business').setCustomValidity('Опишите задачу чуть подробнее — хотя бы 5 символов.');$('#brief-business').reportValidity();return;}
     const f=new FormData(form);
     const site=String(f.get('site')||'').trim();
-    showPreparedMessage(`Кирилл, привет! Хочу обсудить проект.\n\nФормат: ${f.get('format')}${site?`\nМой сайт: ${site}`:''}${briefProject?`\nПример из портфолио: ${caseUrl(briefProject)}`:''}\nЗадача: ${business}\nБюджет: ${f.get('budget')}\nЗапуск: ${f.get('time')}\n\nПодскажите, с чего лучше начать?`);
+    showPreparedMessage(`Кирилл, привет! Хочу обсудить проект.\n\nФормат: ${f.get('format')}${site?`\nМой сайт: ${site}`:''}${briefProject?`\nПример из портфолио: ${caseUrl(briefProject)}`:''}\nЗадача: ${business}\nБюджет: ${f.get('budget')}\nЗапуск: ${f.get('time')}${briefEstimate?`\n\nРасчёт с сайта:\n${briefEstimate}`:''}\n\nПодскажите, с чего лучше начать?`);
   });
   $('#brief-message').addEventListener('input',syncBriefLink);
   $('#edit-brief').addEventListener('click',()=>{
@@ -114,6 +118,32 @@
     showPreparedMessage(`Кирилл, привет! Хочу обсудить сайт: что мешает заявкам и с чего лучше начать.${name?`\n\nИмя: ${name}`:'\n'}\nКонтакт для связи: ${contact}`,true);
   });
   $('#contact-form button[type="submit"]').disabled=false;
+
+  const pricing=window.portfolioPricing;
+  const money=value=>new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0}).format(value)+' ₽';
+  function calculatorQuote(){
+    return pricing.estimate({format:$('#calc-format').value,blocks:$('#calc-blocks').value,design:$('input[name="calc-design"]:checked').value,seo:$('#calc-seo').checked,analytics:$('#calc-analytics').checked});
+  }
+  function updateCalculator(){
+    const q=calculatorQuote();
+    $('#calc-total').textContent=money(q.total);
+    $('#calc-blocks-label').textContent=q.blocks+' блоков';
+    $('#calc-blocks').setAttribute('aria-valuetext',q.blocks+' блоков');
+    $('#calc-blocks').style.setProperty('--range-progress',((q.blocks-5)/15*100)+'%');
+    $('#calc-blocks-note').textContent=`До ${q.plan.includedBlocks} блоков включено. Далее — ${money(q.plan.blockRate)} за блок. Считаем блоки на всех страницах.`;
+    $('#calc-timing').textContent='Базовый срок: '+q.plan.timing.toLowerCase();
+  }
+  $('#calc-format').addEventListener('change',()=>{$('#calc-blocks').value=pricing.plans[$('#calc-format').value].includedBlocks;updateCalculator();});
+  document.querySelectorAll('#calc-blocks,input[name="calc-design"],#calc-seo,#calc-analytics').forEach(input=>input.addEventListener('input',updateCalculator));
+  $('#calc-brief').addEventListener('click',()=>{
+    const q=calculatorQuote();
+    const extras=[q.seo?'расширенная SEO-настройка':'',q.analytics?'подключение аналитики':''].filter(Boolean).join(', ')||'без дополнительных настроек';
+    const estimate=`${q.plan.label} · ${q.blocks} блоков\nДизайн: ${q.design.label}\nДополнительно: ${extras}\nПредварительная стоимость: ${money(q.total)}\nБазовый срок: ${q.plan.timing.toLowerCase()}`;
+    openBrief(q.plan.label,'','',estimate);
+    $('#brief-budget').value=q.total<50000?'20–50 тыс. ₽':q.total<90000?'50–90 тыс. ₽':q.total<150000?'90–150 тыс. ₽':'От 150 тыс. ₽';
+  });
+  updateCalculator();
+  $('#calc-brief').disabled=false;
 
   document.addEventListener('portfolio:brief',e=>{
     openBrief(e.detail.format,e.detail.task);
