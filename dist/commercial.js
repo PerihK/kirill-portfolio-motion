@@ -4,7 +4,7 @@
   const data = window.portfolioData;
   const flow={id:'flow',name:'FLOW',type:'Веб-сервис / CRM',url:'demos/flow/',description:'Рабочее пространство для заказов, расписания и выездных команд. Самостоятельный проект с демонстрационными данными.'};
   const projectById=id=>id==='flow'?flow:data.projects.find(p=>p.id===id);
-  const caseUrl=id=>{const u=new URL(document.querySelector('link[rel="canonical"]').href);u.searchParams.set('project',id);u.hash='works';return u.href;};
+  const caseUrl=id=>{const u=new URL(location.href);u.search='';u.searchParams.set('project',id);u.hash='works';return u.href;};
   const copy = {
     nival:'Архитектура, атмосфера места и выбор резиденции — в одном последовательном знакомстве.',
     lesno:'От прогулки по саду в разные сезоны — к заданию на собственный участок.',
@@ -12,13 +12,17 @@
     plan:'От генплана квартала — к фильтрам, сравнению и выбору своей квартиры.'
   };
   const urlFor = p => p.url || `demos/${p.id}/`;
-  const card = p => `<article class="project-card" id="project-${p.id}"><a class="project-image" style="--project-color:${p.color}" href="${urlFor(p)}" target="_blank" rel="noopener" aria-label="Открыть сайт ${p.name}"><img src="images/project-screens/${p.id}-hero.webp" alt="${p.name} — первый экран сайта" loading="lazy" width="1440" height="900"><span class="image-cta">Открыть сайт</span></a><div class="project-meta"><h3>${p.name}</h3><span>${p.type} / Концепт</span></div><p class="project-description">${copy[p.id] || p.description}</p><div class="project-links"><a href="?project=${p.id}#works" data-case="${p.id}">Разбор проекта</a><a href="${urlFor(p)}" target="_blank" rel="noopener">Открыть сайт</a></div></article>`;
-  $('#featured-projects').innerHTML = data.projects.slice(0,4).map(card).join('');
-  $('#more-grid').innerHTML = data.projects.slice(4).map(card).join('');
+  const card = p => `<article class="project-card${p.kind==='client'?' project-card--client':''}" id="project-${p.id}"><a class="project-image" style="--project-color:${p.color}" href="${urlFor(p)}" target="_blank" rel="noopener" aria-label="Открыть сайт ${p.name}"><img src="images/project-screens/${p.id}-hero.webp" alt="${p.name} — первый экран сайта" loading="lazy" width="1440" height="900"><span class="image-cta">Открыть сайт</span></a><div class="project-meta"><h3>${p.name}</h3><span>${p.kind==='client'?'Клиентский проект · MODX':`${p.type} / Концепт`}</span></div><p class="project-description">${copy[p.id] || p.description}</p><div class="project-links"><a href="?project=${p.id}#works" data-case="${p.id}">Разбор проекта</a><a href="${urlFor(p)}" target="_blank" rel="noopener">Открыть сайт</a></div></article>`;
+  // The live client sites lead the section in their own case block (index.html, .client-case); the grid shows the concepts.
+  const concepts=data.projects.filter(p=>p.kind!=='client');
+  const featuredCount=4;
+  const moreCount=Math.max(0,concepts.length-featuredCount);
+  $('#featured-projects').innerHTML = concepts.slice(0,featuredCount).map(card).join('');
+  $('#more-grid').innerHTML = concepts.slice(featuredCount).map(card).join('');
   $('#catalog-toggle').addEventListener('click', e => {
     const button = e.currentTarget, expanded = button.getAttribute('aria-expanded') !== 'true';
     button.setAttribute('aria-expanded', String(expanded));
-    button.innerHTML = `${expanded ? 'Свернуть проекты' : 'Ещё 6 проектов'} <svg aria-hidden="true"><use href="#plus"/></svg>`;
+    button.innerHTML = `${expanded ? 'Свернуть проекты' : `Ещё ${moreCount} проектов`} <svg aria-hidden="true"><use href="#plus"/></svg>`;
     $('#more-grid').hidden = !expanded;
   });
 
@@ -49,7 +53,9 @@
       result:'FLOW — самостоятельный проект. Заказы и данные в демо вымышлены; интерфейс не подтверждает наличие коммерческого внедрения, защищённой серверной CRM или результатов продаж.'
     }:data.cases[id];
     const image=id==='flow'?'images/commercial/flow.webp':`images/project-screens/${id}-hero.webp`;
-    $('#case-content').innerHTML=`<div class="case-header"><p class="eyebrow">${p.type} / САМОСТОЯТЕЛЬНЫЙ ПРОЕКТ</p><h2 id="case-title">${p.name}</h2><p>${p.description}</p><div class="case-actions"><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">Открыть работающий сайт</a><button class="text-link" data-case-brief="${id}">Обсудить похожую задачу</button></div><button class="text-link case-share" data-copy-case="${id}">Скопировать ссылку на проект</button><input class="case-permalink" aria-label="Прямая ссылка на проект" readonly value="${caseUrl(id)}" hidden><p class="fine-print" id="case-share-status" role="status"></p></div><img class="case-main-image" src="${image}" alt="${p.name} — первый экран"><div class="case-body"><div class="case-context"><div><span>ЗАДАЧА</span><p>${c?.brief || p.description}</p></div><div><span>МОЯ РОЛЬ</span><p>Концепция, структура, дизайн, адаптивная вёрстка и разработка интерактивных сценариев.</p></div></div>${c ? c.decisions.map(([title,text],i)=>`<article class="case-decision"><h3>0${i+1} / ${title}</h3><p>${text}</p></article>`).join('') : `<div class="project-tags">${p.features.map(f=>`<span>${f}</span>`).join('')}</div>`}<p class="case-note">${c?.result || 'Самостоятельный концепт с работающим интерфейсом. Бренд и предложения вымышлены. Реальные клиентские заказы и показатели продаж не заявляются.'}</p>${id==='flow'?'':`<img class="case-detail-image" src="images/project-screens/${id}-detail.webp" loading="lazy" alt="${p.name} — интерактивные возможности сайта">`}<div class="case-footer"><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">Попробовать демо</a><button class="text-link" data-case-brief="${id}">Обсудить похожую задачу</button></div></div>`;
+    const isClient=p.kind==='client';
+    const caseKind=isClient?'КЛИЕНТСКИЙ ПРОЕКТ · ЗАПУЩЕН':'САМОСТОЯТЕЛЬНЫЙ ПРОЕКТ';
+    $('#case-content').innerHTML=`<div class="case-header${isClient?' case-header--client':''}"><p class="eyebrow">${p.type} / ${caseKind}</p><h2 id="case-title">${p.name}</h2><p>${p.description}</p><div class="case-actions"><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">Открыть работающий сайт</a><button class="text-link" data-case-brief="${id}">Обсудить похожую задачу</button></div><button class="text-link case-share" data-copy-case="${id}">Скопировать ссылку на проект</button><input class="case-permalink" aria-label="Прямая ссылка на проект" readonly value="${caseUrl(id)}" hidden><p class="fine-print" id="case-share-status" role="status"></p></div><img class="case-main-image" src="${image}" alt="${p.name} — первый экран"><div class="case-body"><div class="case-context"><div><span>ЗАДАЧА</span><p>${c?.brief || p.description}</p></div><div><span>МОЯ РОЛЬ</span><p>${c?.role || 'Концепция, структура, дизайн, адаптивная вёрстка и разработка интерактивных сценариев.'}</p></div></div>${c ? c.decisions.map(([title,text],i)=>`<article class="case-decision"><h3>0${i+1} / ${title}</h3><p>${text}</p></article>`).join('') : `<div class="project-tags">${p.features.map(f=>`<span>${f}</span>`).join('')}</div>`}<p class="case-note">${c?.result || 'Самостоятельный концепт с работающим интерфейсом. Бренд и предложения вымышлены. Реальные клиентские заказы и показатели продаж не заявляются.'}</p>${id==='flow'?'':`<img class="case-detail-image" src="images/project-screens/${id}-detail.webp" loading="lazy" alt="${p.name} — ${isClient?'каталог автомобилей на работающем сайте':'интерактивные возможности сайта'}">`}<div class="case-footer"><a class="button button-dark" href="${urlFor(p)}" target="_blank" rel="noopener">${isClient?'Открыть сайт':'Попробовать демо'}</a><button class="text-link" data-case-brief="${id}">Обсудить похожую задачу</button></div></div>`;
     if(!$('#case-dialog').open)show($('#case-dialog'));else $('#case-dialog').scrollTop=0;
     if(changeUrl){const u=new URL(location.href);u.searchParams.set('project',id);u.hash='works';history.pushState(null,'',u);}
   }

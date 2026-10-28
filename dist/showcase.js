@@ -59,6 +59,7 @@
   selectPeriod('month',false);
   reduced.addEventListener('change',()=>selectPeriod(currentPeriod,false));
 
+  if(window.portfolioLiveAgent)return;
   const chat=$('#chat-log'),choices=$('#chat-choices'),lead=$('#lead-preview'),frame=$('.agent-demo');
   let mode='auto',paused=false,inView=false,started=false,controller=new AbortController(),demo={};
   const signalNow=()=>controller.signal;

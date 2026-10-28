@@ -84,3 +84,9 @@ body:before{background:radial-gradient(ellipse 70% 85% at 100% 0,#a9e5d780 0%,#d
   body:before{background:radial-gradient(ellipse 110% 80% at 100% 0,#a9e5d76b 0%,#d8f3e92b 43%,transparent 80%)}
   .section-glow-enter{background:radial-gradient(ellipse 85% 190px at 78% 100%,#14b69c24,transparent 72%)}.section-glow-exit{background:radial-gradient(ellipse 85% 200px at 23% 0,#14b69c26,transparent 72%)}
 }
+
+/* Client work: same portfolio grid, with a clear published-project label. */
+.project-card--client .project-meta{flex-wrap:wrap;gap:10px 14px}
+.project-card--client .project-meta>span{display:inline-flex;align-items:center;padding:6px 10px;border:1px solid #baded9;border-radius:999px;background:#edf8f6;color:#007b79;font-size:10px;line-height:1.4;white-space:nowrap}
+.project-card--client .project-image img{object-fit:contain;object-position:center}
+.case-header--client h2{font-size:clamp(34px,6vw,65px);overflow-wrap:anywhere}
