@@ -1,0 +1,51 @@
+/* Client case (28.10.2026): the two live client sites lead the portfolio, apart from the concepts.
+   Dark panel, live screenshots in device frames, four checked facts. Nothing moves for «reduce motion». */
+.client-case{position:relative;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:48px;align-items:center;padding:54px 44px 54px 58px;margin-bottom:96px;border-radius:32px;background:radial-gradient(120% 90% at 100% 0,#14b69c2e 0%,transparent 55%),radial-gradient(90% 80% at 0 100%,#0eaaa61f 0%,transparent 60%),#0f1c1b;color:#eef6f3;overflow:hidden;isolation:isolate}
+.client-case:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 40%,#ffffff08 50%,transparent 60%);background-size:250% 100%;animation:cc-sheen 9s linear infinite}
+@keyframes cc-sheen{from{background-position:120% 0}to{background-position:-120% 0}}
+.client-case-eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;padding:7px 14px 7px 12px;border:1px solid #ffffff26;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.02em;color:#bfe9df;background:#ffffff0a}
+.live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:#3fe0b5}
+.live-dot:after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid #3fe0b5;animation:cc-pulse 2.2s ease-out infinite}
+@keyframes cc-pulse{from{transform:scale(.6);opacity:1}to{transform:scale(1.9);opacity:0}}
+.client-case h3{margin:0;font-size:clamp(28px,2.65vw,40px);line-height:1.08;letter-spacing:-.035em;font-weight:700;color:#fff}
+.client-case h3 em{font-style:normal;color:#51dac1}
+.client-case-lead{margin:20px 0 34px;max-width:520px;font-size:17px;line-height:1.6;color:#b9c9c4}
+.client-case-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 34px}
+.client-case-stats div{padding:18px 20px;border:1px solid #ffffff17;border-radius:18px;background:#ffffff08;transition:border-color .4s,background .4s,transform .5s cubic-bezier(.2,.7,.2,1)}
+.client-case-stats div:hover{border-color:#51dac166;background:#51dac10f;transform:translateY(-3px)}
+.client-case-stats dt{font-size:30px;line-height:1.1;font-weight:700;letter-spacing:-.03em;color:#fff}
+.client-case-stats dd{margin:6px 0 0;font-size:14px;line-height:1.45;color:#a9bbb6}
+.client-case-sites{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cc-site{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:16px;background:#fff;color:#141918}
+.cc-site strong{display:flex;align-items:center;gap:10px;font-size:17px;letter-spacing:-.01em}
+.cc-site strong img{width:26px;height:26px;border-radius:50%}
+.cc-site span{font-size:13px;color:#66716c}
+.cc-site-links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px;font-size:14px;font-weight:600}.cc-site-links a{white-space:nowrap}
+.cc-site-links a{color:#009c9a;text-decoration:none;border-bottom:1px solid #009c9a55}
+.cc-site-links a:hover{border-color:#009c9a}
+/* Visual: two browsers and a phone, slightly floating */
+.client-case-visual{position:relative;aspect-ratio:1.2/1;min-height:420px}
+.cc-browser,.cc-phone{position:absolute;margin:0;overflow:hidden;background:#0b1211;box-shadow:0 40px 80px -30px #000c,0 0 0 1px #ffffff1f;transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.cc-browser{border-radius:14px;padding-top:26px}
+.cc-browser:before{content:"";position:absolute;top:10px;left:12px;width:7px;height:7px;border-radius:50%;background:#ff6159;box-shadow:12px 0 #ffbd2e,24px 0 #28c840}
+.cc-browser:after{content:attr(data-url);position:absolute;top:6px;left:50%;transform:translateX(-50%);padding:1px 14px;border-radius:6px;background:#ffffff14;font-size:10px;line-height:15px;color:#c9d6d2;white-space:nowrap}
+.cc-browser img,.cc-phone img{display:block;width:100%;height:auto}
+.cc-browser--back{top:2%;right:0;width:86%;opacity:.9}
+.cc-browser--front{bottom:4%;left:0;width:88%;z-index:2}
+.cc-phone{right:1%;bottom:-2%;width:26%;z-index:3;border-radius:28px;padding:9px;background:#05090a}
+.cc-phone-screen{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:390/844}
+.cc-phone-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;animation:cc-swap 10s ease-in-out infinite}
+.cc-phone-screen img+img{animation-delay:-5s}
+@keyframes cc-swap{0%,42%{opacity:1}50%,92%{opacity:0}100%{opacity:1}}
+.client-case:hover .cc-browser--back{transform:translate(8px,-8px)}
+.client-case:hover .cc-browser--front{transform:translate(-6px,4px)}
+.client-case:hover .cc-phone{transform:translateY(-10px)}
+.concepts-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin:0 0 30px;padding-top:6px;border-top:1px solid #dfe5e0}
+.concepts-head h3{margin:22px 0 0;font-size:clamp(22px,2vw,28px);letter-spacing:-.025em}
+.concepts-head p{margin:0;max-width:380px;font-size:14px;line-height:1.5;color:#66716c}
+@media(max-width:1100px){.client-case{grid-template-columns:1fr;padding:44px}.client-case-visual{max-width:640px;width:100%;margin-inline:auto}}
+@media(max-width:700px){.client-case{padding:28px 20px 30px;border-radius:24px;gap:34px;margin-bottom:64px}.client-case-stats{gap:10px}.client-case-stats div{padding:14px}.client-case-stats dt{font-size:24px}.client-case-stats dd{font-size:13px}.client-case-sites{grid-template-columns:1fr}.client-case-visual{min-height:0}.cc-phone{border-radius:20px;padding:6px}.cc-phone-screen{border-radius:15px}.cc-browser{padding-top:18px;border-radius:10px}.cc-browser:after{display:none}.concepts-head{display:block}.concepts-head p{margin-top:8px}}
+@media(prefers-reduced-motion:reduce){.client-case:before,.live-dot:after,.cc-phone-screen img{animation:none}.cc-phone-screen img+img{opacity:0}.cc-browser,.cc-phone,.client-case-stats div{transition:none}.client-case:hover .cc-browser--back,.client-case:hover .cc-browser--front,.client-case:hover .cc-phone{transform:none}}
+/* Phones and tablets: the devices come right after the heading and lead, the facts follow */
+@media(max-width:1100px){.client-case{row-gap:0}.client-case-copy{display:contents}.client-case-eyebrow{order:1;justify-self:start}.client-case h3{order:2}.client-case-lead{order:3;margin-bottom:28px}.client-case-visual{order:4;margin-bottom:34px}.client-case-stats{order:5}.client-case-sites{order:6}}
+@media(max-width:700px){.client-case-eyebrow{font-size:12px;margin-bottom:18px}.client-case-lead{font-size:16px}}
